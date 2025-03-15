@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container, Box, Button, Typography, Card, CardContent, Grid, Avatar, Menu, MenuItem } from "@mui/material";
 import sagaGif from "../assets/saga.gif";
 import Logo from "../assets/Logo.jpg";
 import "../styles/LandingPage.css"; // Importing the CSS file
@@ -29,83 +28,64 @@ const announcements = [
 ];
 
 const LandingPage = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <Container maxWidth={false} className="landing-container">
+    <div className="landing-container">
       {/* Header */}
-      <Box className="header">
-        <Box className="header-content">
+      <header className="header">
+        <div className="header-content">
           <img src={Logo} alt="Logo" className="logo" />
-          <Typography variant="h4" className="header-title">
-            Department of Electronics and Communication Engineering
-          </Typography>
-        </Box>
-        <Button variant="contained" className="login-button" onClick={handleClick}>
+          <div className="header-text">
+            <h1 className="header-title">Department of Electronics and Communication Engineering</h1>
+            <p className="header-subtitle">(Constituted under the A.P. Govt. Act 18 of 2008 and recognized as per Section 2(f), 12(B) of UGC Act, 1956)</p>
+          </div>
+        </div>
+        <button className="login-button" onClick={() => setMenuOpen(!menuOpen)}>
           Login
-        </Button>
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} className="dropdown-menu">
-          <MenuItem onClick={handleClose}>Faculty</MenuItem>
-          <MenuItem onClick={handleClose}>Alumni</MenuItem>
-          <MenuItem onClick={handleClose}>Student</MenuItem>
-        </Menu>
-      </Box>
+        </button>
+        {menuOpen && (
+          <div className="dropdown-menu">
+            <button onClick={() => setMenuOpen(false)}>Faculty</button>
+            <button onClick={() => setMenuOpen(false)}>Alumni</button>
+            <button onClick={() => setMenuOpen(false)}>Student</button>
+          </div>
+        )}
+      </header>
 
       {/* Category Buttons */}
-      <Box className="category-buttons">
-        <Button variant="contained" className="category-button">All</Button>
-        <Button variant="contained" className="category-button">Academics</Button>
-        <Button variant="contained" className="category-button">Sports</Button>
-        <Button variant="contained" className="category-button">Career</Button>
-      </Box>
+      <div className="category-buttons">
+        <button className="category-button">All</button>
+        <button className="category-button">Academics</button>
+        <button className="category-button">Sports</button>
+        <button className="category-button">Career</button>
+      </div>
 
-      <Grid container spacing={4}>
+      <div className="content-grid">
         {/* Announcements Section */}
-        <Grid item xs={12} md={6}>
-          <Box className="announcements-container">
-            {announcements.map((announcement) => (
-              <Card key={announcement.id} className="announcement-card">
-                <CardContent>
-                  <Box className="announcement-header">
-                    <Box className="announcement-author">
-                      <Avatar className="avatar">{announcement.author.charAt(0)}</Avatar>
-                      <Typography variant="subtitle1" className="announcement-author-name">
-                        {announcement.author}
-                      </Typography>
-                    </Box>
-                    <Typography variant="caption" className="announcement-time">{announcement.time}</Typography>
-                  </Box>
-                  <Typography variant="h6" className="announcement-title">
-                    {announcement.title}
-                  </Typography>
-                  <Typography variant="body2" className="announcement-description">
-                    {announcement.description}
-                  </Typography>
-                  <Typography variant="body2" className="view-more">
-                    View More
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))}
-          </Box>
-        </Grid>
+        <div className="announcements-container">
+          {announcements.map((announcement) => (
+            <div key={announcement.id} className="announcement-card">
+              <div className="announcement-header">
+                <div className="announcement-author">
+                  <div className="avatar">{announcement.author.charAt(0)}</div>
+                  <span className="announcement-author-name">{announcement.author}</span>
+                </div>
+                <span className="announcement-time">{announcement.time}</span>
+              </div>
+              <h2 className="announcement-title">{announcement.title}</h2>
+              <p className="announcement-description">{announcement.description}</p>
+              <p className="view-more">View More</p>
+            </div>
+          ))}
+        </div>
 
-        {/* GIF Placeholder */}
-        <Grid item xs={12} md={4}>
-          <Box className="gif-container">
-            <img src={sagaGif} alt="GIF Placeholder" className="gif-image" />
-          </Box>
-        </Grid>
-      </Grid>
-    </Container>
+        {/* GIF Section */}
+        <div className="gif-container">
+          <img src={sagaGif} alt="GIF Placeholder" className="gif-image" />
+        </div>
+      </div>
+    </div>
   );
 };
 

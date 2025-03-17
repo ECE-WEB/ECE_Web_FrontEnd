@@ -145,7 +145,6 @@
 .login-popup {
   display: flex;
   width: 800px; /* Make it bigger */
-  background: white;
   border-radius: 15px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -162,16 +161,19 @@
 }
 
 .login-popup .login-image img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 
 /* === RIGHT SIDE LOGIN CARD === */
 .login-popup .login-box {
-  width: 50%;
+  width: 300px;
   background: #800000; /* Same maroon as login page */
-  padding: 40px;
+  padding: 0px;
   border-radius: 0px 15px 15px 0px; /* Rounded corners on right side */
+  margin-right: 200px;
+  margin-bottom: 50px;
+
 }
 
 .login-popup .login-box .login-title {

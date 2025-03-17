@@ -5,7 +5,7 @@ import "../styles/LoginPage.css";
 // Import images based on roles
 import StudentImage from "../assets/Student.svg";
 import FacultyImage from "../assets/Faculty.svg";
-import AdminImage from "../assets/Alumni.svg";
+import AlumniImage from "../assets/Alumni.svg";
 
 const LoginPage = ({ role, closePopup }) => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const LoginPage = ({ role, closePopup }) => {
         return StudentImage;
       case "Faculty":
         return FacultyImage;
-      case "Admin":
-        return AdminImage;
+      case "Alumni":
+        return AlumniImage;
       default:
         return "";
     }

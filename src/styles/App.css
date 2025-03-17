@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* Ensures full-width layout and proper alignment */
+/* Ensures full-width layout */
 #root {
   width: 100%;
   max-width: 100%;
@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-/* Main app container */
+/* Main App Container */
 .app-container {
   width: 100%;
   min-height: 100vh;
@@ -24,139 +24,4 @@
   justify-content: flex-start;
   background-color: white;
   padding: 20px;
-}
-
-/* Department header */
-.department-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.department-header h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.department-header p {
-  font-size: 14px;
-  color: #555;
-}
-
-/* Login button */
-.login-btn {
-  background-color: maroon;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-  background-color: darkred;
-}
-
-/* Category buttons */
-.category-container {
-  margin-top: 15px;
-}
-
-.category-btn {
-  background-color: maroon;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.category-btn:hover {
-  background-color: darkred;
-}
-
-/* Content Section */
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 90%;
-  max-width: 1200px;
-  margin-top: 20px;
-}
-
-/* Announcement Cards */
-.announcement-container {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.announcement-card {
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: left;
-  transition: transform 0.2s ease-in-out;
-}
-
-.announcement-card:hover {
-  transform: scale(1.02);
-}
-
-.announcement-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.announcement-title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.view-more {
-  color: blue;
-  cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-.view-more:hover {
-  color: darkblue;
-}
-
-/* Announcement Image */
-.announcement-image {
-  width: 35%;
-  max-width: 400px;
-}
-
-.announcement-image img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 900px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .announcement-container {
-    width: 100%;
-  }
-
-  .announcement-image {
-    width: 100%;
-    max-width: 300px;
-    margin-top: 20px;
-  }
 }

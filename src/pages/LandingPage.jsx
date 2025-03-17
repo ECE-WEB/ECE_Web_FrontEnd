@@ -8,9 +8,11 @@ const LandingPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null); // Track selected role
-  
+  const [isSortByOpen, setIsSortByOpen] = useState(false); // Track Sort By dropdown
+
   const dropdownRef = useRef(null);
   const loginRef = useRef(null);
+  const sortByRef = useRef(null);
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -20,8 +22,13 @@ const LandingPage = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !sortByRef.current.contains(event.target)
+      ) {
         setIsDropdownOpen(false);
+        setIsSortByOpen(false);
       }
     };
 
@@ -49,6 +56,7 @@ const LandingPage = () => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setIsLoginOpen(false);
+        setIsSortByOpen(false);
       }
     };
 
@@ -95,7 +103,27 @@ const LandingPage = () => {
         </div>
       )}
 
-      <nav className="category-nav">
+      {/* Mobile: Latest Updates + Sort By Dropdown */}
+      <div className="latest-updates-container mobile-only">
+        <span>Latest Updates</span>
+        <div className="sort-by-container" ref={sortByRef}>
+          <button className="sort-by-dropdown" onClick={() => setIsSortByOpen(!isSortByOpen)}>
+            Sort By ▼
+          </button>
+          {isSortByOpen && (
+            <div className="dropdown-menu sort-dropdown active">
+              <button onClick={() => setIsSortByOpen(false)}>All</button>
+              <button onClick={() => setIsSortByOpen(false)}>Internships</button>
+              <button onClick={() => setIsSortByOpen(false)}>Jobs</button>
+              <button onClick={() => setIsSortByOpen(false)}>Internal Marks</button>
+              <button onClick={() => setIsSortByOpen(false)}>Attendance</button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* === DESKTOP ONLY: Category Navigation === */}
+      <nav className="category-nav desktop-only">
         <button className="category-btn active">All</button>
         <button className="category-btn">Internships</button>
         <button className="category-btn">Jobs</button>

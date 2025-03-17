@@ -242,6 +242,84 @@
   width: 100%;
 }
 
+/* Announcement Card Colors */
+.announcement-card:nth-child(4n + 1) {
+  background-color: #EAE6FF; /* Light Purple */
+  border-left: 8px solid #5A42E0; /* Darker Purple */
+}
+
+.announcement-card:nth-child(4n + 2) {
+  background-color: #FEF7D6; /* Light Yellow */
+  border-left: 8px solid #D9A100; /* Darker Yellow */
+}
+
+.announcement-card:nth-child(4n + 3) {
+  background-color: #FFE3E3; /* Light Pink */
+  border-left: 8px solid #D32F2F; /* Darker Red */
+}
+
+.announcement-card:nth-child(4n + 4) {
+  background-color: #E0F7FA; /* Light Cyan */
+  border-left: 8px solid #00897B; /* Darker Green */
+}
+
+/* Profile Name Color Matches Darker Border */
+.announcement-card:nth-child(4n + 1) .profile-name {
+  color: #5A42E0; /* Darker Purple */
+}
+
+.announcement-card:nth-child(4n + 2) .profile-name {
+  color: #D9A100; /* Darker Yellow */
+}
+
+.announcement-card:nth-child(4n + 3) .profile-name {
+  color: #D32F2F; /* Darker Red */
+}
+
+.announcement-card:nth-child(4n + 4) .profile-name {
+  color: #00897B; /* Darker Green */
+}
+
+/* Profile Circle Matches Darker Border */
+.announcement-card:nth-child(4n + 1) .profile-img {
+  background-color: #5A42E0;
+}
+
+.announcement-card:nth-child(4n + 2) .profile-img {
+  background-color: #D9A100;
+}
+
+.announcement-card:nth-child(4n + 3) .profile-img {
+  background-color: #D32F2F;
+}
+
+.announcement-card:nth-child(4n + 4) .profile-img {
+  background-color: #00897B;
+}
+/* Announcement Author Text Color Matches Profile Image */
+.announcement-card:nth-child(4n + 1) .announcement-author {
+  color: #5A42E0; /* Darker Purple */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 2) .announcement-author {
+  color: #D9A100; /* Darker Yellow */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 3) .announcement-author {
+  color: #D32F2F; /* Darker Red */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 4) .announcement-author {
+  color: #00897B; /* Darker Green */
+  font-weight: bold;
+}
+
+.announcement-time{
+  font-size: 14px;
+}
 /* Profile Section inside Announcement Header */
 .profile-section {
   display: flex;

@@ -2,9 +2,42 @@ import React,{ useState,useEffect,useRef} from "react";
 import "../styles/LandingPage.css"; // Replace with actual image path
 import Logo from "../assets/Logonew.png"; // Replace with actual image path
 import announcements from "../assets/announcements.svg"; // Replace with actual image path
+import LoginPage from "./LoginPage"; // Import the separate LoginPage component
+import { useNavigate } from "react-router-dom";
+
 
 
 const LandingPage = () => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const navigate = useNavigate();
+  const loginRef = useRef(null);
+
+  // Toggle login popup
+  const toggleLogin = () => {
+    setIsLoginOpen((prev) => !prev);
+  };
+
+  // Close login when clicking outside or pressing ESC
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (loginRef.current && !loginRef.current.contains(event.target)) {
+        setIsLoginOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setIsLoginOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -49,12 +82,21 @@ const LandingPage = () => {
           )}
         </div>
       </header>
+      {/* Login Popup (When opened on the landing page) */}
+      {isLoginOpen && (
+        <div className="login-popup-overlay">
+          <div className="login-popup" ref={login}>
+            <LoginPage closePopup={() => setIsLoginOpen(false)} />
+          </div>
+        </div>
+      )}
 
       <nav className="category-nav">
         <button className="category-btn active">All</button>
-        <button className="category-btn">Academics</button>
-        <button className="category-btn">Sports</button>
-        <button className="category-btn">Career</button>
+        <button className="category-btn">Internships</button>
+        <button className="category-btn">Jobs</button>
+        <button className="category-btn">Internal Marks</button>
+        <button className="category-btn">Attendance</button>
       </nav>
 
       <div className="content">

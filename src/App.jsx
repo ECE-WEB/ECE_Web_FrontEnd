@@ -1,18 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/landingPage";
-import "./styles/App.css"; // Importing global styles
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <div className="app-container">
-      <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          {/* Add more routes here if needed */}
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </Router>
   );
 }
 

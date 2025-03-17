@@ -33,7 +33,7 @@
   padding: 10px;
   color: #800000;
   font-family: Inria Serif;
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .heading {
@@ -124,14 +124,17 @@
   z-index: 999; /* Ensures it is below the popup */
 }
 
-/* Prevent pointer events on blurred background */
-.landing-container.blurred *:not(.login-popup-overlay):not(.login-popup) {
-  pointer-events: none;
+/* Allow interactions for elements inside the popup */
+.landing-container.blurred .login-popup * {
+  pointer-events: auto;
 }
+
+
 
 /* ========== LOGIN POPUP STYLING ========== */
 
 /* Login Popup Overlay */
+/* Fix issue where inputs inside popup are not clickable */
 .login-popup-overlay {
   position: fixed;
   top: 0;
@@ -144,7 +147,6 @@
   z-index: 1000;
 }
 
-/* Login Popup (Square Shape & Centered) */
 .login-popup {
   background: white;
   width: 600px;
@@ -157,7 +159,15 @@
   justify-content: center;
   align-items: center;
   z-index: 1001;
+  position: relative; /* Ensures it is interactive */
 }
+
+/* Ensure inputs inside login popup are interactive */
+.login-popup input {
+  pointer-events: auto; 
+  z-index: 1002;
+}
+
 
 /* Responsive */
 @media (max-width: 600px) {

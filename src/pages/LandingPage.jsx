@@ -7,7 +7,7 @@ import LoginPage from "./LoginPage"; // Import LoginPage component
 const LandingPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [selectedLoginType, setSelectedLoginType] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null); // Track selected role
   
   const dropdownRef = useRef(null);
   const loginRef = useRef(null);
@@ -33,7 +33,7 @@ const LandingPage = () => {
 
   // Open login popup when selecting an option
   const openLoginPopup = (role) => {
-    setSelectedLoginType(role);
+    setSelectedRole(role);
     setIsDropdownOpen(false);
     setIsLoginOpen(true);
   };
@@ -80,7 +80,7 @@ const LandingPage = () => {
             <div className="dropdown-menu">
               <button onClick={() => openLoginPopup("Student")}>Student</button>
               <button onClick={() => openLoginPopup("Faculty")}>Faculty</button>
-              <button onClick={() => openLoginPopup("Admin")}>Admin</button>
+              <button onClick={() => openLoginPopup("Alumni")}>Alumni</button>
             </div>
           )}
         </div>
@@ -90,7 +90,7 @@ const LandingPage = () => {
       {isLoginOpen && (
         <div className="login-popup-overlay">
           <div className="login-popup" ref={loginRef}>
-            <LoginPage role={selectedLoginType} closePopup={() => setIsLoginOpen(false)} />
+            <LoginPage role={selectedRole} closePopup={() => setIsLoginOpen(false)} />
           </div>
         </div>
       )}

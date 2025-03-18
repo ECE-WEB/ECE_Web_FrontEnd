@@ -1,0 +1,341 @@
+/* Main Wrapper for Sidebar + Dashboard */
+.dashboard-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar should take minimal space */
+.sidepanel {
+    flex-shrink: 0;
+}
+
+/* Main dashboard container */
+.dashboard-container {
+    flex-grow: 1;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Navigation Bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4b0000;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.dashboard-title {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dashboard-icon {
+    margin-right: 10px;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 250px;
+}
+
+.search-icon {
+    color: gray;
+    margin-right: 5px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+/* Navigation Icons */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.mail-icon {
+    font-size: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+/* Community Profile Images */
+.community {
+    display: flex;
+    position: relative;
+}
+
+.profile-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.profile1 {
+    left: 0;
+    z-index: 3;
+}
+
+.profile2 {
+    left: 20px;
+    z-index: 2;
+}
+
+.profile3 {
+    left: 40px;
+    z-index: 1;
+}
+
+/* Main Content Section */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Left Division */
+.left-division {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    gap: 20px;
+}
+
+/* Upper Row: Schedule & Attendance */
+.upper-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Schedule Card */
+.schedule-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Schedule List */
+.schedule-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Schedule Item */
+.schedule-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.schedule-item:hover {
+    transform: scale(1.02);
+}
+
+/* Arrow on Left */
+.schedule-arrow {
+    color: gray;
+    margin-right: 10px;
+}
+
+/* Color Indicator */
+.schedule-color {
+    width: 5px;
+    height: 35px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Schedule Details */
+.schedule-details {
+    flex-grow: 1;
+}
+
+.schedule-subject {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+}
+
+.schedule-time {
+    font-size: 12px;
+    color: gray;
+    text-align: left;
+    display: block;
+}
+
+/* Attendance Card */
+.attendance-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    color: #800000;
+    padding: 20px;
+    border-radius: 15px;
+    justify-content: center;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    flex-direction: column;
+}
+
+/* Circular Progress Bar */
+.attendance-card .CircularProgressbar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+/* Attendance Info */
+.attendance-info {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Subject-wise attendance inside attendance card */
+.subject-attendance {
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.subject-attendance p {
+    margin: 3px 0;
+}
+
+/* Lower Row: Semester GPA Visualization */
+.gpa-card {
+    background: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.gpa-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.gpa-sem {
+    width: 15%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.gpa-bar {
+    width: 70%;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.gpa-fill {
+    height: 100%;
+    background-color: #00C9A7;
+    border-radius: 6px;
+}
+
+.gpa-value {
+    width: 10%;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Right Division (Announcements) */
+.right-division {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Announcements Container */
+.announcements-container {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual Announcement Item */
+.announcement-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Announcement Icon */
+.announcement-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Announcement Content */
+.announcement-content {
+    flex-grow: 1;
+}
+
+/* Faculty Name */
+.announcement-faculty {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Announcement Title */
+.announcement-title {
+    display: block;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+/* Announcement Description */
+.announcement-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Read More Link */
+.announcement-readmore {
+    font-size: 12px;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}

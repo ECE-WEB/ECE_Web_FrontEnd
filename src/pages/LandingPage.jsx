@@ -142,7 +142,7 @@ const LandingPage = () => {
                 </div>
                 <span className="announcement-time">12:00 22/06/2025</span>
               </div>
-              <h3>Mid Time Table for E2 is announced</h3>
+              <h3 className="announcement-title">Mid Time Table for E2 is announced</h3>
               <p>Mid 2 schedule came out, so I request all the students to check it</p>
               <a href="#" className="view-more">View More</a>
             </div>

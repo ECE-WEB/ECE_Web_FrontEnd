@@ -234,7 +234,7 @@
   /* Make login form full width */
   .login-popup .div2 {
     width: 100%;
-    height: 70%;
+    height: 60%;
     padding: 0px;
     background: white;
     border-radius: 10px;
@@ -268,7 +268,12 @@
     flex: 1;
     padding: 5px;
     background: transparent;
+    min-width: 0; /* Prevents overflow */
+    overflow-x: hidden;
+    text-overflow: ellipsis; /* Adds "..." if text is too long */
+    white-space: nowrap;
   }
+
 
   .input-group .icon {
     margin-right: 10px;

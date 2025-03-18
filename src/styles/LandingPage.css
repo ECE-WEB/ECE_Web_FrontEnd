@@ -385,7 +385,7 @@
 
 /* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
 /* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
-@media (max-width: 600px) {
+@media (max-width: 830px) {
   /* Adjust header for mobile */
   .header {
     flex-direction: row;
@@ -402,6 +402,7 @@
     width: 35px;
     height: 35px;
     margin-top: 5px;
+    margin-right: 6px;
   }
 
   /* Main text inline with login */

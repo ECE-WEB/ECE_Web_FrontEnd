@@ -331,116 +331,72 @@
 }
 
 
-/* ===== FIXED ANNOUNCEMENTS CONTAINER ===== */
 /* Announcements Section */
 .announcements {
-    width: 100%;
-    max-height: 350px; /* Set fixed height */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-    background: white;
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #800000 #f0f0f0; /* Firefox */
-}
-
-/* Hide default scrollbar for WebKit (Chrome, Edge, Safari) */
-.announcements::-webkit-scrollbar {
-    width: 6px;
-}
-
-.announcements::-webkit-scrollbar-thumb {
-    background: #800000;
-    border-radius: 10px;
-}
-
-/* Individual Announcement Card */
-.announcement-card {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #800000; /* Left color bar */
     display: flex;
     flex-direction: column;
-}
-
-/* ===== PROFILE IMAGE, USER, AND TIMESTAMP FIX ===== */
-
-/* Profile Section inside Announcement Header */
-.profile-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: nowrap; /* Prevents wrapping */
-}
-
-/* Profile Image Styling */
-.profile-img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #ddd;
-    flex-shrink: 0; /* Prevents shrinking */
-    object-fit: cover;
-}
-
-/* Announcement Author */
-.announcement-author {
-    font-size: 14px;
-    font-weight: bold;
-    color: #800000;
-    white-space: nowrap; /* Prevents text from breaking */
-}
-
-/* Timestamp */
-.announcement-time {
-    font-size: 12px;
-    color: #555;
-    flex-shrink: 0;
-    margin-left: auto; /* Push timestamp to the right */
-}
-
-/* Announcement Header */
-.announcement-header {
+    gap: 10px;
+    width: 100%;
+  }
+  
+  /* Announcement Card */
+  .announcement-card {
+    padding: 15px;
+    border-radius: 15px;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+  }
+  
+  /* Announcement Header */
+  .announcement-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    flex-wrap: nowrap; /* Ensures everything stays in one line */
-}
-
-/* Announcement Title */
-.announcement-title {
+    flex-wrap: wrap;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Profile Image */
+  .profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  
+  /* Faculty Name */
+  .announcement-author {
+    font-weight: bold;
     font-size: 16px;
+  }
+  
+  /* Announcement Role */
+  .announcement-role {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  /* Read More Link */
+  .view-more {
+    font-size: 14px;
     font-weight: bold;
-    color: black;
-    margin-bottom: 5px;
-}
-
-/* Announcement Text */
-.announcement-card p {
-    font-size: 14px;
-    color: #666;
-}
-
-/* "View More" / "Read More" Button */
-.view-more {
-    text-align: right;
-    color: blue;
-    font-size: 14px;
     text-decoration: none;
-    font-weight: bold;
-    display: block;
-    margin-top: 8px;
-}
-
-.view-more:hover {
+    color: blue;
+  }
+  
+  .view-more:hover {
     text-decoration: underline;
     color: darkblue;
-}
+  }
+  
 
 /* Responsive Fixes */
 @media (max-width: 768px) {

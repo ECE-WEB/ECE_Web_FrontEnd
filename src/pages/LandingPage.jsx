@@ -3,6 +3,7 @@ import "../styles/LandingPage.css";
 import Logo from "../assets/Logonew.png";
 import announcements from "../assets/announcements.svg";
 import LoginPage from "./LoginPage"; // Import LoginPage component
+import userpic from "../assets/profilePic.svg";
 
 const LandingPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -137,7 +138,7 @@ const LandingPage = () => {
             <div className="announcement-card" key={index}>
               <div className="announcement-header">
                 <div className="profile-section">
-                  <img src="" alt="" className="profile-img" />
+                  <img src={userpic} alt="" className="" />
                   <span className="announcement-author">Dean of Academics</span>
                 </div>
                 <span className="announcement-time">12:00 22/06/2025</span>

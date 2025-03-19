@@ -382,7 +382,6 @@
     display: none;
   }
 }
-
 @media (max-width: 831px) {
   /* Ensures announcements section stays fixed */
   .announcements {

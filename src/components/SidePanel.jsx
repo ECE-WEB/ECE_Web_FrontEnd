@@ -134,11 +134,11 @@ const SidePanel = ({
           <ListItem disablePadding>
             <ListItemButton
               component={Link}
-              to="/"
+              to="/studentdashboard"
               sx={{
                 alignItems: "center",
                 backgroundColor:
-                  location.pathname === "/facultydashboard" ? colorsProp.selectedBackgroundColor : "inherit",
+                  location.pathname === "/studentdashboard" ? colorsProp.selectedBackgroundColor : "inherit",
                 borderRadius: colorsProp.itemBorderRadius, // Apply border radius
                 ":hover": {
                   backgroundColor: colorsProp.hoverBackgroundColor, // Apply hover color

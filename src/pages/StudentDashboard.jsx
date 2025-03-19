@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { FaTachometerAlt, FaSearch, FaEnvelope, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/StudentDashboard.css";
-import SidePanel from "../components/SidePanel";
+import NavBar from "../components/NavBar";
 import user1 from "../assets/profilePic.svg";
 import user2 from "../assets/profilePic.svg";
 import user3 from "../assets/profilePic.svg";
@@ -53,30 +54,10 @@ const StudentDashboard = () => {
   
   return (
     <div className="sd-dashboard-wrapper">
-      {/* Sidebar */}
-      <SidePanel />
-
       {/* Main Dashboard Content */}
       <div className="sd-dashboard-container">
         {/* Top Navigation Bar */}
-        <div className="sd-top-nav">
-          <div className="sd-dashboard-title">
-            <FaTachometerAlt className="sd-dashboard-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sd-search-bar">
-            <FaSearch className="sd-search-icon" />
-            <input type="text" placeholder="Search..." />
-          </div>
-          <div className="sd-nav-icons">
-            <FaEnvelope className="sd-mail-icon" />
-            <div className="sd-community">
-              <img src={user1} alt="User1" className="sd-profile-img profile1" />
-              <img src={user2} alt="User2" className="sd-profile-img profile2" />
-              <img src={user3} alt="User3" className="sd-profile-img profile3" />
-            </div>
-          </div>
-        </div>
+        
 
         {/* Two Main Divisions */}
         <div className="sd-main-content">

@@ -332,21 +332,30 @@
 
 
 /* Announcements Section */
+/* Announcements Section */
 .sd-announcements {
+    height: 550px; /* Fixed height */
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-  }
-  
-  /* Announcement Card */
-  .sd-announcement-card {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+}
+
+.sd-announcements::-webkit-scrollbar {
+    display: none;
+}
+
+/* Announcement Card */
+.sd-announcement-card {
     padding: 15px;
     border-radius: 15px;
     text-align: left;
     transition: transform 0.2s ease-in-out;
     width: 100%;
-  }
+}
   
   /* Announcement Header */
   .sd-announcement-header {

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
@@ -10,221 +8,254 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Fade from "@mui/material/Fade";
-import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const drawerWidthExpanded = 240;
-const drawerWidthCollapsed = 70;
+const SidePanel = ({
+  isHovered,
+  isSidebarExpanded,
+  drawerWidthExpanded,
+  drawerWidthCollapsed,
+  setIsHovered,
+  textVisible,
+}) => {
+  const user = {
+    name: "Yekkaluru Divya Teja",
+    avatar: "",
+    email: "divyateja050@gmail.com",
+  };
+  user.avatar = user.name[0];
 
-function CollapsibleSidebar() {
-  
-  const [isToggled, setIsToggled] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [textVisible, setTextVisible] = useState(false);
+  const location = useLocation();
 
-  const isSidebarExpanded = (isToggled && isHovered);
-
-  const toggleSidebar = () => {
-    setIsToggled((prev) => !prev);
+  const colorsProp = {
+    panelBackgroundColor: "#4D0000",
+    panelTextColor: "white",
+    profileBorder: "2px solid #FF7A7A",
+    profileBackgroundColor: "#FF7A7A",
+    hoverBackgroundColor: "#FF7A7A", // Hover color for items
+    selectedBackgroundColor: "#800000", // Selected item color
+    itemBorderRadius: "12px", // Border radius for items
   };
 
-  useEffect(() => {
-    if (isSidebarExpanded) {
-      const timer = setTimeout(() => {
-        setTextVisible(true);
-      }, 300); 
-      return () => clearTimeout(timer);
-    } else {
-      
-      setTextVisible(false);
-    }
-  }, [isSidebarExpanded]);
-
   return (
-    <Router>
-      <Box sx={{ display: "flex" ,overflowY: "auto",height: "100vh"}}>
-        <CssBaseline />
-
-        {/* Left Sidebar */}
-        <Drawer
-          variant="permanent"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+    <Drawer
+      variant="permanent"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      sx={{
+        width: isHovered ? drawerWidthExpanded : drawerWidthCollapsed,
+        transition: "width 0.5s ease",
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: isHovered ? drawerWidthExpanded : drawerWidthCollapsed,
+          boxSizing: "border-box",
+          transition: "width 0.4s ease",
+          overflowX: "hidden",
+          overflowY: "auto",
+          backgroundColor: colorsProp.panelBackgroundColor,
+          color: colorsProp.panelTextColor,
+          borderTopRightRadius: "20px",
+          borderBottomRightRadius: "20px",
+          height: "100%",
+        },
+      }}
+    >
+      {/* Profile Section */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 2,
+        }}
+      >
+        <Avatar
+          alt={user.name}
           sx={{
-            width: isSidebarExpanded ? drawerWidthExpanded : drawerWidthCollapsed,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: isSidebarExpanded ? drawerWidthExpanded : drawerWidthCollapsed,
-              boxSizing: "border-box",
-              transition: "width 0.5s ease",
-              overflowX: "hidden",
-              overflowY: "auto",
-              backgroundColor: "#4D0000",
-              color: "white",
-              borderTopRightRadius: "20px",
-              borderBottomRightRadius: "20px",
-              height: "100vh",
-            },
+            width: 50,
+            height: 50,
+            border: colorsProp.profileBorder,
+            bgcolor: colorsProp.profileBackgroundColor,
           }}
         >
-          {/* Profile Section */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: isSidebarExpanded ? "row" : "column",
-              alignItems: "center",
-              justifyContent: isSidebarExpanded ? "flex-start" : "center",
-              p: 2,
-              borderBottom: "1px solid #ddd",
-            }}
-          >
-            <Avatar
-              alt="John Doe"
+          {user.avatar}
+        </Avatar>
+        {isSidebarExpanded && (
+          <Box sx={{ ml: 0, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <Fade in={textVisible} timeout={400} unmountOnExit>
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.email}
+                </Typography>
+              </Box>
+            </Fade>
+          </Box>
+        )}
+      </Box>
+
+      {/* Navigation List */}
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        <List sx={{ flexGrow: 1 }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/"
               sx={{
-                width: 45,
-                height: 45,
-                border: "2px solid #FF7A7A",
-                bgcolor: "#FF5722",
+                alignItems: "center",
+                backgroundColor:
+                  location.pathname === "/" ? colorsProp.selectedBackgroundColor : "inherit",
+                borderRadius: colorsProp.itemBorderRadius, // Apply border radius
+                ":hover": {
+                  backgroundColor: colorsProp.hoverBackgroundColor, // Apply hover color
+                },
               }}
             >
-              JD
-            </Avatar>
-            {isSidebarExpanded && (
-              <Box sx={{ ml: 2 }}>
-                <Fade in={textVisible} timeout={300} unmountOnExit>
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FontAwesomeIcon icon={faLayerGroup} style={{ marginRight: '8px' }} />
+              </ListItemIcon>
+              {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
                   <Box>
-                    <Typography variant="subtitle1">John Doe</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      john.doe@example.com
-                    </Typography>
+                    <Typography variant="body1">Dashboard</Typography>
                   </Box>
                 </Fade>
-              </Box>
-            )}
-          </Box>
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/anouncements"
+              sx={{
+                alignItems: "center",
+                backgroundColor:
+                  location.pathname === "/anouncements" ? colorsProp.selectedBackgroundColor : "inherit",
+                borderRadius: colorsProp.itemBorderRadius,
+                ":hover": {
+                  backgroundColor: colorsProp.hoverBackgroundColor,
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FontAwesomeIcon icon={faBullhorn} style={{ marginRight: '8px' }} />
+              </ListItemIcon>
+              {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                    <Typography variant="body1">Announcements</Typography>
+                  </Box>
+                </Fade>
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/uploadMarks"
+              sx={{
+                alignItems: "center",
+                backgroundColor:
+                  location.pathname === "/uploadMarks" ? colorsProp.selectedBackgroundColor : "inherit",
+                borderRadius: colorsProp.itemBorderRadius,
+                ":hover": {
+                  backgroundColor: colorsProp.hoverBackgroundColor,
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FontAwesomeIcon icon={faArrowUpFromBracket} style={{ marginRight: '8px' }} />
+              </ListItemIcon>
+              {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                    <Typography variant="body1">Upload Marks</Typography>
+                  </Box>
+                </Fade>
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/uploadAttandance"
+              sx={{
+                alignItems: "center",
+                backgroundColor:
+                  location.pathname === "/uploadAttandance" ? colorsProp.selectedBackgroundColor : "inherit",
+                borderRadius: colorsProp.itemBorderRadius,
+                ":hover": {
+                  backgroundColor: colorsProp.hoverBackgroundColor,
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FontAwesomeIcon icon={faHand} style={{ marginRight: '8px' }} />
+              </ListItemIcon>
+              {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                    <Typography variant="body1">Upload Attendance</Typography>
+                  </Box>
+                </Fade>
+              )}
+            </ListItemButton>
+          </ListItem>
+        </List>
 
-          {/* Navigation List and Toggle Button */}
-          <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-            <List sx={{ flexGrow: 1 }}>
-              <ListItem disablePadding>
-                <ListItemButton component={Link} to="/">
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  {isSidebarExpanded && (
-                    <Fade in={textVisible} timeout={300} unmountOnExit>
-                      <Box>
-                        <Typography variant="body1">Dashboard</Typography>
-                      </Box>
-                    </Fade>
-                  )}
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton component={Link} to="/about">
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    <InfoIcon />
-                  </ListItemIcon>
-                  {isSidebarExpanded && (
-                    <Fade in={textVisible} timeout={300} unmountOnExit>
-                      <Box>
-                        <Typography variant="body1">Announcements</Typography>
-                      </Box>
-                    </Fade>
-                  )}
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton component={Link} to="/contact">
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    <ContactMailIcon />
-                  </ListItemIcon>
-                  {isSidebarExpanded && (
-                    <Fade in={textVisible} timeout={300} unmountOnExit>
-                      <Box>
-                        <Typography variant="body1">Upload Marks</Typography>
-                      </Box>
-                    </Fade>
-                  )}
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton component={Link} to="/contact">
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    <ContactMailIcon />
-                  </ListItemIcon>
-                  {isSidebarExpanded && (
-                    <Fade in={textVisible} timeout={300} unmountOnExit>
-                      <Box>
-                        <Typography variant="body1">Upload Attandance</Typography>
-                      </Box>
-                    </Fade>
-                  )}
-                </ListItemButton>
-              </ListItem>
-            </List>
-
-            {/* Toggle Button at the Bottom */}
-            <List>
-              <ListItem disablePadding onClick={toggleSidebar}>
-                <ListItemButton >
-                  <ListItemIcon sx={{ color: "inherit" }}>
-                    {isSidebarExpanded ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Drawer>
-
-        {/* Main Content */}
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            ml: isSidebarExpanded ? `${drawerWidthExpanded}px` : `${drawerWidthCollapsed}px`,
-            transition: "margin-left 0.3s ease",
-          }}
-        >
-          <Toolbar />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Typography variant="h4">Home Content</Typography>
-                  <Typography paragraph>This is the home page.</Typography>
-                </>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <>
-                  <Typography variant="h4">About Content</Typography>
-                  <Typography paragraph>This is the about page.</Typography>
-                </>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <>
-                  <Typography variant="h4">Contact Content</Typography>
-                  <Typography paragraph>This is the contact page.</Typography>
-                </>
-              }
-            />
-          </Routes>
-        </Box>
+        {/* Toggler Section */}
+        <List>
+        <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/logout"
+              sx={{
+                alignItems: "center",
+                backgroundColor:
+                  location.pathname === "/logout" ? colorsProp.selectedBackgroundColor : "inherit",
+                borderRadius: colorsProp.itemBorderRadius,
+                ":hover": {
+                  backgroundColor: colorsProp.hoverBackgroundColor,
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </ListItemIcon>
+              {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                    <Typography variant="body1">Logout</Typography>
+                  </Box>
+                </Fade>
+              )}
+            </ListItemButton>
+          </ListItem>
+        </List>
       </Box>
-    </Router>
+    </Drawer>
   );
-}
+};
 
-export default CollapsibleSidebar;
+export default SidePanel;

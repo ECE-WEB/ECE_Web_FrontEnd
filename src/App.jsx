@@ -1,19 +1,16 @@
 // src/App.js
 import React from 'react';
-import CustomNavbar from './components/NavBar';
+import Root from './components/Root';
 import SidePanel from './components/SidePanel';
-import MainContent from './components/MainContent';
+import MainContent from './components/NavBar';
 import { Box } from '@mui/material';
+import { Container } from 'react-bootstrap';
 
 const App = () => {
   return (
-    
-      <>
-        <CustomNavbar></CustomNavbar>
-      </>
-          
-      
-
+    <Container fluid>
+      <Root></Root>
+    </Container>
   );
 };
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { FaTachometerAlt, FaSearch, FaEnvelope, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { BarChart, XAxis, YAxis, Tooltip, Bar,ResponsiveContainer } from "recharts";
+
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/StudentDashboard.css";
 import SidePanel from "../components/SidePanel";
@@ -32,6 +34,11 @@ const subjectAttendance = {
   ComputerScience: "85%",
   Chemistry: "78%",
 };
+const attendanceData = Object.entries(subjectAttendance).map(([subject, percentage]) => ({
+  subject,
+  attendance: parseInt(percentage),
+}));
+
 
 // Sample Schedule Data
 const scheduleData = [
@@ -54,29 +61,12 @@ const StudentDashboard = () => {
   return (
     <div className="sd-dashboard-wrapper">
       {/* Sidebar */}
-      <SidePanel />
+ 
 
       {/* Main Dashboard Content */}
       <div className="sd-dashboard-container">
         {/* Top Navigation Bar */}
-        <div className="sd-top-nav">
-          <div className="sd-dashboard-title">
-            <FaTachometerAlt className="sd-dashboard-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sd-search-bar">
-            <FaSearch className="sd-search-icon" />
-            <input type="text" placeholder="Search..." />
-          </div>
-          <div className="sd-nav-icons">
-            <FaEnvelope className="sd-mail-icon" />
-            <div className="sd-community">
-              <img src={user1} alt="User1" className="sd-profile-img profile1" />
-              <img src={user2} alt="User2" className="sd-profile-img profile2" />
-              <img src={user3} alt="User3" className="sd-profile-img profile3" />
-            </div>
-          </div>
-        </div>
+        
 
         {/* Two Main Divisions */}
         <div className="sd-main-content">
@@ -115,12 +105,17 @@ const StudentDashboard = () => {
                 />
                 <div className="sd-attendance-info">
                   <h4>Overall Attendance</h4>
-                  <div className="sd-subject-attendance">
-                    <p>Mathematics: {subjectAttendance.Mathematics}</p>
-                    <p>Physics: {subjectAttendance.Physics}</p>
-                    <p>Computer Science: {subjectAttendance.ComputerScience}</p>
-                    <p>Chemistry: {subjectAttendance.Chemistry}</p>
-                  </div>
+                  {/* Horizontal Bar Chart */}
+        <div style={{ width: "100%", height: 200 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={attendanceData} layout="vertical">
+              <XAxis type="number" domain={[0, 100]} hide />
+              <YAxis type="category" dataKey="subject" width={100} />
+              <Tooltip />
+              <Bar dataKey="attendance" fill="#800000" barSize={20} radius={[10, 10, 10, 10]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
                 </div>
               </div>
             </div>
@@ -163,6 +158,7 @@ const StudentDashboard = () => {
             
           {/* Right Division (Announcements) */}
           <div className="sd-content">
+            <div><h2 className="sd-heading">Announcements</h2></div>
           <nav className="sd-category-nav desktop-only">
         <button className="sd-category-btn active">All</button>
         <button className="sd-category-btn">Internships</button>

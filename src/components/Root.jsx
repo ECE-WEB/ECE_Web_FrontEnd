@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
 import ProfilePanel from "./ProfilePanel";
-import LandingPage from "./pages/landingPage";
-import LoginPage from "./pages/LoginPage";
-import SidePanel from "./components/SidePanel";
-import StudentDashboard from "./pages/StudentDashboard";
+import LandingPage from "../pages/landingPage";
+import LoginPage from "../pages/LoginPage";
+import SidePanel from "./SidePanel";
+import StudentDashboard from "../pages/StudentDashboard";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -24,6 +24,7 @@ function Root() {
   const [brand, setBrand] = useState({ name: "Dashboard", icon: faLayerGroup });
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
   const isSidebarExpanded = isToggled || isHovered;
+  const userStatus = 0;
 
   const toggleSidebar = () => {
     setIsToggled(prev => !prev);

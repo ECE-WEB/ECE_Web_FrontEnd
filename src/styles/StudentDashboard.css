@@ -229,113 +229,232 @@
     margin: 3px 0;
 }
 
-/* Lower Row: Semester GPA Visualization */
-.gpa-card {
+/* ========== GPA & CGPA Section ========== */
+.gpa-container {
+    display: flex;
+    align-items: center;
     background: #ffffff;
     padding: 20px;
-    text-align: center;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
+    gap: 20px;
+    justify-content: space-between;
 }
 
+/* Overall CGPA Circular Progress */
+.overall-cgpa {
+    width: 100px;
+    text-align: center;
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+.overall-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Semester GPA Progress */
+.gpa-card {
+    flex-grow: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.gpa-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px; /* Reduce gap for compact spacing */
+}
+
+/* Adjust GPA Row Layout */
 .gpa-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px 0;
+    margin: 4px 0; /* Reduced margin to make it more compact */
 }
 
+/* Semester Text */
 .gpa-sem {
     width: 15%;
     text-align: left;
     font-weight: bold;
+    font-size: 12px; /* Reduced font size */
 }
 
+/* GPA Progress Bar */
 .gpa-bar {
-    width: 70%;
-    height: 12px;
+    width: 50%; /* Adjust width to align with CGPA */
+    height: 8px; /* Reduced height */
     background-color: #e0e0e0;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
+/* Filled Progress */
 .gpa-fill {
     height: 100%;
     background-color: #00C9A7;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
+/* GPA Value */
 .gpa-value {
-    width: 10%;
+    width: 15%;
     text-align: right;
     font-weight: bold;
+    font-size: 12px; /* Reduced font size */
 }
 
-/* Right Division (Announcements) */
-.right-division {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 768px) {
+    .gpa-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .gpa-list {
+        width: 100%;
+    }
+
+    .gpa-bar {
+        width: 50%; /* Adjust width for smaller screens */
+    }
+
+    .overall-cgpa {
+        width: 80px; /* Reduce CGPA circle size for mobile */
+    }
 }
 
-/* Announcements Container */
-.announcements-container {
-    background: #fff3cd;
+
+/* ===== FIXED ANNOUNCEMENTS CONTAINER ===== */
+/* Announcements Section */
+.announcements {
+    width: 100%;
+    max-height: 350px; /* Set fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
     padding: 15px;
     border-radius: 10px;
-    width: 100%;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #800000 #f0f0f0; /* Firefox */
 }
 
-/* Individual Announcement Item */
-.announcement-item {
-    display: flex;
-    align-items: center;
+/* Hide default scrollbar for WebKit (Chrome, Edge, Safari) */
+.announcements::-webkit-scrollbar {
+    width: 6px;
+}
+
+.announcements::-webkit-scrollbar-thumb {
+    background: #800000;
+    border-radius: 10px;
+}
+
+/* Individual Announcement Card */
+.announcement-card {
+    background: #ffffff;
+    border-radius: 10px;
     padding: 15px;
-    border-radius: 8px;
     margin-bottom: 10px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    border-left: 5px solid #800000; /* Left color bar */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Announcement Icon */
-.announcement-icon {
-    width: 15px;
-    height: 15px;
+/* ===== PROFILE IMAGE, USER, AND TIMESTAMP FIX ===== */
+
+/* Profile Section inside Announcement Header */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap; /* Prevents wrapping */
+}
+
+/* Profile Image Styling */
+.profile-img {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    margin-right: 10px;
+    background: #ddd;
+    flex-shrink: 0; /* Prevents shrinking */
+    object-fit: cover;
 }
 
-/* Announcement Content */
-.announcement-content {
-    flex-grow: 1;
-}
-
-/* Faculty Name */
-.announcement-faculty {
+/* Announcement Author */
+.announcement-author {
+    font-size: 14px;
     font-weight: bold;
-    color: #333;
+    color: #800000;
+    white-space: nowrap; /* Prevents text from breaking */
+}
+
+/* Timestamp */
+.announcement-time {
+    font-size: 12px;
+    color: #555;
+    flex-shrink: 0;
+    margin-left: auto; /* Push timestamp to the right */
+}
+
+/* Announcement Header */
+.announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap; /* Ensures everything stays in one line */
 }
 
 /* Announcement Title */
 .announcement-title {
-    display: block;
+    font-size: 16px;
     font-weight: bold;
-    margin: 5px 0;
+    color: black;
+    margin-bottom: 5px;
 }
 
-/* Announcement Description */
-.announcement-text {
+/* Announcement Text */
+.announcement-card p {
     font-size: 14px;
     color: #666;
 }
 
-/* Read More Link */
-.announcement-readmore {
-    font-size: 12px;
-    color: #007BFF;
+/* "View More" / "Read More" Button */
+.view-more {
+    text-align: right;
+    color: blue;
+    font-size: 14px;
     text-decoration: none;
     font-weight: bold;
+    display: block;
+    margin-top: 8px;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+    color: darkblue;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .announcements {
+        max-height: 300px;
+    }
+    
+    .announcement-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .announcement-time {
+        text-align: left;
+    }
 }

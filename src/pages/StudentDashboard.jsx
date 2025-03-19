@@ -20,6 +20,10 @@ const semesterGPA = [
   { sem: "Sem 8", gpa: 8.7 },
 ];
 
+// Calculate Overall CGPA
+const overallCGPA =
+  semesterGPA.reduce((sum, sem) => sum + sem.gpa, 0) / semesterGPA.length;
+
 // Sample Attendance Data
 const attendancePercentage = 75;
 const subjectAttendance = {
@@ -121,41 +125,62 @@ const StudentDashboard = () => {
             </div>
 
             {/* Lower Row: Semester-wise GPA Visualization */}
-            <div className="gpa-card">
-              <h4>Semester Progress</h4>
-              {semesterGPA.map((sem, index) => (
-                <div key={index} className="gpa-row">
-                  <span className="gpa-sem">{sem.sem}</span>
-                  <div className="gpa-bar">
-                    <div
-                      className="gpa-fill"
-                      style={{ width: `${(sem.gpa / 10) * 100}%` }}
-                    ></div>
+            <div className="gpa-container">
+              {/* Overall CGPA Circular Progress */}
+              <div className="overall-cgpa">
+                <CircularProgressbar
+                  value={(overallCGPA / 10) * 100}
+                  text={overallCGPA.toFixed(2)}
+                  styles={buildStyles({
+                    textSize: "16px",
+                    pathColor: "#00b894",
+                    textColor: "#333",
+                    trailColor: "#dfe6e9",
+                  })}
+                />
+                <p className="overall-text">Overall CGPA</p>
+              </div>
+
+              {/* Semester Progress */}
+              <div className="gpa-card">
+                <h4>Semester Progress</h4>
+                {semesterGPA.map((sem, index) => (
+                  <div key={index} className="gpa-row">
+                    <span className="gpa-sem">{sem.sem}</span>
+                    <div className="gpa-bar">
+                      <div
+                        className="gpa-fill"
+                        style={{ width: `${(sem.gpa / 10) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="gpa-value">{sem.gpa}</span>
                   </div>
-                  <span className="gpa-value">{sem.gpa}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right Division (Announcements) */}
-          <div className="right-division">
-            <div className="announcements-container">
-              <h3>Recent Announcements</h3>
-              {announcements.map((announcement, index) => (
-                <div key={index} className="announcement-item" style={{ backgroundColor: announcement.color }}>
-                  <div className="announcement-content">
-                    <span className="announcement-faculty">{announcement.faculty} </span>
-                    <span className="announcement-title">{announcement.title}</span>
-                    <p className="announcement-text">{announcement.description}</p>
-                    <a href="#" className="announcement-readmore">Read more...</a>
-                  </div>
+          <div className="content">
+        <div className="announcements">
+          {[...Array(6)].map((_, index) => (
+            <div className="announcement-card" key={index}>
+              <div className="announcement-header">
+                <div className="profile-section">
+                  <img src="" alt="" className="profile-img" />
+                  <span className="announcement-author">Dean of Academics</span>
                 </div>
-              ))}
+                <span className="announcement-time">12:00 22/06/2025</span>
+              </div>
+              <h3 className="announcement-title">Mid Time Table for E2 is announced</h3>
+              <p>Mid 2 schedule came out, so I request all the students to check it</p>
+              <a href="#" className="view-more">View More</a>
             </div>
-          </div>
+          ))}
+        </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

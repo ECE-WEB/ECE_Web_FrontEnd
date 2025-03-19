@@ -195,7 +195,7 @@
 }
 
 /* ======= MOBILE RESPONSIVE DESIGN (FOR LOGIN POPUP) ======= */
-@media (max-width: 600px) {
+@media (max-width: 830px) {
   /* Full-screen overlay with blur effect */
   .login-popup-overlay {
     position: fixed;
@@ -238,7 +238,7 @@
     padding: 0px;
     background: white;
     border-radius: 10px;
-    margin-top: 30%;
+    margin-top: 50%;
   }
 
   /* Adjust title */

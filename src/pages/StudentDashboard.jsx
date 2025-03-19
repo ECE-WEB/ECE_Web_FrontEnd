@@ -7,7 +7,7 @@ import SidePanel from "../components/SidePanel";
 import user1 from "../assets/profilePic.svg";
 import user2 from "../assets/profilePic.svg";
 import user3 from "../assets/profilePic.svg";
-
+import userpic from "../assets/profilePic.svg";
 // Sample Semester-wise GPA Data
 const semesterGPA = [
   { sem: "Sem 1", gpa: 7.8 },
@@ -50,50 +50,51 @@ const announcements = [
 ];
 
 const StudentDashboard = () => {
+  
   return (
-    <div className="dashboard-wrapper">
+    <div className="sd-dashboard-wrapper">
       {/* Sidebar */}
       <SidePanel />
 
       {/* Main Dashboard Content */}
-      <div className="dashboard-container">
+      <div className="sd-dashboard-container">
         {/* Top Navigation Bar */}
-        <div className="top-nav">
-          <div className="dashboard-title">
-            <FaTachometerAlt className="dashboard-icon" />
+        <div className="sd-top-nav">
+          <div className="sd-dashboard-title">
+            <FaTachometerAlt className="sd-dashboard-icon" />
             <span>Dashboard</span>
           </div>
-          <div className="search-bar">
-            <FaSearch className="search-icon" />
+          <div className="sd-search-bar">
+            <FaSearch className="sd-search-icon" />
             <input type="text" placeholder="Search..." />
           </div>
-          <div className="nav-icons">
-            <FaEnvelope className="mail-icon" />
-            <div className="community">
-              <img src={user1} alt="User1" className="profile-img profile1" />
-              <img src={user2} alt="User2" className="profile-img profile2" />
-              <img src={user3} alt="User3" className="profile-img profile3" />
+          <div className="sd-nav-icons">
+            <FaEnvelope className="sd-mail-icon" />
+            <div className="sd-community">
+              <img src={user1} alt="User1" className="sd-profile-img profile1" />
+              <img src={user2} alt="User2" className="sd-profile-img profile2" />
+              <img src={user3} alt="User3" className="sd-profile-img profile3" />
             </div>
           </div>
         </div>
 
         {/* Two Main Divisions */}
-        <div className="main-content">
+        <div className="sd-main-content">
           {/* Left Division */}
-          <div className="left-division">
+          <div className="sd-left-division">
             {/* Upper Row: Schedule & Attendance */}
-            <div className="upper-row">
+            <div className="sd-upper-row">
               {/* Today's Schedule */}
-              <div className="schedule-card">
+              <div className="sd-schedule-card">
                 <h3>Today's Schedule</h3>
-                <ul className="schedule-list">
+                <ul className="sd-schedule-list">
                   {scheduleData.map((item, index) => (
-                    <li key={index} className="schedule-item">
-                      <div className="schedule-color" style={{ backgroundColor: item.color }}></div>
-                      <FaChevronRight className="schedule-arrow" />
-                      <div className="schedule-details">
-                        <span className="schedule-subject">{item.subject}</span>
-                        <span className="schedule-time">{item.time}</span>
+                    <li key={index} className="sd-schedule-item">
+                      <div className="sd-schedule-color" style={{ backgroundColor: item.color }}></div>
+                      <FaChevronRight className="sd-schedule-arrow" />
+                      <div className="sd-schedule-details">
+                        <span className="sd-schedule-subject">{item.subject}</span>
+                        <span className="sd-schedule-time">{item.time}</span>
                       </div>
                     </li>
                   ))}
@@ -101,7 +102,7 @@ const StudentDashboard = () => {
               </div>
 
               {/* Overall Attendance */}
-              <div className="attendance-card">
+              <div className="sd-attendance-card">
                 <CircularProgressbar
                   value={attendancePercentage}
                   text={`${attendancePercentage}%`}
@@ -112,9 +113,9 @@ const StudentDashboard = () => {
                     strokeLinecap: "round",
                   })}
                 />
-                <div className="attendance-info">
+                <div className="sd-attendance-info">
                   <h4>Overall Attendance</h4>
-                  <div className="subject-attendance">
+                  <div className="sd-subject-attendance">
                     <p>Mathematics: {subjectAttendance.Mathematics}</p>
                     <p>Physics: {subjectAttendance.Physics}</p>
                     <p>Computer Science: {subjectAttendance.ComputerScience}</p>
@@ -125,9 +126,9 @@ const StudentDashboard = () => {
             </div>
 
             {/* Lower Row: Semester-wise GPA Visualization */}
-            <div className="gpa-container">
+            <div className="sd-gpa-container">
               {/* Overall CGPA Circular Progress */}
-              <div className="overall-cgpa">
+              <div className="sd-overall-cgpa">
                 <CircularProgressbar
                   value={(overallCGPA / 10) * 100}
                   text={overallCGPA.toFixed(2)}
@@ -138,49 +139,60 @@ const StudentDashboard = () => {
                     trailColor: "#dfe6e9",
                   })}
                 />
-                <p className="overall-text">Overall CGPA</p>
+                <p className="sd-overall-text">Overall CGPA</p>
               </div>
 
               {/* Semester Progress */}
-              <div className="gpa-card">
+              <div className="sd-gpa-card">
                 <h4>Semester Progress</h4>
                 {semesterGPA.map((sem, index) => (
-                  <div key={index} className="gpa-row">
-                    <span className="gpa-sem">{sem.sem}</span>
-                    <div className="gpa-bar">
+                  <div key={index} className="sd-gpa-row">
+                    <span className="sd-gpa-sem">{sem.sem}</span>
+                    <div className="sd-gpa-bar">
                       <div
-                        className="gpa-fill"
+                        className="sd-gpa-fill"
                         style={{ width: `${(sem.gpa / 10) * 100}%` }}
                       ></div>
                     </div>
-                    <span className="gpa-value">{sem.gpa}</span>
+                    <span className="sd-gpa-value">{sem.gpa}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+            
+          {/* Right Division (Announcements) */}
+          <div className="sd-content">
+          <nav className="sd-category-nav desktop-only">
+        <button className="sd-category-btn active">All</button>
+        <button className="sd-category-btn">Internships</button>
+        <button className="sd-category-btn">Jobs</button>
+        <button className="sd-category-btn">Internal Marks</button>
+        <button className="sd-category-btn">Attendance</button>
+      </nav>
+
 
           {/* Right Division (Announcements) */}
-          <div className="content">
-            <div className="announcements">
+          
+            <div className="sd-announcements">
               {announcements.map((item, index) => (
-                <div className="announcement-card" key={index} style={{ backgroundColor: item.color }}>
-                  <div className="announcement-header">
+                <div className="sd-announcement-card" key={index} style={{ backgroundColor: item.color }}>
+                  <div className="sd-announcement-header">
                     {/* Profile Section with Proper Alignment */}
-                    <div className="profile-section">
-                      <div className="profile-img" style={{ backgroundColor: item.color }}></div>
-                      <span className="announcement-author">{item.faculty}</span>
-                      <span className="announcement-role">Faculty</span>
+                    <div className="sd-profile-section">
+                      <img className="" src={userpic} alt="" />
+                      <span className="sd-announcement-author">{item.faculty}</span>
+                      <span className="sd-announcement-role">Faculty</span>
                     </div>
-                    <span className="announcement-time">12:00 22/06/2025</span>
+                    <span className="sd-announcement-time">12:00 22/06/2025</span>
                   </div>
 
                   {/* Announcement Content */}
-                  <h3 className="announcement-title">{item.title}</h3>
-                  <p className="announcement-text">{item.description}</p>
+                  <h3 className="sd-announcement-title">{item.title}</h3>
+                  <p className="sd-announcement-text">{item.description}</p>
                   
                   {/* Read More Link - Enhanced Visibility */}
-                  <a href="#" className="view-more">Read more...</a>
+                  <a href="#" className="sd-view-more">Read more...</a>
                 </div>
               ))}
             </div>

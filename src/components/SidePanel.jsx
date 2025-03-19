@@ -8,6 +8,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Fade from "@mui/material/Fade";
+import TextField from "@mui/material/TextField";
+import { Button,Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -21,6 +23,8 @@ const SidePanel = ({
   drawerWidthCollapsed,
   setIsHovered,
   textVisible,
+  setProfileOffcanvasVisible,
+  setOffcanvasVisible
 }) => {
   const user = {
     name: "Yekkaluru Divya Teja",
@@ -28,7 +32,7 @@ const SidePanel = ({
     email: "divyateja050@gmail.com",
   };
   user.avatar = user.name[0];
-
+ 
   const location = useLocation();
 
   const colorsProp = {
@@ -40,8 +44,14 @@ const SidePanel = ({
     selectedBackgroundColor: "#800000", // Selected item color
     itemBorderRadius: "12px", // Border radius for items
   };
-
+  const handleProfilePanel = () => {
+    //window.location.href = "/profile";  
+    setProfileOffcanvasVisible(true);
+    setOffcanvasVisible(true);
+  }
+  
   return (
+    <>
     <Drawer
       variant="permanent"
       onMouseEnter={() => setIsHovered(true)}
@@ -66,6 +76,7 @@ const SidePanel = ({
     >
       {/* Profile Section */}
       <Box
+      onClick={handleProfilePanel}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -74,6 +85,7 @@ const SidePanel = ({
           p: 2,
         }}
       >
+        
         <Avatar
           alt={user.name}
           sx={{
@@ -113,6 +125,7 @@ const SidePanel = ({
             </Fade>
           </Box>
         )}
+        
       </Box>
 
       {/* Navigation List */}
@@ -255,6 +268,7 @@ const SidePanel = ({
         </List>
       </Box>
     </Drawer>
+    </>
   );
 };
 

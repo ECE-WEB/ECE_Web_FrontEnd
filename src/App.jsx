@@ -3,13 +3,13 @@ import React from 'react';
 import Root from './components/Root';
 import SidePanel from './components/SidePanel';
 import MainContent from './components/NavBar';
-import { Box } from '@mui/material';
 import { Container } from 'react-bootstrap';
+import ProfilePanel from './components/ProfilePanel';
 
 const App = () => {
   return (
-    <Container fluid>
-      <Root></Root>
+    <Container fluid style={{ padding: "0rem 0rem" }}>
+      <ProfilePanel></ProfilePanel> 
     </Container>
   );
 };

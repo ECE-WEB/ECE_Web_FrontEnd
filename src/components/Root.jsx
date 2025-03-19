@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SidePanel from "./SidePanel";
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
+import ProfilePanel from "./ProfilePanel";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -69,9 +70,10 @@ function Root() {
             textVisible={textVisible}
             toggleSidebar={toggleSidebar}
             setIsPanelVisible={setIsPanelVisible}
+            setOffcanvasVisible={null}
+            setProfileOffcanvasVisible={null}
           />
         )}
-
         {/* Main Content */}
         <Box
           component="main"
@@ -99,7 +101,7 @@ function Root() {
             <Route
               path="/"
               element={
-                <Home setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
+                <Home style={{ padding: "0rem 2rem" }} setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
               }
             />
             <Route
@@ -120,6 +122,7 @@ function Root() {
                 <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
               }
             />
+           
           </Routes>
         </Box>
       </Box>

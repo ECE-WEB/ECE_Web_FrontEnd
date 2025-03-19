@@ -162,23 +162,29 @@ const StudentDashboard = () => {
 
           {/* Right Division (Announcements) */}
           <div className="content">
-        <div className="announcements">
-          {[...Array(6)].map((_, index) => (
-            <div className="announcement-card" key={index}>
-              <div className="announcement-header">
-                <div className="profile-section">
-                  <img src="" alt="" className="profile-img" />
-                  <span className="announcement-author">Dean of Academics</span>
+            <div className="announcements">
+              {announcements.map((item, index) => (
+                <div className="announcement-card" key={index} style={{ backgroundColor: item.color }}>
+                  <div className="announcement-header">
+                    {/* Profile Section with Proper Alignment */}
+                    <div className="profile-section">
+                      <div className="profile-img" style={{ backgroundColor: item.color }}></div>
+                      <span className="announcement-author">{item.faculty}</span>
+                      <span className="announcement-role">Faculty</span>
+                    </div>
+                    <span className="announcement-time">12:00 22/06/2025</span>
+                  </div>
+
+                  {/* Announcement Content */}
+                  <h3 className="announcement-title">{item.title}</h3>
+                  <p className="announcement-text">{item.description}</p>
+                  
+                  {/* Read More Link - Enhanced Visibility */}
+                  <a href="#" className="view-more">Read more...</a>
                 </div>
-                <span className="announcement-time">12:00 22/06/2025</span>
-              </div>
-              <h3 className="announcement-title">Mid Time Table for E2 is announced</h3>
-              <p>Mid 2 schedule came out, so I request all the students to check it</p>
-              <a href="#" className="view-more">View More</a>
+              ))}
             </div>
-          ))}
-        </div>
-        </div>
+          </div>
       </div>
     </div>
     </div>

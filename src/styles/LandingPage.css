@@ -148,7 +148,7 @@
 }
 
 .login-popup {
-  background: white;
+  background: rgba(245, 245, 220, 0.884);
   width: 600px;
   height: 600px;
   border-radius: 15px;
@@ -382,6 +382,60 @@
     display: none;
   }
 }
+@media (max-width: 831px) {
+  /* Ensures announcements section stays fixed */
+  .announcements {
+    width: 100%; /* Full width on smaller screens */
+    max-width: 600px; /* Ensures it doesn't stretch too much */
+    height: 500px; /* Keeps the height fixed */
+    margin: 0 auto; /* Centers the section */
+    padding: 15px;
+  }
+
+  /* Adjusts announcement card size */
+  .announcement-card {
+    font-size: 14px; /* Smaller font for better fit */
+    padding: 12px;
+    width: 90%; /* Adjusts width for responsiveness */
+    margin: 0 auto; /* Centers the cards */
+  }
+
+  /* Profile image size adjustment */
+  .profile-img {
+    width: 25px;
+    height: 25px;
+  }
+
+  /* Adjust profile section spacing */
+  .profile-section {
+    gap: 5px;
+  }
+
+  /* Reduce size of category buttons */
+  .category-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  /* Align category navigation side by side */
+  .category-nav {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 0px;
+    padding: 20px;
+    margin-left: 10px;
+  }
+
+  /* Ensure category buttons are evenly spaced */
+  .category-btn { /* Allow buttons to adjust their width */
+    min-width: 10px; /* Set a minimum width */
+    text-align: left;
+    align-items: left; 
+  }
+}
+
+
 
 /* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
 /* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
@@ -402,7 +456,6 @@
     width: 35px;
     height: 35px;
     margin-top: 5px;
-    margin-right: 6px;
   }
 
   /* Main text inline with login */
@@ -625,58 +678,5 @@
 
   .back-btn {
     font-size: 16px;
-  }
-}
-
-@media (max-width: 1100px) {
-  /* Ensures announcements section stays fixed */
-  .announcements {
-    width: 100%; /* Full width on smaller screens */
-    max-width: 600px; /* Ensures it doesn't stretch too much */
-    height: 500px; /* Keeps the height fixed */
-    margin: 0 auto; /* Centers the section */
-    padding: 15px;
-  }
-
-  /* Adjusts announcement card size */
-  .announcement-card {
-    font-size: 14px; /* Smaller font for better fit */
-    padding: 12px;
-    width: 90%; /* Adjusts width for responsiveness */
-    margin: 0 auto; /* Centers the cards */
-  }
-
-  /* Profile image size adjustment */
-  .profile-img {
-    width: 25px;
-    height: 25px;
-  }
-
-  /* Adjust profile section spacing */
-  .profile-section {
-    gap: 5px;
-  }
-
-  /* Reduce size of category buttons */
-  .category-btn {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  /* Align category navigation side by side */
-  .category-nav {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    margin-bottom: 0px;
-    padding: 20px;
-    margin-left: 10px;
-  }
-
-  /* Ensure category buttons are evenly spaced */
-  .category-btn { /* Allow buttons to adjust their width */
-    min-width: 10px; /* Set a minimum width */
-    text-align: left;
-    align-items: left; 
   }
 }

@@ -1,23 +1,23 @@
 /* Main Wrapper for Sidebar + Dashboard */
-.dashboard-wrapper {
+.sd-dashboard-wrapper {
     display: flex;
     width: 100%;
 }
 
 /* Sidebar should take minimal space */
-.sidepanel {
+.sd-sidepanel {
     flex-shrink: 0;
 }
 
 /* Main dashboard container */
-.dashboard-container {
+.sd-dashboard-container {
     flex-grow: 1;
     padding: 20px;
     font-family: Arial, sans-serif;
 }
 
 /* Navigation Bar */
-.top-nav {
+.sd-top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,19 +27,19 @@
     border-radius: 10px;
 }
 
-.dashboard-title {
+.sd-dashboard-title {
     display: flex;
     align-items: center;
     font-size: 20px;
     font-weight: bold;
 }
 
-.dashboard-icon {
+.sd-dashboard-icon {
     margin-right: 10px;
 }
 
 /* Search Bar */
-.search-bar {
+.sd-search-bar {
     display: flex;
     align-items: center;
     background: white;
@@ -48,36 +48,36 @@
     width: 250px;
 }
 
-.search-icon {
+.sd-search-icon {
     color: gray;
     margin-right: 5px;
 }
 
-.search-bar input {
+.sd-search-bar input {
     border: none;
     outline: none;
     width: 100%;
 }
 
 /* Navigation Icons */
-.nav-icons {
+.sd-nav-icons {
     display: flex;
     align-items: center;
 }
 
-.mail-icon {
+.sd-mail-icon {
     font-size: 20px;
     margin-right: 20px;
     cursor: pointer;
 }
 
 /* Community Profile Images */
-.community {
+.sd-community {
     display: flex;
     position: relative;
 }
 
-.profile-img {
+.sd-profile-img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -85,23 +85,23 @@
     position: absolute;
 }
 
-.profile1 {
+.sd-profile1 {
     left: 0;
     z-index: 3;
 }
 
-.profile2 {
+.sd-profile2 {
     left: 20px;
     z-index: 2;
 }
 
-.profile3 {
+.sd-profile3 {
     left: 40px;
     z-index: 1;
 }
 
 /* Main Content Section */
-.main-content {
+.sd-main-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -110,7 +110,7 @@
 }
 
 /* Left Division */
-.left-division {
+.sd-left-division {
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -118,14 +118,14 @@
 }
 
 /* Upper Row: Schedule & Attendance */
-.upper-row {
+.sd-upper-row {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
 /* Schedule Card */
-.schedule-card {
+.sd-schedule-card {
     background: #ffffff;
     padding: 20px;
     border-radius: 10px;
@@ -138,13 +138,13 @@
 }
 
 /* Schedule List */
-.schedule-list {
+.sd-schedule-list {
     list-style-type: none;
     padding: 0;
 }
 
 /* Schedule Item */
-.schedule-item {
+.sd-schedule-item {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -154,18 +154,18 @@
     transition: all 0.2s ease-in-out;
 }
 
-.schedule-item:hover {
+.sd-schedule-item:hover {
     transform: scale(1.02);
 }
 
 /* Arrow on Left */
-.schedule-arrow {
+.sd-schedule-arrow {
     color: gray;
     margin-right: 10px;
 }
 
 /* Color Indicator */
-.schedule-color {
+.sd-schedule-color {
     width: 5px;
     height: 35px;
     border-radius: 5px;
@@ -173,17 +173,17 @@
 }
 
 /* Schedule Details */
-.schedule-details {
+.sd-schedule-details {
     flex-grow: 1;
 }
 
-.schedule-subject {
+.sd-schedule-subject {
     font-weight: bold;
     display: block;
     text-align: left;
 }
 
-.schedule-time {
+.sd-schedule-time {
     font-size: 12px;
     color: gray;
     text-align: left;
@@ -191,7 +191,7 @@
 }
 
 /* Attendance Card */
-.attendance-card {
+.sd-attendance-card {
     display: flex;
     align-items: center;
     background: #ffffff;
@@ -205,137 +205,260 @@
 }
 
 /* Circular Progress Bar */
-.attendance-card .CircularProgressbar {
+.sd-attendance-card .CircularProgressbar {
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
 }
 
 /* Attendance Info */
-.attendance-info {
+.sd-attendance-info {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
 }
 
 /* Subject-wise attendance inside attendance card */
-.subject-attendance {
+.sd-subject-attendance {
     margin-top: 5px;
     font-size: 14px;
     text-align: center;
 }
 
-.subject-attendance p {
+.sd-subject-attendance p {
     margin: 3px 0;
 }
 
-/* Lower Row: Semester GPA Visualization */
-.gpa-card {
+/* ========== GPA & CGPA Section ========== */
+.sd-gpa-container {
+    display: flex;
+    align-items: center;
     background: #ffffff;
     padding: 20px;
-    text-align: center;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
+    gap: 20px;
+    justify-content: space-between;
 }
 
-.gpa-row {
+/* Overall CGPA Circular Progress */
+.sd-overall-cgpa {
+    width: 100px;
+    text-align: center;
+    flex-shrink: 0; /* Prevents shrinking */
+}
+
+.sd-overall-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Semester GPA Progress */
+.sd-gpa-card {
+    flex-grow: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.sd-gpa-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px; /* Reduce gap for compact spacing */
+}
+
+/* Adjust GPA Row Layout */
+.sd-gpa-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px 0;
+    margin: 4px 0; /* Reduced margin to make it more compact */
 }
 
-.gpa-sem {
+/* Semester Text */
+.sd-gpa-sem {
     width: 15%;
     text-align: left;
     font-weight: bold;
+    font-size: 12px; /* Reduced font size */
 }
 
-.gpa-bar {
-    width: 70%;
-    height: 12px;
+/* GPA Progress Bar */
+.sd-gpa-bar {
+    width: 50%; /* Adjust width to align with CGPA */
+    height: 8px; /* Reduced height */
     background-color: #e0e0e0;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
-.gpa-fill {
+/* Filled Progress */
+.sd-gpa-fill {
     height: 100%;
     background-color: #00C9A7;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
-.gpa-value {
-    width: 10%;
+/* GPA Value */
+.sd-gpa-value {
+    width: 15%;
     text-align: right;
     font-weight: bold;
+    font-size: 12px; /* Reduced font size */
 }
 
-/* Right Division (Announcements) */
-.right-division {
-    width: 35%;
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 768px) {
+    .gpa-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .gpa-list {
+        width: 100%;
+    }
+
+    .gpa-bar {
+        width: 50%; /* Adjust width for smaller screens */
+    }
+
+    .overall-cgpa {
+        width: 80px; /* Reduce CGPA circle size for mobile */
+    }
+}
+
+
+/* Announcements Section */
+/* Announcements Section */
+.sd-announcements {
+    height: 550px; /* Fixed height */
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-/* Announcements Container */
-.announcements-container {
-    background: #fff3cd;
-    padding: 15px;
-    border-radius: 10px;
+    gap: 10px;
     width: 100%;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
 }
 
-/* Individual Announcement Item */
-.announcement-item {
+.sd-announcements::-webkit-scrollbar {
+    display: none;
+}
+
+/* Announcement Card */
+.sd-announcement-card {
+    padding: 15px;
+    border-radius: 15px;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+}
+  
+  /* Announcement Header */
+  .sd-announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  /* Profile Section */
+  .sd-profile-section {
     display: flex;
     align-items: center;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
-
-/* Announcement Icon */
-.announcement-icon {
-    width: 15px;
-    height: 15px;
+    gap: 8px;
+  }
+  
+  /* Profile Image */
+  .sd-profile-img {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    margin-right: 10px;
-}
-
-/* Announcement Content */
-.announcement-content {
-    flex-grow: 1;
-}
-
-/* Faculty Name */
-.announcement-faculty {
+    flex-shrink: 0;
+  }
+  
+  /* Faculty Name */
+  .sd-announcement-author {
     font-weight: bold;
-    color: #333;
-}
-
-/* Announcement Title */
-.announcement-title {
-    display: block;
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-/* Announcement Description */
-.announcement-text {
+    font-size: 16px;
+  }
+  
+  /* Announcement Role */
+  .sd-announcement-role {
     font-size: 14px;
-    color: #666;
+    color: gray;
+  }
+  
+  /* Read More Link */
+  .sd-view-more {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: blue;
+  }
+  
+  .sd-view-more:hover {
+    text-decoration: underline;
+    color: darkblue;
+  }
+  .sd-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;
+  }
+  
+  /* Category Navbar */
+.sd-category-nav {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
 }
 
-/* Read More Link */
-.announcement-readmore {
-    font-size: 12px;
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: bold;
+/* Category Button */
+.sd-category-btn {
+  background: #ddd;
+  color: #333;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+/* Active Category */
+.sd-category-btn.active {
+  background: #800000;
+  color: white;
+  font-weight: bold;
+}
+
+.sd-category-btn:hover {
+  background: #600000;
+  color: white;
+}
+
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .announcements {
+        max-height: 300px;
+    }
+    
+    .announcement-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .announcement-time {
+        text-align: left;
+    }
 }

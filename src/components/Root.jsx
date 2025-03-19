@@ -4,9 +4,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import MainContent from "./NavBar";
 import Typography from "@mui/material/Typography";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SidePanel from "./SidePanel";
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
 import ProfilePanel from "./ProfilePanel";
+import LandingPage from "./pages/landingPage";
+import LoginPage from "./pages/LoginPage";
+import SidePanel from "./components/SidePanel";
+import StudentDashboard from "./pages/StudentDashboard";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -99,7 +102,7 @@ function Root() {
           {/* Routes */}
           <Routes>
             <Route
-              path="/"
+              path="/facultydashboard"
               element={
                 <Home style={{ padding: "0rem 2rem" }} setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
               }
@@ -122,7 +125,10 @@ function Root() {
                 <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
               }
             />
-           
+           <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sidepanel" element={<SidePanel />} />
+        <Route path="/studentdashboard" element={<StudentDashboard />} />
           </Routes>
         </Box>
       </Box>

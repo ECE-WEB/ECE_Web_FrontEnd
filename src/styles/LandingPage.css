@@ -1,0 +1,682 @@
+/* Reset default styles to avoid conflicts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensures full-width layout */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Main Landing Page Container */
+.landing-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  width: 100%;
+}
+
+.logo-img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #800000;
+  font-family: Inria Serif;
+  margin-left: 50px;
+}
+
+.heading {
+  margin-left: 40px;
+  margin-right: 55px;
+}
+
+/* Main Heading */
+.main-text {
+  font-size: 45px;
+}
+
+/* Subheading */
+.sub-text {
+  font-size: 20px;
+  color: #800000;
+}
+
+/* ========== LOGIN DROPDOWN STYLING ========== */
+
+/* Login Dropdown Wrapper */
+.login-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Login Button */
+.login-btn {
+  background: #800000;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  transition: background 0.3s ease;
+  height: 35px;
+  width: 90px;
+  align-items: center;
+}
+
+.login-btn:hover {
+  background: #600000;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  width: 90px;
+  padding: 5px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* Dropdown buttons */
+.dropdown-menu button {
+  background: transparent;
+  border: none;
+  padding: 10px 15px;
+  text-align: left;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu button:hover {
+  background: #800000;
+  color: white;
+}
+
+/* ========== BACKGROUND BLUR WHEN LOGIN POPUP IS ACTIVE ========== */
+.landing-container.blurred::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Light overlay */
+  backdrop-filter: blur(5px); /* Blurs only the background */
+  z-index: 999; /* Ensures it is below the popup */
+}
+
+/* Allow interactions for elements inside the popup */
+.landing-container.blurred .login-popup * {
+  pointer-events: auto;
+}
+
+
+
+/* ========== LOGIN POPUP STYLING ========== */
+
+/* Login Popup Overlay */
+/* Fix issue where inputs inside popup are not clickable */
+.login-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-popup {
+  background: rgba(245, 245, 220, 0.884);
+  width: 600px;
+  height: 600px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  position: relative; /* Ensures it is interactive */
+}
+
+/* Ensure inputs inside login popup are interactive */
+.login-popup input {
+  pointer-events: auto; 
+  z-index: 1002;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+  .login-popup {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+}
+
+/* Content Section (Announcements + Image) */
+.content {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0px;
+  gap: 20px;
+}
+
+/* Announcements Section (Fixed Height, Scrollable but Hidden Scrollbar) */
+.announcements {
+  width: 40%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 20px;
+  margin-left: 100px;
+  
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.announcements::-webkit-scrollbar {
+  display: none;
+}
+
+/* Category Navigation (Inside Announcements) */
+.category-nav {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 0px;
+  padding: 20px;
+  margin-left: 100px;
+}
+
+.category-btn {
+  background: #800000;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.category-btn:hover {
+  background: #600000;
+}
+
+/* Announcement Card */
+.announcement-card {
+  border: 2px solid black;
+  padding: 15px;
+  border-radius: 15px 15px 0px 15px;
+  text-align: left;
+  transition: transform 0.2s ease-in-out;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Announcement Card Colors */
+.announcement-card:nth-child(4n + 1) {
+  background-color: #EAE6FF; /* Light Purple */
+  border-left: 8px solid #5A42E0; /* Darker Purple */
+}
+
+.announcement-card:nth-child(4n + 2) {
+  background-color: #FEF7D6; /* Light Yellow */
+  border-left: 8px solid #D9A100; /* Darker Yellow */
+}
+
+.announcement-card:nth-child(4n + 3) {
+  background-color: #FFE3E3; /* Light Pink */
+  border-left: 8px solid #D32F2F; /* Darker Red */
+}
+
+.announcement-card:nth-child(4n + 4) {
+  background-color: #E0F7FA; /* Light Cyan */
+  border-left: 8px solid #00897B; /* Darker Green */
+}
+
+/* Profile Name Color Matches Darker Border */
+.announcement-card:nth-child(4n + 1) .profile-name {
+  color: #5A42E0; /* Darker Purple */
+}
+
+.announcement-card:nth-child(4n + 2) .profile-name {
+  color: #D9A100; /* Darker Yellow */
+}
+
+.announcement-card:nth-child(4n + 3) .profile-name {
+  color: #D32F2F; /* Darker Red */
+}
+
+.announcement-card:nth-child(4n + 4) .profile-name {
+  color: #00897B; /* Darker Green */
+}
+
+/* Profile Circle Matches Darker Border */
+.announcement-card:nth-child(4n + 1) .profile-img {
+  background-color: #5A42E0;
+}
+
+.announcement-card:nth-child(4n + 2) .profile-img {
+  background-color: #D9A100;
+}
+
+.announcement-card:nth-child(4n + 3) .profile-img {
+  background-color: #D32F2F;
+}
+
+.announcement-card:nth-child(4n + 4) .profile-img {
+  background-color: #00897B;
+}
+/* Announcement Author Text Color Matches Profile Image */
+.announcement-card:nth-child(4n + 1) .announcement-author {
+  color: #5A42E0; /* Darker Purple */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 2) .announcement-author {
+  color: #D9A100; /* Darker Yellow */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 3) .announcement-author {
+  color: #D32F2F; /* Darker Red */
+  font-weight: bold;
+}
+
+.announcement-card:nth-child(4n + 4) .announcement-author {
+  color: #00897B; /* Darker Green */
+  font-weight: bold;
+}
+
+.announcement-time{
+  font-size: 14px;
+}
+/* Profile Section inside Announcement Header */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Profile Image Styling */
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.announcement-card:hover {
+  transform: scale(1.02);
+}
+
+/* Announcement Header */
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ensure "View More" is right-aligned */
+.view-more {
+  color: blue;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: right;
+  display: block;
+  margin-top: 10px;
+}.view-more:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+/* Announcement Image (Hidden on Mobile) */
+.announcement-image {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  margin-bottom: 80px;
+}
+
+.announcement-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+/* Hide Latest Updates section on Desktop */
+@media (min-width: 601px) {
+  .mobile-only {
+    display: none;
+  }
+}
+@media (max-width: 831px) {
+  /* Ensures announcements section stays fixed */
+  .announcements {
+    width: 100%; /* Full width on smaller screens */
+    max-width: 600px; /* Ensures it doesn't stretch too much */
+    height: 500px; /* Keeps the height fixed */
+    margin: 0 auto; /* Centers the section */
+    padding: 15px;
+  }
+
+  /* Adjusts announcement card size */
+  .announcement-card {
+    font-size: 14px; /* Smaller font for better fit */
+    padding: 12px;
+    width: 90%; /* Adjusts width for responsiveness */
+    margin: 0 auto; /* Centers the cards */
+  }
+
+  /* Profile image size adjustment */
+  .profile-img {
+    width: 25px;
+    height: 25px;
+  }
+
+  /* Adjust profile section spacing */
+  .profile-section {
+    gap: 5px;
+  }
+
+  /* Reduce size of category buttons */
+  .category-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  /* Align category navigation side by side */
+  .category-nav {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 0px;
+    padding: 20px;
+    margin-left: 10px;
+  }
+
+  /* Ensure category buttons are evenly spaced */
+  .category-btn { /* Allow buttons to adjust their width */
+    min-width: 10px; /* Set a minimum width */
+    text-align: left;
+    align-items: left; 
+  }
+}
+
+
+
+/* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
+/* ======== MOBILE RESPONSIVE DESIGN (FOR ANDROID) ======== */
+@media (max-width: 830px) {
+  /* Adjust header for mobile */
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  /* Reduce logo size */
+  .logo-img {
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+  }
+
+  /* Main text inline with login */
+  .heading {
+    flex: 1;
+    margin: 0;
+    padding: 0 10px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 18px;
+  }
+
+  /* Change main text for mobile */
+  .main-text::before {
+    content: "Department of ECE";
+     /* Shortened title for mobile */
+    font-size: 25px; /* Adjust font size */
+  }
+  .sub-text::before {
+    content: "Constituted under the A.P Govt. Act 18 of 2008 ";
+     /* Shortened title for mobile */
+    font-size:10px;
+    
+
+    /* Adjust font size */
+
+  }
+
+  .main-text {
+    font-size: 0; /* Hide original text */
+  }
+  /* Hide sub-text on mobile */
+  .sub-text {
+    font-size: 0;
+  }
+
+  /* Adjust login button */
+  .login-dropdown {
+    margin-left: auto;
+  }
+
+  .login-btn {
+    font-size: 14px;
+    padding: 5px 10px;
+    height: auto;
+    width: auto;
+  }
+
+  /* Latest Updates Container */
+  .latest-updates-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #800000;
+    position: relative;
+  }
+
+  /* Sort By Dropdown Button */
+  .sort-by-container {
+    position: relative; /* Ensures dropdown aligns properly */
+    display: inline-block;
+  }
+
+  .sort-by-dropdown {
+    cursor: pointer;
+    background: #800000;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    border: none;
+  }
+
+  /* Dropdown Menu Styling */
+  .sort-dropdown {
+    position: absolute;
+    top: 100%; /* Ensures dropdown appears right below the Sort By button */
+    left:auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    min-width: 140px;
+    padding: 5px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    margin-top: 5px; /* Small gap between button and dropdown */
+  }
+
+  /* Show dropdown when active */
+  .sort-dropdown.active {
+    display: flex;
+  }
+
+  .sort-dropdown button {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+    
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .sort-dropdown button:hover {
+    background: #800000;
+    color: white;
+  }
+
+  /* ========== Category Navigation Removed for Mobile ========== */
+  .category-nav {
+    display: none;
+  }
+
+  /* Announcements section takes full width */
+  .announcements {
+    width: 100%;
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  /* Adjust announcement cards for mobile */
+  .announcement-card {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  /* Adjust announcement header layout */
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; /* Ensures proper spacing on small screens */
+}
+  .announcement-title{
+    font-size: 15px;
+  }
+  /* Ensure author and timestamp align in one row */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between profile image and text */
+  flex-grow: 1; /* Allow to take up available space */
+}
+
+  .profile-img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .announcement-author {
+    font-size: 14px;
+  }
+
+  /* Align timestamp to the right of the author */
+.announcement-time {
+  font-size: 12px;
+  text-align: right;
+  color: #555;
+  flex-shrink: 0; /* Prevents shrinking */
+}
+/* Ensure "View More" is right-aligned */
+.view-more {
+  color: blue;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: right;
+  display: block;
+  margin-top: 10px;
+}.view-more:hover {
+  text-decoration: underline;
+  color: darkblue;
+}
+  /* Hide announcement image on mobile */
+  .announcement-image {
+    display: none;
+  }
+
+  /* Responsive login popup */
+  .login-popup {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .login-popup .login-image {
+    width: 100%;
+    height: 180px;
+    padding: 10px;
+  }
+
+  .login-popup .div2 {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .login-popup .div2 .login-box {
+    width: 100%;
+  }
+
+  /* Ensure inputs are responsive */
+  .input-group input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .login-submit,
+  .google-login {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .back-btn {
+    font-size: 16px;
+  }
+}

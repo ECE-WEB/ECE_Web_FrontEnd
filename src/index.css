@@ -1,0 +1,86 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color: black;
+  background-color: white;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: none;
+}
+
+.view-more {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.view-more:hover {
+  color: darkblue;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  color: black;
+}
+
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.login-btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: #7B1919;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #d32f2f;
+}
+
+
+
+button:hover {
+  background-color: #d32f2f;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+}

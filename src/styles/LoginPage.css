@@ -1,0 +1,358 @@
+/* Full-page container */
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+.login-image{
+  width: 50%;
+}
+
+.div2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #800000;
+  width: 50%;
+}
+/* Login Box */
+.login-box {
+  background: white;
+  padding: 30px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Login Title */
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #800000;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1;
+  padding: 5px;
+}
+
+.input-group .icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* Forgot Password */
+.forgot-password {
+  display: block;
+  font-size: 14px;
+  color: blue;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-submit {
+  background: #800000;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 15px;
+  transition: background 0.3s ease;
+}
+
+.login-submit:hover {
+  background: #600000;
+}
+
+/* Google Login Button */
+.google-login {
+  background: #800000;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.google-login:hover {
+  background: #600000;
+}
+
+/* Google Icon */
+.google-icon {
+  background: white;
+  color: #800000;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Back Button */
+.back-btn {
+  background: transparent;
+  color: #800000;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #600000;
+}
+
+/* ========== LOGIN POPUP STYLES (Used when modal is shown) ========== */
+
+/* === LOGIN POPUP OVERLAY (Blur Background) === */
+.login-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Darker background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px); /* Increased blur */
+}
+
+/* === LOGIN POPUP CONTAINER === */
+.login-popup {
+  display: flex;
+  width: 60%; /* Adjust width */
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* === LEFT SIDE IMAGE DIVISION === */
+.login-popup .login-image {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+}
+
+.login-popup .login-image img {
+  max-width: 90%;
+  height: auto;
+  object-fit: contain; /* Prevents cropping */
+  display: block;
+}
+
+/* === RIGHT SIDE LOGIN BOX === */
+.login-popup .div2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #800000;
+  width: 50%;
+}
+
+
+.login-popup .div2 .login-box .login-form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* ======= MOBILE RESPONSIVE DESIGN (FOR LOGIN POPUP) ======= */
+@media (max-width: 830px) {
+  /* Full-screen overlay with blur effect */
+  .login-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;/* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Blurred landing page */
+  }
+
+  /* Popup login form (SQUARE SHAPE & CENTERED) */
+  .login-popup {
+    width: 100%;
+    max-width: 350px; /* Square shape */
+     /* Allow dynamic height */
+    background: transparent;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Hide the image section in mobile */
+  .login-popup .login-image {
+    display: none;
+  }
+
+  /* Make login form full width */
+  .login-popup .div2 {
+    width: 100%;
+    height: 60%;
+    padding: 0px;
+    background: white;
+    border-radius: 10px;
+    margin-top: 50%;
+  }
+
+  /* Adjust title */
+  .login-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #800000;
+    margin-bottom: 15px;
+  }
+
+  /* Adjust input fields */
+  .input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    background: #f9f9f9; /* Light background */
+  }
+
+  .input-group input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    flex: 1;
+    padding: 5px;
+    background: transparent;
+    min-width: 0; /* Prevents overflow */
+    overflow-x: hidden;
+    text-overflow: ellipsis; /* Adds "..." if text is too long */
+    white-space: nowrap;
+  }
+
+
+  .input-group .icon {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+
+  /* Forgot Password Link */
+  .forgot-password {
+    display: block;
+    font-size: 14px;
+    color: blue;
+    text-decoration: none;
+    margin-bottom: 15px;
+  }
+
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+
+  /* Login Button */
+  .login-submit {
+    background: #800000;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: background 0.3s ease;
+  }
+
+  .login-submit:hover {
+    background: #600000;
+  }
+
+  /* Google Login Button */
+  .google-login {
+    background: #800000;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+
+  .google-login:hover {
+    background: #600000;
+  }
+
+  /* Google Icon */
+  .google-icon {
+    background: white;
+    color: #800000;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  /* Back Button */
+  .back-btn {
+    background: transparent;
+    color: #800000;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .back-btn:hover {
+    color: #600000;
+  }
+}

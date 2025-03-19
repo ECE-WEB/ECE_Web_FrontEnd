@@ -138,7 +138,7 @@ const SidePanel = ({
               sx={{
                 alignItems: "center",
                 backgroundColor:
-                  location.pathname === "/" ? colorsProp.selectedBackgroundColor : "inherit",
+                  location.pathname === "/facultydashboard" ? colorsProp.selectedBackgroundColor : "inherit",
                 borderRadius: colorsProp.itemBorderRadius, // Apply border radius
                 ":hover": {
                   backgroundColor: colorsProp.hoverBackgroundColor, // Apply hover color

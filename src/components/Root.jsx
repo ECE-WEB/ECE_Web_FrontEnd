@@ -13,8 +13,8 @@ import StudentDashboard from "../pages/StudentDashboard";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
-// Define a breakpoint below which the panel should vanish, e.g., 768px.
-const panelVanishBreakpoint = 650;
+
+const panelVanishBreakpoint = 768;
 
 function Root() {
   const [isToggled, setIsToggled] = useState(false);

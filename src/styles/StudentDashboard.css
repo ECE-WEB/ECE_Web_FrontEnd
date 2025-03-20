@@ -375,6 +375,8 @@
     transition: transform 0.2s ease-in-out;
     width: 100%;
     height: 35%;
+    display: flex;
+    flex-direction: column;
 }
   
   /* Announcement Header */
@@ -430,7 +432,9 @@
     font-weight: bold;
     text-decoration: none;
     color: blue;
-  }
+    align-self: flex-start; /* Keep it inside the card */
+    margin-top: auto; /* Push to the bottom */
+}
   
   .sd-view-more:hover {
     text-decoration: underline;

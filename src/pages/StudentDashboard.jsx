@@ -28,7 +28,7 @@ const attendancePercentage = 75;
 const subjectAttendance = {
   SS: 40,
   CS: 68,
-  DSP: 85,
+  DSP: 100,
   DLD: 78,
   RLR: 70,
 };
@@ -105,7 +105,7 @@ const StudentDashboard = () => {
                   <h4>Overall Attendance</h4>
                   {/* Horizontal Bar Chart */}
         <div style={{ width: "100%", height: 200 }}>
-          <ResponsiveContainer width="110%" height="100%">
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={attendanceData} layout="vertical">
               <XAxis type="number" domain={[0, 100]} hide />
               <YAxis
@@ -137,7 +137,7 @@ const StudentDashboard = () => {
                             key={`cell-${index}`}
                             fill={
                               entry.attendance < 50 ? "#e74c3c" : // Red for below 50%
-                              entry.attendance === 75 ? "#f39c12" : // Orange for exactly 75%
+                              entry.attendance <75 ? "#f39c12" : // Orange for exactly 75%
                               "#00b894" // Green for above 75%
                             }
                           />

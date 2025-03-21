@@ -22,7 +22,7 @@ const SidePanel = ({
   setProfileOffcanvasVisible,
   setOffcanvasVisible
 }) => {
-  
+
   const location = useLocation();
 
   // 🚀 **Hide sidebar if the user is on the landing page**
@@ -33,7 +33,7 @@ const SidePanel = ({
     name: "Yekkaluru Divya Teja",
     avatar: "Y",
     email: "divyateja050@gmail.com",
-    role: sessionStorage.getItem("role") || "Student", // Default role
+    role: (sessionStorage.getItem("role") || "student").toLowerCase(), // Normalize to lowercase
   };
 
   // Define Role-Based Sidebar Menu Items
@@ -44,13 +44,13 @@ const SidePanel = ({
       { name: "Manage Users", path: "/manageUsers", icon: faHand },
       { name: "Upload Reports", path: "/uploadReports", icon: faArrowUpFromBracket },
     ],
-    Faculty: [
+    faculty: [
       { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
       { name: "Announcements", path: "/announcements", icon: faBullhorn },
       { name: "Upload Marks", path: "/uploadMarks", icon: faArrowUpFromBracket },
       { name: "Upload Attendance", path: "/uploadAttendance", icon: faHand },
     ],
-    Student: [
+    student: [
       { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
       { name: "Announcements", path: "/announcements", icon: faBullhorn },
       { name: "View Marks", path: "/viewMarks", icon: faArrowUpFromBracket },
@@ -59,7 +59,7 @@ const SidePanel = ({
   };
 
   // Fetch the appropriate menu list based on user role
-  const sidebarOptions = menuItems[user.role] || menuItems.Student;
+  const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
     setProfileOffcanvasVisible(true);

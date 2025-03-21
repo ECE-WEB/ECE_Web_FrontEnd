@@ -10,6 +10,7 @@ import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/LoginPage";
 import SidePanel from "./SidePanel";
 import StudentDashboard from "../pages/StudentDashboard";
+import StudentAttendance from "../pages/StudentAttendance";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -130,6 +131,7 @@ function Root() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidepanel" element={<SidePanel />} />
         <Route path="/studentdashboard" element={<StudentDashboard />} />
+        <Route path="/studentattendance" element={<StudentAttendance/>} />
           </Routes>
         </Box>
       </Box>

@@ -1,5 +1,7 @@
+
 import { useLocation } from "react-router-dom";
-import React, { use, useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, {  useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Navbar,
@@ -159,7 +161,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
 
             {/* Brand Section */}
             <div className={`d-flex align-items-center ms-${showSearch ? 0 : 3}`}>
-              <Navbar.Brand style={navLinkStyle} href="/">
+              <Navbar.Brand style={navLinkStyle} href="#">
                 {showSearch && (
                   <FontAwesomeIcon
                     icon={brand.icon}

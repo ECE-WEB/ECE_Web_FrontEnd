@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import MainContent from "./NavBar";
+import NavBar from "./NavBar";
 import Typography from "@mui/material/Typography";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,7 @@ import LoginPage from "../pages/LoginPage";
 import SidePanel from "./SidePanel";
 import StudentDashboard from "../pages/StudentDashboard";
 import StudentAttendance from "../pages/StudentAttendance";
+
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -26,6 +27,7 @@ function Root() {
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
   const isSidebarExpanded = isToggled || isHovered;
   const userStatus = 0;
+
 
   const toggleSidebar = () => {
     setIsToggled(prev => !prev);
@@ -65,7 +67,7 @@ function Root() {
         <CssBaseline />
 
         {/* Side Panel */}
-        {isPanelVisible && (
+        {(userStatus == 1)?(isPanelVisible && (
           <SidePanel
             isHovered={isHovered}
             isSidebarExpanded={isSidebarExpanded}
@@ -78,7 +80,7 @@ function Root() {
             setOffcanvasVisible={null}
             setProfileOffcanvasVisible={null}
           />
-        )}
+        )):<></>}
         {/* Main Content */}
         <Box
           component="main"
@@ -99,10 +101,13 @@ function Root() {
             p: 1,
           }}
         >
-          <MainContent brand={brand} offcanvasVisible={offcanvasVisible} setOffcanvasVisible = {setOffcanvasVisible}/>
+          {(userStatus == 1)?<NavBar brand={brand} offcanvasVisible={offcanvasVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
 
           {/* Routes */}
           <Routes>
+          <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/studentdashboard" element={<StudentDashboard  />} />
             <Route
               path="/facultydashboard"
               element={
@@ -127,11 +132,13 @@ function Root() {
                 <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
               }
             />
+
            <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sidepanel" element={<SidePanel />} />
         <Route path="/studentdashboard" element={<StudentDashboard />} />
         <Route path="/studentattendance" element={<StudentAttendance/>} />
+
           </Routes>
         </Box>
       </Box>

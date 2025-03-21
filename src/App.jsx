@@ -1,21 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/landingPage";
-import LoginPage from "./pages/LoginPage";
-import SidePanel from "./components/SidePanel";
-import StudentDashboard from "./pages/StudentDashboard";
+// src/App.js
+import React from 'react';
+import Root from './components/Root';
+import { Container } from 'react-bootstrap';
 
-function App() {
+
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sidepanel" element={<SidePanel />} />
-        <Route path="/studentdashboard" element={<StudentDashboard />} />
-      </Routes>
-    </Router>
+    <Container fluid style={{ padding: "0rem 0rem" }}>
+      <Root /> 
+    </Container>
   );
-}
+};
 
 export default App;

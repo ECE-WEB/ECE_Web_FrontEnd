@@ -10,7 +10,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "react-circular-progressbar/dist/styles.css";
-import { Button, Form, Card,Row,Col } from "react-bootstrap";
+import { Button, Form, Card, Row, Col } from "react-bootstrap";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import "../styles/StudentAttendance.css"; // Custom CSS file for styling
 
 const StudentAttendance = () => {
@@ -25,7 +27,7 @@ const StudentAttendance = () => {
   });
 
   const actualAttendance = {
-    overall: 85, // Overall attendance percentage
+    overall: 85,
     subjects: [
       { name: "Math", attendance: 90 },
       { name: "Physics", attendance: 80 },
@@ -56,6 +58,33 @@ const StudentAttendance = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // States for Calendar & Attendance Data
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedAttendance, setSelectedAttendance] = useState([]);
+
+  // Sample subject-wise attendance data (Replace with real MongoDB data)
+  const subjectAttendanceByDate = {
+    "2025-03-01": [
+      { subject: "Math", status: "Present" },
+      { subject: "Physics", status: "Absent" },
+      { subject: "Chemistry", status: "Present" },
+      { subject: "English", status: "Present" },
+    ],
+    "2025-03-05": [
+      { subject: "Math", status: "Absent" },
+      { subject: "Physics", status: "Present" },
+      { subject: "Chemistry", status: "Present" },
+      { subject: "English", status: "Absent" },
+    ],
+  };
+
+  // Handle Date Click
+  const handleDateClick = (value) => {
+    const formattedDate = value.toISOString().split("T")[0];
+    setSelectedDate(formattedDate);
+    setSelectedAttendance(subjectAttendanceByDate[formattedDate] || []);
+  };
 
   return (
     <div className="sa-container sa-student-attendance">
@@ -107,8 +136,7 @@ const StudentAttendance = () => {
         </Card>
 
         {/* Card for Export Attendance Section */}
-         {/* Card for Export Attendance Section */}
-         <Card className="col-md-4 sa-export-card">
+        <Card className="col-md-4 sa-export-card">
           <Card.Body>
             <h5 className="text-center">Export Attendance Data</h5>
             <Form>
@@ -165,6 +193,32 @@ const StudentAttendance = () => {
                 </Col>
               </Row>
             </Form>
+          </Card.Body>
+        </Card>
+      </div>
+
+      {/* Lower Section: Calendar & Attendance Data Side by Side */}
+      <div className="sa-calendar-container">
+        <Card className="sa-calendar-card">
+          <Card.Body>
+            <h5 className="text-center">Attendance Calendar</h5>
+            <Row>
+              <Col md={6}>
+                <Calendar onClickDay={handleDateClick} className="sa-calender-position" />
+              </Col>
+              <Col md={6} className="sa-attendance-details">
+                <h5>Attendance for {selectedDate || "Select a date"}</h5>
+                {selectedAttendance.length > 0 ? (
+                  selectedAttendance.map((entry, index) => (
+                    <p key={index} className={`sa-status-${entry.status.toLowerCase()}`}>
+                      <strong>{entry.subject}:</strong> {entry.status}
+                    </p>
+                  ))
+                ) : (
+                  <p className="sa-status-absent">No data available for this date.</p>
+                )}
+              </Col>
+            </Row>
           </Card.Body>
         </Card>
       </div>

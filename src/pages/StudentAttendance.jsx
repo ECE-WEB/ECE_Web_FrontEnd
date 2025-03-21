@@ -58,11 +58,11 @@ const StudentAttendance = () => {
   }, []);
 
   return (
-    <div className="container student-attendance">
+    <div className="sa-container sa-student-attendance">
       <div className="row d-flex align-items-center justify-content-between upper-section">
         
         {/* Card for Overall Attendance & Subject-wise Attendance */}
-        <Card className="col-md-7 attendance-card">
+        <Card className="col-md-7 sa-attendance-card">
           <Card.Body className="d-flex align-items-center">
             {/* Overall Attendance (Circular Progress) */}
             <div className="text-center" style={{ width: "35%" }}>
@@ -81,7 +81,7 @@ const StudentAttendance = () => {
             </div>
 
             {/* Subject-wise Attendance (Horizontal Bars) */}
-            <div className="subject-attendance" style={{ width: "65%" }}>
+            <div className="sa-subject-attendance" style={{ width: "65%" }}>
               <h5>Subject-wise Attendance</h5>
               <ResponsiveContainer width="100%" height={120}>
                 <BarChart
@@ -108,7 +108,7 @@ const StudentAttendance = () => {
 
         {/* Card for Export Attendance Section */}
          {/* Card for Export Attendance Section */}
-         <Card className="col-md-4 export-card">
+         <Card className="col-md-4 sa-export-card">
           <Card.Body>
             <h5 className="text-center">Export Attendance Data</h5>
             <Form>

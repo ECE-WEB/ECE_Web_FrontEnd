@@ -23,6 +23,7 @@ const StudentAttendance = () => {
       { name: "Physics", attendance: 0 },
       { name: "Chemistry", attendance: 0 },
       { name: "English", attendance: 0 },
+      { name: "Biology", attendance: 0 },
     ],
   });
 
@@ -33,6 +34,7 @@ const StudentAttendance = () => {
       { name: "Physics", attendance: 80 },
       { name: "Chemistry", attendance: 75 },
       { name: "English", attendance: 88 },
+      { name: "Biology", attendance: 85 },
     ],
   };
 
@@ -112,7 +114,7 @@ const StudentAttendance = () => {
             {/* Subject-wise Attendance (Horizontal Bars) */}
             <div className="sa-subject-attendance" style={{ width: "65%" }}>
               <h5>Subject-wise Attendance</h5>
-              <ResponsiveContainer width="100%" height={120}>
+              <ResponsiveContainer width="100%" height={150}>
                 <BarChart
                   layout="vertical"
                   data={attendanceData.subjects}
@@ -208,7 +210,7 @@ const StudentAttendance = () => {
               </Col>
               <Col md={6} className="sa-attendance-details">
                 <h5>Attendance for {selectedDate || "Select a date"}</h5>
-                {selectedAttendance.length > 0 ? (
+                  {selectedAttendance.length > 0 ? (
                   selectedAttendance.map((entry, index) => (
                     <p key={index} className={`sa-status-${entry.status.toLowerCase()}`}>
                       <strong>{entry.subject}:</strong> {entry.status}

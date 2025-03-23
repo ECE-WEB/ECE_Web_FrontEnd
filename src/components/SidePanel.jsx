@@ -54,7 +54,7 @@ const SidePanel = ({
       { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
       { name: "Announcements", path: "/announcements", icon: faBullhorn },
       { name: "View Marks", path: "/viewMarks", icon: faArrowUpFromBracket },
-      { name: "Attendance", path: "/attendance", icon: faHand },
+      { name: "Attendance", path: "/studentattendance", icon: faHand },
     ],
   };
 

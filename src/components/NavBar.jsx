@@ -178,7 +178,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
                   </Avatar>
                 )}
               </Button>
-            </div>
+            </div >
 
             {/* Brand Section */}
             {!isMobile && (<div className={`d-flex align-items-center ms-3`}>

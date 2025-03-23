@@ -18,4 +18,5 @@ export default defineConfig({
        host: 'mycustomsub.loca.lt'
     }
   },
+  assetsInclude: ["**/*.svg"],
 })

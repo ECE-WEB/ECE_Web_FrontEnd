@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
+import { Box } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "@mui/material/Avatar";
 import {
@@ -23,9 +24,9 @@ import {
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 import PopUp from "./PopUp";
-function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
+function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim}) {
   const searchBreakpoint = 700;
-  const mobileBreakpoint = 768;
+  const mobileBreakpoint = 768;//900 to 930
   const drawerWidthExpanded = 240;
   const drawerWidthCollapsed = 60;
 
@@ -179,7 +180,6 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
                 )}
               </Button>
             </div >
-
             {/* Brand Section */}
             {!isMobile && (<div className={`d-flex align-items-center ms-3`}>
               <Navbar.Brand style={navLinkStyle} href="#">
@@ -193,7 +193,6 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
                 {brand.name}
               </Navbar.Brand>
             </div>)}
-
             {/* Search Bar Section */}
             <div className="d-flex flex-grow-1 justify-content-center align-items-center" style={{ height: "100%", }} >
               {showSearch && (
@@ -250,10 +249,6 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
                 </Form>
               )}
             </div>
-
-
-
-
             {/* Notification Section */}
             <div className="d-flex align-items-center">
               <div className="position-relative me-3">
@@ -280,9 +275,25 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
                   {notifications}
                 </span>
               </div>
-              <div className="position-relative">
-                <CommunityLogo />
-              </div>
+              {!isComunityVisible && isLogoAnim &&(
+                <div className="position-relative">
+                <Button
+                  variant="outline-Dark"
+                  aria-controls="offcanvas-navbar"
+                  onClick={()=>{setIsCommunityVisible(true);setTimeout(()=>setLogoAnim(false),80)}}
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    boxShadow: "none",
+                    padding: "0px",
+                    marginLeft:"5px",
+                    marginRight: "8px",
+                  }}
+                >
+                  <CommunityLogo />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
 

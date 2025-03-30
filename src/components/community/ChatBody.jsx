@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Avatar } from "@mui/material";
+import { InstallMobile } from "@mui/icons-material";
 const messages = [
     { id: 1, username: "Alice", role: "Student", avatar: "https://ui-avatars.com/api/?name=Alice", message: "Hey everyone! Excited to be here!", timestamp: "10:30 AM" },
     { id: 2, username: "Kalavakuntla Raj Tharun Kumar Reddy", role: "Faculty", message: "Welcome, Alice! Glad to have you onboard.", timestamp: "10:32 AM" },
@@ -15,10 +16,9 @@ const messages = [
 
 const defaultAvatar = "https://via.placeholder.com/40?text=U"; // Default avatar with placeholder text
 
-const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAtBottom }) => {
-  
+const ChatBody = ({ chatBodyRef,chatMessages, isAtBottom }) => {
+  const [isMobile,setIsMobile] = useState(true);
   useEffect(() => {
-    console.log(isAtBottom);
     if (isAtBottom && chatBodyRef.current) {
       chatBodyRef.current.scrollTo({
         top: chatBodyRef.current.scrollHeight,
@@ -38,15 +38,12 @@ const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAt
     };
     return (
       <div
-      ref={chatBodyRef}
-      onScroll={handleScroll}
       style={{
-        position: "relative",
-        height: "79vh", // Full height of the container
+        height: "100%", // Full height of the container
         overflowY: "auto", // Enable scrolling for ChatBody
         backgroundColor: "#ffffff",
         borderRadius: "10px",
-        padding: "15px",
+        padding:"15px",
         boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
       }}
     >
@@ -125,6 +122,7 @@ const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAt
                       fontSize: "clamp(0.8rem, 1.7vw, 0.85rem)",
                       color: "#555",
                       textAlign: "left",
+                      whiteSpace: "pre-wrap"
                     }}
                   >
                     {msg.message}
@@ -212,6 +210,7 @@ const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAt
                         fontSize: "clamp(0.8rem, 1.7vw, 0.85rem)",
                         color: "#555",
                         textAlign: "left",
+                        whiteSpace: "pre-wrap"
                       }}
                     >
                       {msg.message}
@@ -224,25 +223,7 @@ const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAt
         ))}
       </Container>
       
-      {!isAtBottom && (
-        <Button
-          onClick={scrollToBottom}
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            zIndex: 1070,
-            backgroundColor: "#4A90E2",
-            border: "none",
-            color: "#ffffff",
-            padding: "10px 15px",
-            borderRadius: "50px",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-          }}
-        >
-          Go Down
-        </Button>
-      )}
+     
     </div>
     );
 };

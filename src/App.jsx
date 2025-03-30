@@ -7,7 +7,7 @@ import ChatBox from './components/community/ChatBox';
 const App = () => {
   return (
     <Container fluid style={{ padding: "0rem 0rem" }}>
-    <ChatBox />
+    <Root />
     </Container>
   );
 };

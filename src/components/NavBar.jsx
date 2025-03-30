@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {  useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import React, { use, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Navbar,
@@ -23,6 +25,11 @@ import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 
 function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
+  const location = useLocation();
+
+  // 🚀 **Hide Navbar if the user is on the landing page**
+  if (location.pathname === "/") return null;
+
   const searchBreakpoint = 650;
   const drawerWidthExpanded = 240;
   const drawerWidthCollapsed = 60;
@@ -38,7 +45,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
   const [iconSize, setIconSize] = useState("xl");
   const [notifications, setNotifications] = useState(5);
   const [messages, setMessages] = useState(3);
-   const [profileOffcanvasVisible, setProfileOffcanvasVisible] = useState(false);
+  const [profileOffcanvasVisible, setProfileOffcanvasVisible] = useState(false);
   const [showSearch, setShowSearch] = useState(
     window.innerWidth >= searchBreakpoint
   );
@@ -196,25 +203,13 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
             <div className="d-flex align-items-center">
               <div className="position-relative me-3">
                 <FontAwesomeIcon icon={faEnvelope} size={iconSize} />
-                <span
-                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
-                  style={{
-                    fontSize: "0.7rem",
-                    transform: "translate(-50%, -40%)",
-                  }}
-                >
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                   {messages}
                 </span>
               </div>
               <div className="position-relative me-3">
                 <FontAwesomeIcon icon={faBell} size={iconSize} />
-                <span
-                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                  style={{
-                    fontSize: "0.7rem",
-                    transform: "translate(-50%, -40%)",
-                  }}
-                >
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {notifications}
                 </span>
               </div>
@@ -223,55 +218,6 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible }) {
               </div>
             </div>
           </div>
-
-          {/* Offcanvas Section */}
-          <Offcanvas
-            id="offcanvas-navbar"
-            show={offcanvasVisible}
-            onHide={() => setOffcanvasVisible(false)}
-            style={{
-              zIndex: 1050,
-              height: "100vh",
-              width: `${drawerWidthExpanded - 15}px`,
-              borderTopRightRadius: "20px",
-              borderBottomRightRadius: "20px",
-              padding: "0px",
-            }}
-          >
-            <Offcanvas.Body>
-              {!showSearch && (
-                <SidePanel
-                  isHovered={true}
-                  isSidebarExpanded={true}
-                  drawerWidthExpanded={drawerWidthExpanded}
-                  drawerWidthCollapsed={drawerWidthCollapsed}
-                  setIsHovered={()=>{}}
-                  textVisible={true}
-                  toggleSidebar={null}
-                  setIsPanelVisible={null}
-                  setProfileOffcanvasVisible = {setProfileOffcanvasVisible}
-                  setOffcanvasVisible={setOffcanvasVisible}
-                />
-              )}
-            </Offcanvas.Body>
-          </Offcanvas>
-          <Offcanvas
-            show={profileOffcanvasVisible}
-            onHide={() => setProfileOffcanvasVisible(false)}
-            placement="start"
-            style={{
-              zIndex: 1060, 
-              height: "100vh",
-              width: `${drawerWidthExpanded}px`,
-              borderTopRightRadius: "20px",
-              borderBottomRightRadius: "20px",
-              padding: "0px",
-            }}
-          >
-            <Offcanvas.Body>
-              <ProfilePanel></ProfilePanel>
-          </Offcanvas.Body>
-          </Offcanvas>
         </Container>
       </Navbar>
     </Container>

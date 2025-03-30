@@ -1,0 +1,125 @@
+.sa-student-attendance {
+    max-width: 1100px;
+  }
+  
+  /* Upper section occupies only 30% height */
+  .sa-upper-section {
+    height: 40vh; /* Restricts row to 30% of viewport height */
+    display: flex;
+    
+  }
+  
+  /* Card Styling */
+  .sa-attendance-card, .export-card {
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: white;
+  }
+  
+  /* Ensuring both cards fit within the 30% height limit */
+  .sa-attendance-card {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .sa-export-card {
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Centering the Circular Progress Bar */
+  .sa-circular-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Subject-wise Attendance should take full width within the card */
+  .sa-subject-attendance {
+    width: 100%;
+  }
+  
+  /* Form Layout Adjustments */
+  .sa-export-card form {
+    width: 100%;
+  }
+  
+  /* Align Custom Date Range Inputs Side by Side */
+  .sa-custom-date-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Ensuring Export Buttons Appear Side by Side */
+  .sa-export-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .sa-export-buttons button {
+    flex: 1;
+  }
+  
+  /* Typography Adjustments */
+  h5 {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Button Styling */
+  sa-button {
+    width: 100%;
+  }
+  
+  .sa-mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+/* Main container for lower section */
+.sa-calendar-container {
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card styling for Calendar + Attendance */
+.sa-calendar-card {
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: white;
+}
+
+/* Right side attendance details formatting */
+.sa-attendance-details {
+  padding-left: 30px;
+  border-left: 2px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Better spacing for headings */
+.sa-attendance-details h5 {
+  margin-bottom: 15px;
+}
+
+/* Status text styles */
+.sa-status-present {
+  color: green;
+  font-weight: 600;
+}
+
+.sa-status-absent {
+  color: red;
+  font-weight: 600;
+}

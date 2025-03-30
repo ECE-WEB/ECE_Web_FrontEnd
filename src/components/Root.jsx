@@ -9,7 +9,12 @@ import ProfilePanel from "./ProfilePanel";
 import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import SidePanel from "./SidePanel";
+import LoginPage from "../pages/LoginPage";
+import SidePanel from "./SidePanel";
 import StudentDashboard from "../pages/StudentDashboard";
+import StudentAttendance from "../pages/StudentAttendance";
+import StudentSchedule from "../pages/StudentSchedule";
+import StudentMarks from "../pages/StudentMarks";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -24,7 +29,8 @@ function Root() {
   const [brand, setBrand] = useState({ name: "Dashboard", icon: faLayerGroup });
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
   const isSidebarExpanded = isToggled || isHovered;
-  const userStatus = 1;
+  const userStatus = 0;
+
   const toggleSidebar = () => {
     setIsToggled(prev => !prev);
   };
@@ -129,6 +135,13 @@ function Root() {
               }
             />
             
+           <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sidepanel" element={<SidePanel />} />
+        <Route path="/studentdashboard" element={<StudentDashboard />} />
+        <Route path="/studentattendance" element={<StudentAttendance/>} />
+        <Route path="/studentschedule" element={<StudentSchedule/>} />
+        <Route path="/studentmarks" element={<StudentMarks/>} />
           </Routes>
         </Box>
       </Box>

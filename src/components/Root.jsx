@@ -13,6 +13,8 @@ import StudentDashboard from "../pages/StudentDashboard";
 import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
 import StudentMarks from "../pages/StudentMarks";
+import ChatBody from "./ChatBody";
+import ChatBox from "./ChatBox";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -100,6 +102,8 @@ function Root() {
             <Route path="/studentschedule" element={<StudentSchedule />} />
             <Route path="/studentmarks" element={<StudentMarks />} />
             <Route path="/profilepanel" element={<ProfilePanel />} />
+            <Route path="/chatbody" element={<ChatBody />} />
+            <Route path="/chatbox" element={<ChatBox />} />
             <Route
               path="/facultydashboard"
               element={

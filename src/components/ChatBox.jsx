@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import ChatBody from "../ChatBody";
-import ChatInput from "../ChatInput";
+import ChatBody from "./ChatBody";
+import ChatInput from "./ChatInput";
 import { Container, Row, Col } from "react-bootstrap";
 
 const ChatInterface = () => {

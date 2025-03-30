@@ -23,8 +23,9 @@ import {
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 import PopUp from "./PopUp";
+import ChatBox from "./ChatBox"; // ✅ Import ChatBox
 
-function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggle }) {
+function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggle, showChatBox }) {
   const searchBreakpoint = 700;
   const mobileBreakpoint = 768;
   const drawerWidthExpanded = 240;
@@ -308,6 +309,25 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                 user={user}
                 setUser={setUser}
               />
+            </Offcanvas.Body>
+          </Offcanvas>
+
+          {/* ✅ ChatBox Offcanvas */}
+          <Offcanvas
+            show={showChatBox}
+            onHide={onChatToggle}
+            placement="end"
+            style={{
+              zIndex: 1065,
+              height: "100vh",
+              width: "360px",
+              borderTopLeftRadius: "20px",
+              borderBottomLeftRadius: "20px",
+              padding: "0px",
+            }}
+          >
+            <Offcanvas.Body style={{ padding: 0 }}>
+              <ChatBox />
             </Offcanvas.Body>
           </Offcanvas>
         </Container>

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {  useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import React, { use, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Navbar,

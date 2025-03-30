@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { FaTachometerAlt, FaSearch, FaEnvelope, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -6,7 +5,7 @@ import { BarChart, XAxis, YAxis, Tooltip, Bar,Cell,ResponsiveContainer } from "r
 
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/StudentDashboard.css";
-import NavBar from "../components/NavBar";
+import userpic from "../assets/profilePic.svg";
 // Sample Semester-wise GPA Data
 const semesterGPA = [
   { sem: "Sem 1", gpa: 7.8 },

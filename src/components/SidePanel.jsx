@@ -12,6 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from "react-router-dom";
 
+const colorsProp = {
+  selectedBackgroundColor: "#6e0f0f",
+  hoverBackgroundColor: "#801919",
+  itemBorderRadius: "12px",
+};
+
 const SidePanel = ({
   isHovered,
   isSidebarExpanded,
@@ -22,21 +28,17 @@ const SidePanel = ({
   setProfileOffcanvasVisible,
   setOffcanvasVisible
 }) => {
-
   const location = useLocation();
 
-  // 🚀 **Hide sidebar if the user is on the landing page**
   if (location.pathname === "/") return null;
 
-  // Retrieve user details and role from sessionStorage
   const user = {
     name: "Yekkaluru Divya Teja",
     avatar: "Y",
     email: "divyateja050@gmail.com",
-    role: (sessionStorage.getItem("role") || "student").toLowerCase(), // Normalize to lowercase
+    role: (sessionStorage.getItem("role") || "student").toLowerCase(),
   };
 
-  // Define Role-Based Sidebar Menu Items
   const menuItems = {
     admin: [
       { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
@@ -59,7 +61,6 @@ const SidePanel = ({
     ],
   };
 
-  // Fetch the appropriate menu list based on user role
   const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
@@ -125,110 +126,29 @@ const SidePanel = ({
       {/* Navigation List */}
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <List sx={{ flexGrow: 1 }}>
-          <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/"
-              sx={{
-                alignItems: "center",
-                backgroundColor:
-                  location.pathname === "/facultydashboard" ? colorsProp.selectedBackgroundColor : "inherit",
-                borderRadius: colorsProp.itemBorderRadius, // Apply border radius
-                ":hover": {
-                  backgroundColor: colorsProp.hoverBackgroundColor, // Apply hover color
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FontAwesomeIcon icon={faLayerGroup} style={{ marginRight: '8px' }} />
-              </ListItemIcon>
-              {isSidebarExpanded && (
-                <Fade in={textVisible} timeout={400} unmountOnExit>
-                  <Box>
-                    <Typography variant="body1">Dashboard</Typography>
-                  </Box>
-                </Fade>
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/anouncements"
-              sx={{
-                alignItems: "center",
-                backgroundColor:
-                  location.pathname === "/anouncements" ? colorsProp.selectedBackgroundColor : "inherit",
-                borderRadius: colorsProp.itemBorderRadius,
-                ":hover": {
-                  backgroundColor: colorsProp.hoverBackgroundColor,
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FontAwesomeIcon icon={faBullhorn} style={{ marginRight: '8px' }} />
-              </ListItemIcon>
-              {isSidebarExpanded && (
-                <Fade in={textVisible} timeout={400} unmountOnExit>
-                  <Box>
-                    <Typography variant="body1">Announcements</Typography>
-                  </Box>
-                </Fade>
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/uploadMarks"
-              sx={{
-                alignItems: "center",
-                backgroundColor:
-                  location.pathname === "/uploadMarks" ? colorsProp.selectedBackgroundColor : "inherit",
-                borderRadius: colorsProp.itemBorderRadius,
-                ":hover": {
-                  backgroundColor: colorsProp.hoverBackgroundColor,
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FontAwesomeIcon icon={faArrowUpFromBracket} style={{ marginRight: '8px' }} />
-              </ListItemIcon>
-              {isSidebarExpanded && (
-                <Fade in={textVisible} timeout={400} unmountOnExit>
-                  <Box>
-                    <Typography variant="body1">Upload Marks</Typography>
-                  </Box>
-                </Fade>
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/uploadAttandance"
-              sx={{
-                alignItems: "center",
-                backgroundColor:
-                  location.pathname === "/uploadAttandance" ? colorsProp.selectedBackgroundColor : "inherit",
-                borderRadius: colorsProp.itemBorderRadius,
-                ":hover": {
-                  backgroundColor: colorsProp.hoverBackgroundColor,
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FontAwesomeIcon icon={faHand} style={{ marginRight: '8px' }} />
-              </ListItemIcon>
-              {isSidebarExpanded && (
-                <Fade in={textVisible} timeout={400} unmountOnExit>
-                  <Box>
-                    <Typography variant="body1">Upload Attendance</Typography>
-                  </Box>
-                </Fade>
-              )}
-            </ListItemButton>
-          </ListItem>
+          {sidebarOptions.map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                sx={{
+                  alignItems: "center",
+                  backgroundColor: location.pathname === item.path ? colorsProp.selectedBackgroundColor : "inherit",
+                  borderRadius: colorsProp.itemBorderRadius,
+                  ":hover": { backgroundColor: colorsProp.hoverBackgroundColor },
+                }}
+              >
+                <ListItemIcon sx={{ color: "inherit" }}>
+                  <FontAwesomeIcon icon={item.icon} style={{ marginRight: "8px" }} />
+                </ListItemIcon>
+                {isSidebarExpanded && (
+                  <Fade in={textVisible} timeout={400} unmountOnExit>
+                    <Typography variant="body1">{item.name}</Typography>
+                  </Fade>
+                )}
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
 
         {/* Logout Button */}
@@ -239,7 +159,7 @@ const SidePanel = ({
               to="/"
               sx={{
                 alignItems: "center",
-                borderRadius: "12px",
+                borderRadius: colorsProp.itemBorderRadius,
                 ":hover": { backgroundColor: "#FF7A7A" },
               }}
             >

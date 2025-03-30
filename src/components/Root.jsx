@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import NavBar from "./NavBar";
 import Typography from "@mui/material/Typography";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
+import NavBar from "./NavBar";
 import ProfilePanel from "./ProfilePanel";
-import LandingPage from "../pages/LandingPage";
-import LoginPage from "../pages/LoginPage";
 import SidePanel from "./SidePanel";
+import LandingPage from "../pages/LandingPage"; // Corrected case
 import LoginPage from "../pages/LoginPage";
-import SidePanel from "./SidePanel";
 import StudentDashboard from "../pages/StudentDashboard";
 import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
@@ -18,7 +16,6 @@ import StudentMarks from "../pages/StudentMarks";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
-// Define a breakpoint below which the panel should vanish, e.g., 768px.
 const panelVanishBreakpoint = 650;
 
 function Root() {
@@ -31,33 +28,21 @@ function Root() {
   const isSidebarExpanded = isToggled || isHovered;
   const userStatus = 0;
 
-  const toggleSidebar = () => {
-    setIsToggled(prev => !prev);
-  };
+  const toggleSidebar = () => setIsToggled(prev => !prev);
 
-  // Manage the visibility of text within the sidebar.
   useEffect(() => {
     if (isSidebarExpanded) {
-      const timer = setTimeout(() => {
-        setTextVisible(true);
-      }, 280);
+      const timer = setTimeout(() => setTextVisible(true), 280);
       return () => clearTimeout(timer);
     } else {
       setTextVisible(false);
     }
   }, [isSidebarExpanded]);
 
-  // Automatically hide the panel if screen width falls below the breakpoint.
   useEffect(() => {
     const handlePanelVisibility = () => {
-      if (window.innerWidth < panelVanishBreakpoint) {
-        setIsPanelVisible(false);
-      } else {
-        setIsPanelVisible(true);
-      }
+      setIsPanelVisible(window.innerWidth >= panelVanishBreakpoint);
     };
-
-    // Run once on mount and on every resize.
     handlePanelVisibility();
     window.addEventListener("resize", handlePanelVisibility);
     return () => window.removeEventListener("resize", handlePanelVisibility);
@@ -65,11 +50,11 @@ function Root() {
 
   return (
     <Router>
-      <Box sx={{ display: "flex" ,height:'100vh'}}>
+      <Box sx={{ display: "flex", height: "100vh" }}>
         <CssBaseline />
 
         {/* Side Panel */}
-        {(userStatus == 1)?(isPanelVisible && (
+        {isPanelVisible && (
           <SidePanel
             isHovered={isHovered}
             isSidebarExpanded={isSidebarExpanded}
@@ -82,7 +67,8 @@ function Root() {
             setOffcanvasVisible={null}
             setProfileOffcanvasVisible={null}
           />
-        )):<></>}
+        )}
+
         {/* Main Content */}
         <Box
           component="main"
@@ -103,45 +89,61 @@ function Root() {
             p: 1,
           }}
         >
-          {(userStatus == 1)?<NavBar brand={brand} offcanvasVisible={offcanvasVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
+          <NavBar brand={brand} offcanvasVisible={offcanvasVisible} setOffcanvasVisible={setOffcanvasVisible} />
 
-          {/* Routes */}
           <Routes>
-          <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/studentdashboard" element={<StudentDashboard  />} />
+            <Route path="/sidepanel" element={<SidePanel />} />
+            <Route path="/studentdashboard" element={<StudentDashboard />} />
+            <Route path="/studentattendance" element={<StudentAttendance />} />
+            <Route path="/studentschedule" element={<StudentSchedule />} />
+            <Route path="/studentmarks" element={<StudentMarks />} />
+            <Route path="/profilepanel" element={<ProfilePanel />} />
             <Route
               path="/facultydashboard"
               element={
-                <Home style={{ padding: "0rem 2rem" }} setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
+                <Home
+                  setBrand={() => {
+                    setBrand({ name: "Dashboard", icon: faLayerGroup });
+                    setOffcanvasVisible(false);
+                  }}
+                />
               }
             />
             <Route
               path="/anouncements"
               element={
-                <About setBrand={() => {setBrand({ name: "Announcements", icon: faBullhorn });setOffcanvasVisible(false)}} />
+                <About
+                  setBrand={() => {
+                    setBrand({ name: "Announcements", icon: faBullhorn });
+                    setOffcanvasVisible(false);
+                  }}
+                />
               }
             />
             <Route
               path="/uploadMarks"
               element={
-                <Contact setBrand={() => {setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket });setOffcanvasVisible(false)}} />
+                <Contact
+                  setBrand={() => {
+                    setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket });
+                    setOffcanvasVisible(false);
+                  }}
+                />
               }
             />
             <Route
               path="/uploadAttandance"
               element={
-                <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
+                <UploadAttendance
+                  setBrand={() => {
+                    setBrand({ name: "Upload Attendance", icon: faHand });
+                    setOffcanvasVisible(false);
+                  }}
+                />
               }
             />
-            
-           <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sidepanel" element={<SidePanel />} />
-        <Route path="/studentdashboard" element={<StudentDashboard />} />
-        <Route path="/studentattendance" element={<StudentAttendance/>} />
-        <Route path="/studentschedule" element={<StudentSchedule/>} />
-        <Route path="/studentmarks" element={<StudentMarks/>} />
           </Routes>
         </Box>
       </Box>
@@ -150,10 +152,7 @@ function Root() {
 }
 
 const Home = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
-
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Home Content</Typography>
@@ -163,10 +162,7 @@ const Home = ({ setBrand }) => {
 };
 
 const About = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
-
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">About Content</Typography>
@@ -176,10 +172,7 @@ const About = ({ setBrand }) => {
 };
 
 const Contact = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
-
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Contact Content</Typography>
@@ -189,10 +182,7 @@ const Contact = ({ setBrand }) => {
 };
 
 const UploadAttendance = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
-
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Upload Attendance</Typography>

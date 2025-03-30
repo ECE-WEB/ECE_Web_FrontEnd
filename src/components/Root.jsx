@@ -12,6 +12,7 @@ import SidePanel from "./SidePanel";
 import StudentDashboard from "../pages/StudentDashboard";
 import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
+import StudentMarks from "../pages/StudentMarks";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
@@ -134,6 +135,7 @@ function Root() {
         <Route path="/studentdashboard" element={<StudentDashboard />} />
         <Route path="/studentattendance" element={<StudentAttendance/>} />
         <Route path="/studentschedule" element={<StudentSchedule/>} />
+        <Route path="/studentmarks" element={<StudentMarks/>} />
           </Routes>
         </Box>
       </Box>

@@ -53,8 +53,9 @@ const SidePanel = ({
     student: [
       { name: "Dashboard", path: "/studentdashboard", icon: faLayerGroup },
       { name: "Announcements", path: "/announcements", icon: faBullhorn },
-      { name: "View Marks", path: "/viewMarks", icon: faArrowUpFromBracket },
+      { name: "View Marks", path: "/studentMarks", icon: faArrowUpFromBracket },
       { name: "Attendance", path: "/studentattendance", icon: faHand },
+      { name: "Schedule", path: "/studentschedule", icon: faHand },
     ],
   };
 
@@ -154,7 +155,7 @@ const SidePanel = ({
           <ListItem disablePadding>
             <ListItemButton
               component={Link}
-              to="/logout"
+              to="/"
               sx={{
                 alignItems: "center",
                 borderRadius: "12px",

@@ -1,15 +1,23 @@
-.schedule-table th, .schedule-table td {
-    vertical-align: middle;
-    min-width: 120px;
-  }
-  
-  .schedule-table td {
-    font-size: 1rem;
-    padding: 10px;
-  }
-  
-  thead {
-    background-color: #343a40;
-    color: white;
-  }
-  
+.schedule-table th,
+.schedule-table td {
+  vertical-align: middle;
+  min-width: 100px;
+}
+
+.schedule-table td {
+  font-size: 0.95rem;
+  padding: 10px;
+}
+
+thead {
+  background-color: #343a40;
+  color: white;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}

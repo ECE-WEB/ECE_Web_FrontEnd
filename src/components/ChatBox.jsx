@@ -8,7 +8,7 @@ const ChatInterface = () => {
   const chatBodyRef = useRef(null);
   const [isAtBottom, setIsAtBottom] = useState(true);
 
-  // Add new messages every 5 seconds for testing
+  // Add new messages every 1 second (demo purpose)
   useEffect(() => {
     const interval = setInterval(() => {
       setMessages((prevMessages) => [
@@ -26,53 +26,62 @@ const ChatInterface = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Debounced scroll tracking
   let scrollTimeout = null;
-
-const handleScroll = () => {
-  if (scrollTimeout) {
-    clearTimeout(scrollTimeout);
-  }
-
-  scrollTimeout = setTimeout(() => {
-    if (chatBodyRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = chatBodyRef.current;
-
-      // Use a stable threshold to prevent frequent toggling
-      const atBottom = scrollTop + clientHeight >= scrollHeight - 20;
-
-      // Update state only if it changes
-      setIsAtBottom((prevState) => {
-        if (prevState !== atBottom) {
-          return atBottom;
-        }
-        return prevState;
-      });
-    }
-  }, 100); // Debounced delay
-};
-
+  const handleScroll = () => {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (chatBodyRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = chatBodyRef.current;
+        const atBottom = scrollTop + clientHeight >= scrollHeight - 20;
+        setIsAtBottom((prev) => (prev !== atBottom ? atBottom : prev));
+      }
+    }, 100);
+  };
 
   const scrollToBottom = () => {
-    chatBodyRef.current.scrollTo({
-      top: chatBodyRef.current.scrollHeight,
-      behavior: "smooth",
-    });
-    setIsAtBottom(true);
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTo({
+        top: chatBodyRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+      setIsAtBottom(true);
+    }
   };
 
   return (
-    <Container fluid style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      {/* Sticky Top */}
-      <Row style={{ backgroundColor: "#4A90E2", padding: "10px", position: "sticky", top: 0, zIndex: 1020 }}>
+    <Container
+      fluid
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        backgroundColor: "#f5f5f5",
+        borderRadius: "10px",
+        overflow: "hidden",
+        border: "1px solid #ddd",
+      }}
+    >
+      {/* Sticky Top Header */}
+      <Row
+        style={{
+          backgroundColor: "#4A90E2",
+          padding: "10px",
+          position: "sticky",
+          top: 0,
+          zIndex: 1020,
+        }}
+      >
         <Col>
-          <h4 style={{ color: "#fff", textAlign: "center" }}>Sticky Top Row</h4>
+          <h5 style={{ color: "#fff", textAlign: "center", fontWeight: "600", margin: "0" }}>
+            Community
+          </h5>
         </Col>
       </Row>
 
       {/* Chat Body */}
       <Row style={{ flex: 1 }}>
         <Col style={{ padding: 0 }}>
-        
           <ChatBody
             chatBodyRef={chatBodyRef}
             chatMessages={messages}
@@ -83,10 +92,19 @@ const handleScroll = () => {
         </Col>
       </Row>
 
-      {/* Sticky Input */}
-      <Row style={{ backgroundColor: "#f7f7f7", padding: "10px", position: "sticky", bottom: 0, zIndex: 1020 }}>
+      {/* Sticky Chat Input */}
+      <Row
+        style={{
+          backgroundColor: "#f7f7f7",
+          padding: "10px 15px",
+          position: "sticky",
+          bottom: 0,
+          zIndex: 1020,
+          boxShadow: "0 -2px 6px rgba(0,0,0,0.05)",
+        }}
+      >
         <Col>
-          <ChatInput setMessages = {setMessages} messages={messages} />
+          <ChatInput setMessages={setMessages} messages={messages} />
         </Col>
       </Row>
     </Container>

@@ -1,231 +1,142 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { Avatar } from "@mui/material";
-const messages = [
-    { id: 1, username: "Alice", role: "Student", avatar: "https://ui-avatars.com/api/?name=Alice", message: "Hey everyone! Excited to be here!", timestamp: "10:30 AM" },
-    { id: 2, username: "Kalavakuntla Raj Tharun Kumar Reddy", role: "Faculty", message: "Welcome, Alice! Glad to have you onboard.", timestamp: "10:32 AM" },
-    { id: 3, username: "Charlie", role: "Alumni", avatar: "https://ui-avatars.com/api/?name=Charlie", message: "Looking forward to the discussions today!", timestamp: "10:35 AM" },
-    { id: 4, username: "Divya Teja", role: "Student", avatar: "https://ui-avatars.com/api/?name=You", message: "This is a sent message styled differently!", timestamp: "10:40 AM", sent: true },
-    { id: 5, username: "Ethan", role: "Faculty", avatar: "https://ui-avatars.com/api/?name=Ethan", message: "This is a great platform for knowledge sharing!", timestamp: "10:45 AM" },
-    { id: 6, username: "Fiona", role: "Alumni", avatar: "https://ui-avatars.com/api/?name=Fiona", message: "Alumni events are the best! Let’s organize one soon.", timestamp: "10:50 AM" },
-    { id: 7, username: "George", role: "Student", message: "Looking forward to connecting with all of you!", timestamp: "10:55 AM" },
-    { id: 8, username: "Hannah", role: "Faculty", message: "Always here to help the students grow.", timestamp: "11:00 AM" },
-];
 
-const defaultAvatar = "https://via.placeholder.com/40?text=U"; // Default avatar with placeholder text
-
-const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAtBottom }) => {
-  
+const ChatBody = ({ chatBodyRef, chatMessages, handleScroll, scrollToBottom, isAtBottom }) => {
   useEffect(() => {
-    console.log(isAtBottom);
     if (isAtBottom && chatBodyRef.current) {
       chatBodyRef.current.scrollTo({
         top: chatBodyRef.current.scrollHeight,
         behavior: "smooth",
       });
     }
-  }, [chatMessages, isAtBottom]);  
+  }, [chatMessages, isAtBottom]);
+
   const roleColors = {
-        Student: "#4FC3F7", // Blue
-        Faculty: "#9B59B6", // #2ECC71
-        Alumni: "#FFC107", // Gold
-    };
-    const roleBgColors = {
-        Student: "rgba(79, 195, 247, 0.1)", // Light blue
-        Faculty: "rgba(155, 89, 182, 0.1)", // Light green
-        Alumni: "rgba(255, 193, 7, 0.1)",   // Light gold
-    };
-    return (
-      <div
+    Student: "#4FC3F7",  // blue
+    Faculty: "#9B59B6",  // purple
+    Alumni: "#FFC107",   // yellow
+  };
+
+  const roleBgColors = {
+    Student: "#E0F7FA",  // light blue
+    Faculty: "#F3E5F5",  // light purple
+    Alumni: "#FFF8E1",   // light yellow
+  };
+
+  return (
+    <div
       ref={chatBodyRef}
       onScroll={handleScroll}
       style={{
         position: "relative",
-        height: "79vh", // Full height of the container
-        overflowY: "auto", // Enable scrolling for ChatBody
+        height: "79vh",
+        overflowY: "auto",
         backgroundColor: "#ffffff",
         borderRadius: "10px",
         padding: "15px",
         boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
       }}
     >
-      <Container
-        fluid
-        sx={{
-          padding: { xs: 0, sm: 0, md: 0, lg: 2 },
-        }}
-      >
-        {chatMessages.map((msg) => (
-          <Row
-            key={msg.id}
-            style={{
-              marginBottom: "25px",
-              display: "flex",
-              justifyContent: msg.sent ? "flex-end" : "flex-start",
-            }}
-          >
-            {/* Sent Messages */}
-            {msg.sent ? (
-              <Col xs="auto">
+      <Container fluid>
+        {chatMessages.map((msg) => {
+          const isSent = msg.sent;
+          const roleColor = roleColors[msg.role] || "#999";
+          const bgColor = roleBgColors[msg.role] || "#eee";
+
+          return (
+            <Row
+              key={msg.id}
+              className="mb-4"
+              style={{
+                justifyContent: isSent ? "flex-end" : "flex-start",
+                paddingLeft: isSent ? 0 : "5px",
+                paddingRight: isSent ? "5px" : 0,
+              }}
+            >
+              {!isSent && (
+                <Col xs="auto" className="pe-1">
+                  <Avatar
+                    sx={{
+                      bgcolor: "#ffffff",
+                      color: roleColor,
+                      border: `3px solid ${roleColor}`,
+                      width: 36,
+                      height: 36,
+                      fontSize: "0.8rem",
+                    }}
+                  >
+                    {msg.username?.charAt(0)}
+                  </Avatar>
+                </Col>
+              )}
+
+              <Col xs="auto" style={{ maxWidth: "85%" }}>
                 <div
                   style={{
-                    backgroundColor: "#E6FFE6",
-                    marginLeft:"3.5rem",
+                    backgroundColor: isSent ? "#f2f2f2" : bgColor,
+                    borderRadius: "16px",
+                    boxShadow: `0 4px 10px ${isSent ? "rgba(0,0,0,0.1)" : roleColor}`,
                     padding: "15px",
-                    borderRadius: "15px",
+                    minWidth: "220px",
                     maxWidth: "100%",
-                    color: "#004D40",
-                    border: "0px solid #004D40",
-                    boxShadow: "0 2px 10px rgba(0, 77, 64, 0.3)",
-                    textAlign: "left",
-                    fontSize: "clamp(0.75rem, 2vw, 0.8rem)", // Dynamically adjusts
                   }}
                 >
+                  {/* Header (Username, Role Badge, Time) */}
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "space-between",
                       alignItems: "center",
+                      gap: "0.5rem",
+                      marginBottom: "6px",
                     }}
                   >
                     <strong
                       style={{
-                        fontSize: "clamp(0.84rem, 2vw,0.89rem)", // Scales based on viewport
+                        fontSize: "0.9rem",
                         color: "#333",
+                        flexShrink: 0,
                       }}
                     >
                       {msg.username}
                     </strong>
                     <span
                       style={{
-                        marginLeft: "10px",
-                        padding: "4px 8px",
-                        borderRadius: "50px",
-                        backgroundColor: "#004D40",
-                        fontSize: "clamp(0.65rem, 1.5vw, 0.7rem)", // Scales based on screen
+                        backgroundColor: roleColor,
                         color: "#fff",
+                        borderRadius: "12px",
+                        padding: "2px 8px",
+                        fontSize: "0.65rem",
+                        whiteSpace: "nowrap",
                       }}
                     >
-                      {"You"}
+                      {isSent ? "You" : msg.role}
                     </span>
                     <span
                       style={{
-                        fontSize: "clamp(0.7rem, 1.5vw, 0.75rem)",
-                        color: `#004D40`,
                         marginLeft: "auto",
+                        fontSize: "0.7rem",
+                        color: roleColor,
                       }}
                     >
                       {msg.timestamp}
                     </span>
                   </div>
-                  <p
-                    style={{
-                      margin: "10px 0 0",
-                      fontSize: "clamp(0.8rem, 1.7vw, 0.85rem)",
-                      color: "#555",
-                      textAlign: "left",
-                    }}
-                  >
+
+                  {/* Message Content */}
+                  <div style={{ fontSize: "0.85rem", color: "#444" }}>
                     {msg.message}
-                  </p>
+                  </div>
                 </div>
               </Col>
-            ) : (
-              <>
-                <Col xs={12} style={{ display: "flex", gap: "10px" }}>
-                  {/* Avatar */}
-                  <Avatar
-                    alt={msg.username}
-                    sx={{
-                      width: {
-                        xs: 30,
-                        sm: 35,
-                        md: 40,
-                      },
-                      height: {
-                        xs: 30,
-                        sm: 35,
-                        md: 40,
-                      },
-                      marginTop: "5px",
-                      border: `0.14rem solid ${roleColors[msg.role] || "#ccc"}`,
-                      fontSize: "clamp(0.8rem, 2vw, 0.9rem)",
-                      color: `${roleColors[msg.role] || "#ccc"}`,
-                      bgcolor: ` ${roleBgColors[msg.role] || "#ccc"}`,
-                    }}
-                  >
-                    {msg.username[0]}
-                  </Avatar>
-                  {/* Message Card */}
-                  <div
-                    style={{
-                      backgroundColor: ` ${roleBgColors[msg.role] || "#ccc"}`,
-                      padding: "10px 15px",
-                      borderRadius: "15px",
-                      border: `0px solid ${roleColors[msg.role] || "#ccc"}`,
-                      boxShadow: `0 2px 10px ${roleColors[msg.role] || "rgba(0,0,0,0.1)"}`,
-                      fontSize: "clamp(0.75rem, 2vw, 0.8rem)",
-                      maxWidth: "80%",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <strong
-                        style={{
-                          fontSize: "clamp(0.84rem, 2vw, 0.89rem)",
-                          color: "#333",
-                        }}
-                      >
-                        {msg.username}
-                      </strong>
-                      <span
-                        style={{
-                          marginLeft: "10px",
-                          padding: "4px 8px",
-                          borderRadius: "50px",
-                          backgroundColor: roleColors[msg.role],
-                          fontSize: "clamp(0.65rem, 1.5vw, 0.7rem)",
-                          color: "#fff",
-                        }}
-                      >
-                        {msg.role}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "clamp(0.7rem, 1.5vw, 0.75rem)",
-                          color: `${roleColors[msg.role] || "#ccc"}`,
-                          marginLeft: "auto",
-                        }}
-                      >
-                        {msg.timestamp}
-                      </span>
-                    </div>
-                    <p
-                      style={{
-                        margin: "10px 0 0",
-                        fontSize: "clamp(0.8rem, 1.7vw, 0.85rem)",
-                        color: "#555",
-                        textAlign: "left",
-                      }}
-                    >
-                      {msg.message}
-                    </p>
-                  </div>
-                </Col>
-              </>
-            )}
-          </Row>
-        ))}
+            </Row>
+          );
+        })}
       </Container>
-      
+
       {!isAtBottom && (
-        <Button
+        <button
           onClick={scrollToBottom}
           style={{
             position: "fixed",
@@ -234,17 +145,18 @@ const ChatBody = ({ chatBodyRef,chatMessages, handleScroll, scrollToBottom, isAt
             zIndex: 1070,
             backgroundColor: "#4A90E2",
             border: "none",
-            color: "#ffffff",
-            padding: "10px 15px",
-            borderRadius: "50px",
+            color: "#fff",
+            padding: "8px 14px",
+            borderRadius: "20px",
             boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+            fontSize: "0.85rem",
           }}
         >
           Go Down
-        </Button>
+        </button>
       )}
     </div>
-    );
+  );
 };
 
 export default ChatBody;

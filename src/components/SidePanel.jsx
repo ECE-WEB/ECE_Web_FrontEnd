@@ -12,6 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from "react-router-dom";
 
+const colorsProp = {
+  selectedBackgroundColor: "#6e0f0f",
+  hoverBackgroundColor: "#801919",
+  itemBorderRadius: "12px",
+};
+
 const SidePanel = ({
   isHovered,
   isSidebarExpanded,
@@ -22,21 +28,17 @@ const SidePanel = ({
   setProfileOffcanvasVisible,
   setOffcanvasVisible
 }) => {
-
   const location = useLocation();
 
-  // 🚀 **Hide sidebar if the user is on the landing page**
   if (location.pathname === "/") return null;
 
-  // Retrieve user details and role from sessionStorage
   const user = {
     name: "Yekkaluru Divya Teja",
     avatar: "Y",
     email: "divyateja050@gmail.com",
-    role: (sessionStorage.getItem("role") || "student").toLowerCase(), // Normalize to lowercase
+    role: (sessionStorage.getItem("role") || "student").toLowerCase(),
   };
 
-  // Define Role-Based Sidebar Menu Items
   const menuItems = {
     admin: [
       { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
@@ -53,12 +55,12 @@ const SidePanel = ({
     student: [
       { name: "Dashboard", path: "/studentdashboard", icon: faLayerGroup },
       { name: "Announcements", path: "/announcements", icon: faBullhorn },
-      { name: "View Marks", path: "/viewMarks", icon: faArrowUpFromBracket },
+      { name: "View Marks", path: "/studentMarks", icon: faArrowUpFromBracket },
       { name: "Attendance", path: "/studentattendance", icon: faHand },
+      { name: "Schedule", path: "/studentschedule", icon: faHand },
     ],
   };
 
-  // Fetch the appropriate menu list based on user role
   const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
@@ -131,9 +133,9 @@ const SidePanel = ({
                 to={item.path}
                 sx={{
                   alignItems: "center",
-                  backgroundColor: location.pathname === item.path ? "#800000" : "inherit",
-                  borderRadius: "12px",
-                  ":hover": { backgroundColor: "#FF7A7A" },
+                  backgroundColor: location.pathname === item.path ? colorsProp.selectedBackgroundColor : "inherit",
+                  borderRadius: colorsProp.itemBorderRadius,
+                  ":hover": { backgroundColor: colorsProp.hoverBackgroundColor },
                 }}
               >
                 <ListItemIcon sx={{ color: "inherit" }}>
@@ -154,10 +156,10 @@ const SidePanel = ({
           <ListItem disablePadding>
             <ListItemButton
               component={Link}
-              to="/logout"
+              to="/"
               sx={{
                 alignItems: "center",
-                borderRadius: "12px",
+                borderRadius: colorsProp.itemBorderRadius,
                 ":hover": { backgroundColor: "#FF7A7A" },
               }}
             >

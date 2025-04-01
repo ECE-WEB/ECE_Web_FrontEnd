@@ -20,6 +20,7 @@
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.8",
+    "emoji-picker-react": "^4.12.2",
     "esbuild": "^0.25.1",
     "mongodb": "^6.15.0",
     "react": "^19.0.0",

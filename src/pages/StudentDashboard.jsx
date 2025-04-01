@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { FaTachometerAlt, FaSearch, FaEnvelope, FaChevronRight } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -6,6 +7,7 @@ import { BarChart, XAxis, YAxis, Tooltip, Bar,Cell,ResponsiveContainer } from "r
 
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/StudentDashboard.css";
+
 import userpic from "../assets/profilePic.svg";
 // Sample Semester-wise GPA Data
 const semesterGPA = [
@@ -59,9 +61,6 @@ const StudentDashboard = () => {
   
   return (
     <div className="sd-dashboard-wrapper">
-      {/* Sidebar */}
- 
-
       {/* Main Dashboard Content */}
       <div className="sd-dashboard-container">
         {/* Top Navigation Bar */}

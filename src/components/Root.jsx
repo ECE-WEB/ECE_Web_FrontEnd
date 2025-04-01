@@ -28,6 +28,7 @@ import ChatBody from "./ChatBody";
 import ChatBox from "./ChatBox";
 import { Offcanvas } from "react-bootstrap";
 
+
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
 const panelVanishBreakpoint = 650;
@@ -43,6 +44,7 @@ const RootContent = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showChatBox, setShowChatBox] = useState(false); // ✅ Chat toggle
   const isSidebarExpanded = isToggled || isHovered;
+
 
   const toggleSidebar = () => setIsToggled((prev) => !prev);
   const toggleChatBox = () => setShowChatBox((prev) => !prev); // ✅ Toggle handler
@@ -81,6 +83,7 @@ const RootContent = () => {
   }, []);
 
   return (
+
     <Box sx={{ display: "flex", height: "100vh" }}>
       <CssBaseline />
 
@@ -210,6 +213,7 @@ const RootContent = () => {
             </Offcanvas.Body>
           </Offcanvas>
         )}
+   
       </Box>
     </Box>
   );

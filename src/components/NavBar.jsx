@@ -1,5 +1,9 @@
+
+
+import { useLocation } from "react-router-dom";
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useRef } from "react";
+import React, {  useEffect, useState } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "@mui/material/Avatar";
 import {
@@ -170,6 +174,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
             </div>
 
             {/* Brand Section */}
+
             {!isMobile && (
               <div className="d-flex align-items-center ms-3">
                 <Navbar.Brand style={navLinkStyle} href="#">
@@ -179,6 +184,20 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                 </Navbar.Brand>
               </div>
             )}
+
+            <div className={`d-flex align-items-center ms-${showSearch ? 0 : 3}`}>
+              <Navbar.Brand style={navLinkStyle} href="#">
+                {showSearch && (
+                  <FontAwesomeIcon
+                    icon={brand.icon}
+                    style={{ marginRight: "8px" }}
+                  />
+                )}
+                &nbsp;
+                {showSearch && brand.name}
+              </Navbar.Brand>
+            </div>
+
 
             {/* Search Bar */}
             <div className="d-flex flex-grow-1 justify-content-center align-items-center">

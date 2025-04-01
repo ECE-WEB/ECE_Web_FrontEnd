@@ -63,7 +63,6 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
     const handleTouchStart = (e) => {
       touchStartX.current = e.touches[0].clientX;
     };
-
     const handleTouchMove = (e) => {
       touchEndX.current = e.touches[0].clientX;
     };

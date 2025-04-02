@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
+import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-import {
-  faLayerGroup,
-  faBullhorn,
-  faArrowUpFromBracket,
-  faHand,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand } from '@fortawesome/free-solid-svg-icons';
 
 import NavBar from "./NavBar";
 import ProfilePanel from "./ProfilePanel";
@@ -25,42 +16,40 @@ import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
 import StudentMarks from "../pages/StudentMarks";
 import ChatBody from "./ChatBody";
-import ChatBox from "./ChatBox";
-import { Offcanvas } from "react-bootstrap";
+import ChatBox from "./community/ChatBox";
 
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
-const panelVanishBreakpoint = 650;
+const panelVanishBreakpoint = 768;
+const mobileBreakpoint = 768;
 
-const RootContent = () => {
-  const location = useLocation();
+function RootWrapper() {
+  return (
+    <Router>
+      <Root />
+    </Router>
+  );
+}
+
+function Root() {
   const [isToggled, setIsToggled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [textVisible, setTextVisible] = useState(false);
   const [isPanelVisible, setIsPanelVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= mobileBreakpoint);
   const [brand, setBrand] = useState({ name: "Dashboard", icon: faLayerGroup });
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showChatBox, setShowChatBox] = useState(false); // ✅ Chat toggle
+  const [isComunityVisible, setIsCommunityVisible] = useState(false);
+  const [isLogoAnim, setLogoAnim] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const isSidebarExpanded = isToggled || isHovered;
+  const userStatus = 1;
 
-  const toggleSidebar = () => setIsToggled((prev) => !prev);
-  const toggleChatBox = () => setShowChatBox((prev) => !prev); // ✅ Toggle handler
+  const toggleSidebar = () => setIsToggled(prev => !prev);
 
-  useEffect(() => {
-    const protectedPaths = [
-      "/studentdashboard",
-      "/studentattendance",
-      "/studentschedule",
-      "/studentmarks",
-      "/profilepanel",
-      "/facultydashboard",
-      "/uploadMarks",
-      "/uploadAttandance",
-      "/anouncements",
-    ];
-    setIsLoggedIn(protectedPaths.includes(location.pathname));
-  }, [location.pathname]);
+  const location = useLocation();
+  const translate = location.pathname === '/overlay' ? -100 : 0;
 
   useEffect(() => {
     if (isSidebarExpanded) {
@@ -73,7 +62,10 @@ const RootContent = () => {
 
   useEffect(() => {
     const handlePanelVisibility = () => {
-      setIsPanelVisible(window.innerWidth >= panelVanishBreakpoint);
+      const newWidth = window.innerWidth;
+      setIsPanelVisible(newWidth >= panelVanishBreakpoint);
+      setIsMobile(newWidth <= mobileBreakpoint);
+      setWindowWidth(newWidth);
     };
     handlePanelVisibility();
     window.addEventListener("resize", handlePanelVisibility);
@@ -85,7 +77,7 @@ const RootContent = () => {
       <CssBaseline />
 
       {/* Side Panel */}
-      {isLoggedIn && isPanelVisible && (
+      {userStatus === 1 && isPanelVisible && (
         <SidePanel
           isHovered={isHovered}
           isSidebarExpanded={isSidebarExpanded}
@@ -104,39 +96,41 @@ const RootContent = () => {
       <Box
         component="main"
         sx={{
+          display: "flex",
+          flexDirection: "column",
           flexGrow: 1,
-          transition: "width 0.5s ease",
-          width: isPanelVisible
-            ? `calc(100% - ${
-                isHovered ? drawerWidthExpanded : drawerWidthCollapsed
-              }px)`
-            : "100%",
           margin: {
-            xs: "0 0.5rem",
-            sm: "0 1rem",
-            md: "0 1.5rem",
-            lg: "0 2rem",
-            xl: "0 3rem",
+            xs: '0 0.5rem',
+            sm: '0 1rem',
+            md: '0 1rem',
+            lg: '0 1rem',
+            xl: '0 2rem'
           },
+          width: isPanelVisible
+            ? `calc(100% - ${isSidebarExpanded ? drawerWidthExpanded : drawerWidthCollapsed}px)`
+            : "100%",
+          transition: 'transform 300ms ease',
+          transform: `translateX(${translate}%)`,
           minHeight: "100vh",
           p: 1,
         }}
       >
-        {/* NavBar only if logged in */}
-        {isLoggedIn && (
+        {userStatus === 1 && (
           <NavBar
             brand={brand}
+            isMobile={isMobile}
+            setLogoAnim={setLogoAnim}
+            isLogoAnim={isLogoAnim}
             offcanvasVisible={offcanvasVisible}
             setOffcanvasVisible={setOffcanvasVisible}
-            onChatToggle={toggleChatBox} // ✅ pass toggle
-            showChatBox={showChatBox} // ✅ pass visibility
+            isComunityVisible={isComunityVisible}
+            setIsCommunityVisible={setIsCommunityVisible}
           />
         )}
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/sidepanel" element={<SidePanel />} />
           <Route path="/studentdashboard" element={<StudentDashboard />} />
           <Route path="/studentattendance" element={<StudentAttendance />} />
           <Route path="/studentschedule" element={<StudentSchedule />} />
@@ -144,89 +138,61 @@ const RootContent = () => {
           <Route path="/profilepanel" element={<ProfilePanel />} />
           <Route path="/chatbody" element={<ChatBody />} />
           <Route path="/chatbox" element={<ChatBox />} />
-          <Route
-            path="/facultydashboard"
-            element={
-              <Home
-                setBrand={() => {
-                  setBrand({ name: "Dashboard", icon: faLayerGroup });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/anouncements"
-            element={
-              <About
-                setBrand={() => {
-                  setBrand({ name: "Announcements", icon: faBullhorn });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/uploadMarks"
-            element={
-              <Contact
-                setBrand={() => {
-                  setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/uploadAttandance"
-            element={
-              <UploadAttendance
-                setBrand={() => {
-                  setBrand({ name: "Upload Attendance", icon: faHand });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
+          <Route path="/overlay" element={<></>} />
+          <Route path="/facultydashboard" element={<Home setBrand={() => { setBrand({ name: "Dashboard", icon: faLayerGroup }); setOffcanvasVisible(false); }} />} />
+          <Route path="/anouncements" element={<About setBrand={() => { setBrand({ name: "Announcements", icon: faBullhorn }); setOffcanvasVisible(false); }} />} />
+          <Route path="/uploadMarks" element={<Contact setBrand={() => { setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket }); setOffcanvasVisible(false); }} />} />
+          <Route path="/uploadAttandance" element={<UploadAttendance setBrand={() => { setBrand({ name: "Upload Attendance", icon: faHand }); setOffcanvasVisible(false); }} />} />
         </Routes>
+      </Box>
 
-        {/* ✅ ChatBox Offcanvas */}
-        {isLoggedIn && (
-          <Offcanvas
-            show={showChatBox}
-            onHide={toggleChatBox}
-            placement="end"
-            style={{
-              zIndex: 1065,
-              height: "100vh",
-              width: "360px",
+      {userStatus === 1 && !isMobile && (
+        <Drawer
+          anchor="right"
+          variant="persistent"
+          open={true}
+          sx={{
+            maxWidth: "500px",
+            width: `${isComunityVisible ? Math.round(windowWidth / 3) : 0}px`,
+            transition: "width 0.6s ease",
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              maxWidth: "500px",
+              minWidth: `${isComunityVisible ? 330 : 0}px`,
+              width: `${isComunityVisible ? Math.round(windowWidth / 3.2) : 0}px`,
+              boxSizing: "border-box",
+              transition: "transform 500ms ease-in-out",
+              willChange: "transform",
+              transform: isComunityVisible ? "translateX(0)" : "translateX(100%)",
+              overflowX: "hidden",
+              overflowY: "auto",
+              backgroundColor: "white",
               borderTopLeftRadius: "20px",
               borderBottomLeftRadius: "20px",
-              padding: "0px",
+              height: "100%",
+              position: "fixed",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+              overflow: "hidden",
+              padding: 0,
             }}
           >
-            <Offcanvas.Body style={{ padding: 0 }}>
-              <ChatBox />
-            </Offcanvas.Body>
-          </Offcanvas>
-        )}
-      </Box>
+            <ChatBox isLogoAnim={isLogoAnim} setLogoAnim={setLogoAnim} setIsCommunityVisible={setIsCommunityVisible} />
+          </Box>
+        </Drawer>
+      )}
     </Box>
   );
-};
+}
 
-// Wrapping RootContent with Router
-const Root = () => (
-  <Router>
-    <RootContent />
-  </Router>
-);
-
-// Dummy route content components
 const Home = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Home Content</Typography>
@@ -236,9 +202,7 @@ const Home = ({ setBrand }) => {
 };
 
 const About = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">About Content</Typography>
@@ -248,9 +212,7 @@ const About = ({ setBrand }) => {
 };
 
 const Contact = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Contact Content</Typography>
@@ -260,9 +222,7 @@ const Contact = ({ setBrand }) => {
 };
 
 const UploadAttendance = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
+  useEffect(() => { setBrand(); }, []);
   return (
     <>
       <Typography variant="h4">Upload Attendance</Typography>
@@ -271,4 +231,4 @@ const UploadAttendance = ({ setBrand }) => {
   );
 };
 
-export default Root;
+export default RootWrapper;

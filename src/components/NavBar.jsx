@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
+import { Box } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "@mui/material/Avatar";
 import {
@@ -23,11 +24,8 @@ import {
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 import PopUp from "./PopUp";
-import ChatBox from "./ChatBox"; // ✅ Import ChatBox
-
-function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggle, showChatBox }) {
-  const searchBreakpoint = 700;
-  const mobileBreakpoint = 768;
+function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim,isMobile}) {
+  const searchBreakpoint = 1150;
   const drawerWidthExpanded = 240;
   const drawerWidthCollapsed = 60;
 
@@ -36,8 +34,8 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
       window.innerWidth < 480
         ? "1.5rem"
         : window.innerWidth < 768
-        ? "1.5rem"
-        : "1.5rem",
+          ? "1.5rem"
+          : "1.5rem",
   });
   const [iconSize, setIconSize] = useState("xl");
   const [notifications, setNotifications] = useState(5);
@@ -51,35 +49,45 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
     password: "",
     profilePic: "",
   });
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= mobileBreakpoint);
+  
   const [showSearch, setShowSearch] = useState(window.innerWidth >= searchBreakpoint);
 
-  const touchStartX = useRef(0);
+  const touchStartX = useRef(0); // Using refs for instant values
   const touchEndX = useRef(0);
-  const LeftSwipeDistance = 100;
-  const RightSwipeDistance = 40;
+  const LeftSwipeDistance = 100; // Minimum distance to detect a swipe
+  const RightSwipeDistance = 40; // Minimum distance to detect a swipe
 
   useEffect(() => {
     const handleTouchStart = (e) => {
-      touchStartX.current = e.touches[0].clientX;
+      touchStartX.current = e.touches[0].clientX; // Set ref value
     };
     const handleTouchMove = (e) => {
       touchEndX.current = e.touches[0].clientX;
+    
     };
 
-    const handleTouchEnd = () => {
-      const swipeDistance = Number(touchStartX.current) - Number(touchEndX.current);
+    const handleTouchEnd = (e) => {
+      touchEndX.current = e.changedTouches[0].clientX;
+      const swipeDistance = Number(touchStartX.current) - Number(touchEndX.current); // Use ref values
       if (Math.abs(swipeDistance) !== 0) {
         if (swipeDistance > 0 && Math.abs(swipeDistance) > RightSwipeDistance) {
-          if (offcanvasVisible && !profileOffcanvasVisible) {
-            setOffcanvasVisible(false);
+          // Swipe left: Close Offcanvas
+          if (offcanvasVisible) {
+            
+            if (!profileOffcanvasVisible) { setOffcanvasVisible(false); }
+            else { setProfileOffcanvasVisible(true); }
           }
         } else if (swipeDistance < 0 && Math.abs(swipeDistance) > LeftSwipeDistance) {
-          if (!offcanvasVisible && !profileOffcanvasVisible) {
-            setOffcanvasVisible(true);
+          // Swipe right: Open Offcanvas
+          if (!offcanvasVisible) {
+            
+            if (!profileOffcanvasVisible) { setOffcanvasVisible(true); }
+            else { setProfileOffcanvasVisible(true); }
           }
         }
       }
+
+      // Reset touch values
       touchStartX.current = 0;
       touchEndX.current = 0;
     };
@@ -93,20 +101,25 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [offcanvasVisible, profileOffcanvasVisible]);
-
+  }, [offcanvasVisible, profileOffcanvasVisible, touchStartX, touchEndX]);
   const handleProfileCanvas = () => {
     if (isEditable) {
-      setIsSaved(false);
+      setIsSaved(false); // Ensure the save status resets
     } else {
-      setProfileOffcanvasVisible(false);
+      setProfileOffcanvasVisible(false); // Simply close if not editable
     }
-  };
-
+  }
   const toggleOffcanvas = () => {
     if (!profileOffcanvasVisible) setOffcanvasVisible(!offcanvasVisible);
   };
-
+ const handleCommunity = () =>{
+  if (!isMobile) 
+  {setIsCommunityVisible(true);setTimeout(()=>setLogoAnim(false),80)}
+  else 
+  {
+    window.location.href ="/chatbox"
+  }
+ }
   useEffect(() => {
     const handleResize = () => {
       setNavStyle({
@@ -114,10 +127,10 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
           window.innerWidth < 480
             ? "1.5rem"
             : window.innerWidth < 768
-            ? "1.5rem"
-            : "1.5rem",
+              ? "1.5rem"
+              : "1.5rem",
       });
-      setIsMobile(window.innerWidth <= mobileBreakpoint);
+      
       setShowSearch(window.innerWidth >= searchBreakpoint);
     };
     window.addEventListener("resize", handleResize);
@@ -136,7 +149,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                 alignContent: "center",
                 width: "30px",
                 height: "40px",
-                display: window.innerWidth < mobileBreakpoint ? "block" : "none",
+                display: isMobile? "block" : "none",
               }}
             >
               <Button
@@ -166,29 +179,41 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                   </Avatar>
                 )}
               </Button>
-            </div>
-
+            </div >
             {/* Brand Section */}
-            {!isMobile && (
-              <div className="d-flex align-items-center ms-3">
-                <Navbar.Brand style={navLinkStyle} href="#">
-                  <FontAwesomeIcon icon={brand.icon} style={{ marginRight: "8px" }} />
-                  &nbsp;
-                  {brand.name}
-                </Navbar.Brand>
-              </div>
-            )}
+            {!isMobile && (<div className={`d-flex align-items-center ms-3`}>
+              <Navbar.Brand style={navLinkStyle} href="#">
 
-            {/* Search Bar */}
-            <div className="d-flex flex-grow-1 justify-content-center align-items-center">
+                <FontAwesomeIcon
+                  icon={brand.icon}
+                  style={{ marginRight: "8px" }}
+                />
+
+                &nbsp;
+                {brand.name}
+              </Navbar.Brand>
+            </div>)}
+            {/* Search Bar Section */}
+            <div className="d-flex flex-grow-1 justify-content-center align-items-center" style={{ height: "100%", }} >
               {showSearch && (
-                <Form className="d-flex" style={{ maxWidth: "280px", width: "100%" }}>
+                <Form
+                  className="d-flex"
+                  style={{
+                    display: "flex", // Flexbox for layout
+                    justifyContent: "center", // Horizontally centered
+                    alignItems: "center", // Vertically centered
+                    maxWidth: "280px", // Slightly wider for better usability
+                    width: "100%", // Ensures responsiveness
+                  }}
+                >
                   <InputGroup
                     style={{
+                      display: "flex", // Flexbox for input and button alignment
+                      alignItems: "center",
                       backgroundColor: "#ffffff",
-                      border: "none",
-                      borderRadius: "25px",
-                      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                      border: "none", // Clean white background
+                      borderRadius: "25px", // Smooth, rounded edges
+                      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for a modern look
                       padding: "3px",
                       margin: "10px 0px",
                     }}
@@ -198,24 +223,24 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                       placeholder="Search"
                       aria-label="Search"
                       style={{
-                        height: "1.8rem",
-                        padding: "0.5rem 1rem",
-                        border: "none",
-                        borderRadius: "25px 0 0 25px",
-                        boxShadow: "none",
+                        height: "1.8rem", // Slightly taller for better interaction
+                        padding: "0.5rem 1rem", // Inner padding for input field
+                        border: "none", // Removes default borders
+                        borderRadius: "25px 0 0 25px", // Matches the InputGroup's rounded edges
+                        boxShadow: "none", // Removes inner shadows
                       }}
                     />
                     <Button
                       variant="primary"
                       style={{
-                        height: "1.8rem",
-                        lineHeight: "1.8rem",
-                        padding: "0 15px",
-                        borderRadius: "0 25px 25px 0",
-                        backgroundColor: "#fda129",
-                        border: "none",
-                        color: "#ffffff",
-                        fontSize: "1rem",
+                        height: "1.8rem", // Matches the height of the input field
+                        lineHeight: "1.8rem", // Centers the icon vertically
+                        padding: "0 15px", // Adds spacing around the button content
+                        borderRadius: "0 25px 25px 0", // Smooth edges for the right side
+                        backgroundColor: "#fda129", // A warm, standout color for the button
+                        border: "none", // Removes default button border
+                        color: "#ffffff", // Ensures good contrast for text/icon
+                        fontSize: "1rem", // Slightly larger font size for better readability
                       }}
                     >
                       <FontAwesomeIcon icon={faSearch} />
@@ -224,8 +249,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                 </Form>
               )}
             </div>
-
-            {/* Notification Icons */}
+            {/* Notification Section */}
             <div className="d-flex align-items-center">
               {/* Mail */}
               <div className="position-relative me-3">
@@ -242,14 +266,25 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                   {notifications}
                 </span>
               </div>
-
-              {/* Chat/Online Users */}
-              <div className="position-relative me-3" style={{ cursor: "pointer" }} onClick={onChatToggle}>
-                <FontAwesomeIcon icon={faUsers} size={iconSize} />
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" style={{ fontSize: "0.7rem", transform: "translate(-50%, -40%)" }}>
-                  3
-                </span>
-              </div>
+              {!isComunityVisible && isLogoAnim &&(
+                <div className="position-relative">
+                <Button
+                  variant="outline-Dark"
+                  aria-controls="offcanvas-navbar"
+                  onClick={handleCommunity}
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    boxShadow: "none",
+                    padding: "0px",
+                    marginLeft:"5px",
+                    marginRight: "8px",
+                  }}
+                >
+                  <CommunityLogo />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -274,7 +309,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
                   isSidebarExpanded={true}
                   drawerWidthExpanded={drawerWidthExpanded}
                   drawerWidthCollapsed={drawerWidthCollapsed}
-                  setIsHovered={() => {}}
+                  setIsHovered={() => { }}
                   textVisible={true}
                   toggleSidebar={null}
                   setIsPanelVisible={null}
@@ -300,50 +335,23 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggl
             }}
           >
             <Offcanvas.Body>
-              <ProfilePanel
-                isEditable={isEditable}
-                setIsEditable={setIsEditable}
-                setProfileOffcanvasVisible={setProfileOffcanvasVisible}
-                setOffcanvasVisible={setOffcanvasVisible}
-                user={user}
-                setUser={setUser}
-              />
-            </Offcanvas.Body>
-          </Offcanvas>
-
-          {/* ✅ ChatBox Offcanvas */}
-          <Offcanvas
-            show={showChatBox}
-            onHide={onChatToggle}
-            placement="end"
-            style={{
-              zIndex: 1065,
-              height: "100vh",
-              width: "360px",
-              borderTopLeftRadius: "20px",
-              borderBottomLeftRadius: "20px",
-              padding: "0px",
-            }}
-          >
-            <Offcanvas.Body style={{ padding: 0 }}>
-              <ChatBox />
+              <ProfilePanel isEditable={isEditable} setIsEditable={setIsEditable} setProfileOffcanvasVisible={setProfileOffcanvasVisible}
+                setOffcanvasVisible={setOffcanvasVisible} user={user} setUser={setUser}></ProfilePanel>
             </Offcanvas.Body>
           </Offcanvas>
         </Container>
       </Navbar>
-
-      {/* Unsaved Changes PopUp */}
       {isEditable && !isSaved && (
         <PopUp
-          message="Changes Not Saved! Are you sure you want to close?"
-          onSave={() => {
+          message="Changes Not Saved ! Are you sure you want to close?"
+          onSave={() => { // Call the update function
             setIsSaved(true);
-            setProfileOffcanvasVisible(false);
+            setProfileOffcanvasVisible(false); // Close Profile Offcanvas
           }}
           onDiscard={() => {
             setIsEditable(false);
             setIsSaved(-1);
-            setProfileOffcanvasVisible(false);
+            setProfileOffcanvasVisible(false); // Close Profile Offcanvas
           }}
         />
       )}

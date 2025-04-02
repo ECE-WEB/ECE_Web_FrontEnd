@@ -22,7 +22,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
-import PopUp from "./PopUp";
 import ChatBox from "./ChatBox"; // ✅ Import ChatBox
 
 function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggle, showChatBox }) {

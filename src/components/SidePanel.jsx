@@ -64,6 +64,8 @@ const SidePanel = ({
   const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
+    //window.location.href = "/profile";
+    console.log("profileclicked")  
     setProfileOffcanvasVisible(true);
     setOffcanvasVisible(true);
   };
@@ -72,7 +74,7 @@ const SidePanel = ({
     <Drawer
       variant="permanent"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {setIsHovered(false)}}
       sx={{
         width: isHovered ? drawerWidthExpanded : drawerWidthCollapsed,
         transition: "width 0.5s ease",
@@ -96,12 +98,29 @@ const SidePanel = ({
         onClick={handleProfilePanel}
         sx={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          p: 2,
+          padding: 2,
+          flexDirection: {
+            xs: "column",
+            sm:"row", // Column orientation for mobile (small screens)
+            md: "row", // Row orientation for desktop (medium and larger screens)
+          },
+          alignItems: {
+            xs: "center", // Center alignment for mobile
+            sm: "flex-start", // Left alignment for desktop
+            md: "flex-start", // Left alignment for desktop
+          },
+          justifyContent: {
+            xs: "center", // Center on mobile
+            sm: "flex-start", // Left alignment for desktop
+            md: "flex-start", // Align to start on desktop
+          },
+          cursor: "pointer",
+          pt: 2,
+          pl: 0.5,
+          pb: 2,
         }}
       >
+        
         <Avatar
           alt={user.name}
           sx={{
@@ -114,17 +133,37 @@ const SidePanel = ({
           {user.avatar}
         </Avatar>
         {isSidebarExpanded && (
-          <Fade in={textVisible} timeout={400} unmountOnExit>
-            <Box sx={{ textAlign: "center" }}>
-              <Typography variant="subtitle1">{user.name}</Typography>
-              <Typography variant="caption">{user.email}</Typography>
-            </Box>
-          </Fade>
+          <Box sx={{ ml: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <Fade in={textVisible} timeout={400} unmountOnExit>
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.email}
+                </Typography>
+              </Box>
+            </Fade>
+          </Box>
         )}
       </Box>
 
       {/* Navigation List */}
-      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
         <List sx={{ flexGrow: 1 }}>
           {sidebarOptions.map((item, index) => (
             <ListItem key={index} disablePadding>
@@ -150,8 +189,18 @@ const SidePanel = ({
             </ListItem>
           ))}
         </List>
-
-        {/* Logout Button */}
+        <List>
+        <ListItem disablePadding>
+        {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                  <img src="/src/assets/Teacher.png" style={{width: '100%', height: '100%'}} />
+                  </Box>
+                </Fade>
+              )}
+          </ListItem>
+        </List>
+        {/* Toggler Section */}
         <List>
           <ListItem disablePadding>
             <ListItemButton

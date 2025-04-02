@@ -23,7 +23,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
-import PopUp from "./PopUp";
+import PopUp from "./Popup";
 function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim,isMobile}) {
   const searchBreakpoint = 1150;
   const drawerWidthExpanded = 240;

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import NavBar from "./NavBar";
@@ -15,13 +16,16 @@ import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
-
+const mobileBreakpoint = 768;//900 to 930
 const panelVanishBreakpoint = 768;
 
 function Root() {
   const [isToggled, setIsToggled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [textVisible, setTextVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+      window.innerWidth <= mobileBreakpoint
+    );
   const [isPanelVisible, setIsPanelVisible] = useState(true);
   const [brand, setBrand] = useState({ name: "Dashboard", icon: faLayerGroup });
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
@@ -42,7 +46,10 @@ function Root() {
   const toggleSidebar = () => {
     setIsToggled(prev => !prev);
   };
+  const location = useLocation();
 
+  // If the route is "/overlay", we slide the main content offscreen (translateX: -100%)
+  const translate = location.pathname === '/overlay' ? -100 : 0;
   // Manage the visibility of text within the sidebar.
   useEffect(() => {
     if (isSidebarExpanded) {
@@ -69,18 +76,15 @@ useEffect(() => {
     // Update the state with the new window width
     setWindowWidth(newWidth);
     // If you need to log the updated value, use newWidth directly:
-    
+    setIsMobile(window.innerWidth <= mobileBreakpoint);
   };
-
+  
   // Set initial state on mount
   handlePanelVisibility();
   window.addEventListener("resize", handlePanelVisibility);
   return () => window.removeEventListener("resize", handlePanelVisibility);
 }, []);
-console.log("New window width:", windowWidth/3);
-  
-  return (
-    <Router>
+return (
       <Box sx={{ display: "flex" ,height:'100vh'}}>
         <CssBaseline />
 
@@ -113,11 +117,14 @@ console.log("New window width:", windowWidth/3);
               lg: '0 1rem',
               xl: '0 2rem'
             },
+            width: '100vw',
+            transition: 'transform 300ms ease',
+            transform: `translateX(${translate}%)`,
             minHeight: "100vh",
             p: 1,
           }}
         >
-          {(userStatus == 1)?<NavBar brand={brand} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
+          {(userStatus == 1)?<NavBar brand={brand} isMobile={isMobile} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
 
           {/* Routes */}
           <Routes>
@@ -148,14 +155,10 @@ console.log("New window width:", windowWidth/3);
                 <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
               }
             />
-            <Route
-              path="/chatbox"
-              element={
-                <ChatBox />}
-            />
+            <Route path="/overlay" element={<></>} />
           </Routes>
         </Box>
-        {(userStatus == 1)?(
+        {(userStatus == 1)?!isMobile &&(
          <Drawer
          anchor="right"
          variant="persistent"
@@ -174,7 +177,7 @@ console.log("New window width:", windowWidth/3);
              transition: "transform 500ms ease-in-out",
              willChange: "transform",
              // Slide the paper in or out based on isComunityVisible
-             transform: isComunityVisible ? "translateX(0)" : "translateX(450px)",
+             transform: isComunityVisible ? "translateX(0)" : "translateX(100%)",
              overflowX: "hidden",
              overflowY: "auto",
              backgroundColor: "white",
@@ -189,7 +192,8 @@ console.log("New window width:", windowWidth/3);
            sx={{
              display: "flex",
              flexDirection: "column",
-             height: "100vh",
+             height: "100%",
+             overflow: "hidden",
              padding: 0,
            }}
          >
@@ -199,7 +203,7 @@ console.log("New window width:", windowWidth/3);
         
         ):<></>}
       </Box>
-    </Router>
+    
   );
 }
 

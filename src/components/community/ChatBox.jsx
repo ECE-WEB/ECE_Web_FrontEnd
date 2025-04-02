@@ -111,7 +111,7 @@ const ChatInterface = ({setIsCommunityVisible,setLogoAnim}) => {
           width:"100%",
           display: "flex",
           flexDirection: "column",
-          height: "100vh", // Full viewport height
+          height: "100%", // Full viewport height
           overflow: "hidden", // Prevent layout overflow
           padding:"0px"
         }}

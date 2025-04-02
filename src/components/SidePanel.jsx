@@ -146,7 +146,7 @@ const SidePanel = ({
       </Box>
 
       {/* Navigation List */}
-      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
         <List sx={{ flexGrow: 1 }}>
           <ListItem disablePadding>
             <ListItemButton

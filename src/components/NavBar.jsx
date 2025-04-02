@@ -24,9 +24,8 @@ import {
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 import PopUp from "./PopUp";
-function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim}) {
-  const searchBreakpoint = 700;
-  const mobileBreakpoint = 768;//900 to 930
+function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim,isMobile}) {
+  const searchBreakpoint = 1150;
   const drawerWidthExpanded = 240;
   const drawerWidthCollapsed = 60;
 
@@ -50,9 +49,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
     password: "",
     profilePic: "",
   });
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth <= mobileBreakpoint
-  );
+  
   const [showSearch, setShowSearch] = useState(window.innerWidth >= searchBreakpoint);
 
   const touchStartX = useRef(0); // Using refs for instant values
@@ -68,7 +65,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
 
     const handleTouchMove = (e) => {
       touchEndX.current = e.touches[0].clientX;
-      console.log("Touch Move: ", touchEndX.current);
+    
     };
 
     const handleTouchEnd = (e) => {
@@ -78,14 +75,14 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
         if (swipeDistance > 0 && Math.abs(swipeDistance) > RightSwipeDistance) {
           // Swipe left: Close Offcanvas
           if (offcanvasVisible) {
-            console.log("Swipe Left: Closing Offcanvas");
+            
             if (!profileOffcanvasVisible) { setOffcanvasVisible(false); }
             else { setProfileOffcanvasVisible(true); }
           }
         } else if (swipeDistance < 0 && Math.abs(swipeDistance) > LeftSwipeDistance) {
           // Swipe right: Open Offcanvas
           if (!offcanvasVisible) {
-            console.log("Swipe Right: Opening Offcanvas");
+            
             if (!profileOffcanvasVisible) { setOffcanvasVisible(true); }
             else { setProfileOffcanvasVisible(true); }
           }
@@ -119,7 +116,14 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
   const toggleOffcanvas = () => {
     if (!profileOffcanvasVisible) setOffcanvasVisible(!offcanvasVisible);
   };
-
+ const handleCommunity = () =>{
+  if (!isMobile) 
+  {setIsCommunityVisible(true);setTimeout(()=>setLogoAnim(false),80)}
+  else 
+  {
+    window.location.href ="/chatbox"
+  }
+ }
   useEffect(() => {
     const handleResize = () => {
       setNavStyle({
@@ -130,7 +134,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
               ? "1.5rem"
               : "1.5rem",
       });
-      setIsMobile(window.innerWidth <= mobileBreakpoint);
+      
       setShowSearch(window.innerWidth >= searchBreakpoint);
     };
     window.addEventListener("resize", handleResize);
@@ -149,7 +153,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
                 alignContent: "center",
                 width: "30px",
                 height: "40px",
-                display: window.innerWidth < mobileBreakpoint ? "block" : "none",
+                display: isMobile? "block" : "none",
               }}
             >
               <Button
@@ -280,7 +284,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
                 <Button
                   variant="outline-Dark"
                   aria-controls="offcanvas-navbar"
-                  onClick={()=>{setIsCommunityVisible(true);setTimeout(()=>setLogoAnim(false),80)}}
+                  onClick={handleCommunity}
                   style={{
                     border: "none",
                     outline: "none",

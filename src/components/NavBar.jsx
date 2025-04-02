@@ -308,7 +308,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
             onHide={() => setOffcanvasVisible(false)}
             style={{
               zIndex: 1050,
-              height: "100vh",
+              height: "100%",
               width: `${drawerWidthExpanded - 15}px`,
               borderTopRightRadius: "20px",
               borderBottomRightRadius: "20px",
@@ -338,7 +338,7 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
             placement="start"
             style={{
               zIndex: 1060,
-              height: "100vh",
+              height: "100%",
               width: `${drawerWidthExpanded}px`,
               borderTopRightRadius: "20px",
               borderBottomRightRadius: "20px",

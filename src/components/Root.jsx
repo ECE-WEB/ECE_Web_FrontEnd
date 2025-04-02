@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -22,6 +22,7 @@ const panelVanishBreakpoint = 768;
 function Root() {
   const [isToggled, setIsToggled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  
   const [textVisible, setTextVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(
       window.innerWidth <= mobileBreakpoint
@@ -67,6 +68,7 @@ function Root() {
 useEffect(() => {
   const handlePanelVisibility = () => {
     const newWidth = window.innerWidth;
+    console.log(newWidth);
     // Update panel visibility based on the breakpoint
     if (newWidth < panelVanishBreakpoint) {
       setIsPanelVisible(false);
@@ -85,7 +87,7 @@ useEffect(() => {
   return () => window.removeEventListener("resize", handlePanelVisibility);
 }, []);
 return (
-      <Box sx={{ display: "flex" ,height:'100vh'}}>
+      <Box  sx={{ display: "flex" ,height:'100vh'}}>
         <CssBaseline />
 
         {/* Side Panel */}
@@ -117,10 +119,10 @@ return (
               lg: '0 1rem',
               xl: '0 2rem'
             },
-            width: '100vw',
+            width:"100%",
             transition: 'transform 300ms ease',
             transform: `translateX(${translate}%)`,
-            minHeight: "100vh",
+            minHeight: "100%",
             p: 1,
           }}
         >

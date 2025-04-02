@@ -214,7 +214,7 @@ const ChatInput = ({ setMessages, messages }) => {
           <Col
             xs={12}
             style={{
-                height: "30vh",
+                height: "30%",
                 
               backgroundColor: "#fff",
               border: "1px solid #ccc",

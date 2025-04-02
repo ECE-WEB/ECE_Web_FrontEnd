@@ -1,22 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 
-const PopupWithBlur = ({message,onSave,onDiscard}) => {
+const PopupWithBlur = ({ message, onSave, onDiscard }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleSave = () => {
     onSave();
-    
     setIsOpen(false);
   };
 
   const handleDiscard = () => {
     onDiscard();
-   
     setIsOpen(false);
   };
 
-  return (
+  return createPortal(
     <div>
       {isOpen && (
         <div
@@ -31,7 +30,7 @@ const PopupWithBlur = ({message,onSave,onDiscard}) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            zIndex: 1070,
+            zIndex: 1090,
           }}
         >
           <div
@@ -42,14 +41,17 @@ const PopupWithBlur = ({message,onSave,onDiscard}) => {
               backgroundColor: " #fff4e0", // #d6ffe7
               padding: "1rem",
               borderRadius: "10px",
-              alignContent: "center",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              display: "flex",
+              flexDirection: "column", // Stack text and buttons vertically
+              alignItems: "center", // Center elements horizontally
+              justifyContent: "center", // Center elements vertically
             }}
           >
-            <p style={{ fontSize: "1.2rem", marginBottom: "1rem", color: "#333" }}>
+            <p style={{ fontSize: "1.2rem", marginBottom: "1rem", color: "#333", textAlign: "center" }}>
               {message}
             </p>
-            <div>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
               <button
                 onClick={handleSave}
                 style={{
@@ -58,7 +60,6 @@ const PopupWithBlur = ({message,onSave,onDiscard}) => {
                   color: "white",
                   border: "none",
                   borderRadius: "5px",
-                  marginRight: "0.5rem",
                   cursor: "pointer",
                 }}
               >
@@ -81,7 +82,8 @@ const PopupWithBlur = ({message,onSave,onDiscard}) => {
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 };
 

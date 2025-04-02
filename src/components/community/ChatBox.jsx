@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const ChatInterface = ({setIsCommunityVisible,setLogoAnim}) => {
+const ChatInterface = ({setIsCommunityVisible,setLogoAnim,isMobile,resetOverlay}) => {
   const [messages, setMessages] = useState([]);
   const chatBodyRef = useRef(null);
   const chatInputRef = useRef(null); // Reference to ChatInput
@@ -113,7 +113,8 @@ const ChatInterface = ({setIsCommunityVisible,setLogoAnim}) => {
           flexDirection: "column",
           height: "100%", // Full viewport height
           overflow: "hidden", // Prevent layout overflow
-          padding:"0px"
+          padding:"0px",
+          
         }}
       >
         {/* Sticky Top Header */}
@@ -132,7 +133,7 @@ const ChatInterface = ({setIsCommunityVisible,setLogoAnim}) => {
           <Col xs={2} sm={2} style={{ textAlign: "left" }}>
             <Button
               variant="light"
-              onClick={()=>{setIsCommunityVisible(false);setTimeout(()=>setLogoAnim(true),100)}}
+              onClick={()=>{if(!isMobile){setIsCommunityVisible(false);setTimeout(()=>setLogoAnim(true),100)}else resetOverlay() }}
               style={{
                 border: "none",
                 backgroundColor: "transparent",
@@ -216,6 +217,7 @@ const ChatInterface = ({setIsCommunityVisible,setLogoAnim}) => {
             margin: "0px",
             backgroundColor: "#f7f7f7",
             position: "relative",
+            
           }}
         >
           <Col style={{ padding: "0px", margin: "0px" }}>

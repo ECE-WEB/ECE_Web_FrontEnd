@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Box } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Avatar from "@mui/material/Avatar";
+import CommunityLogo from "../logos/CommunityLogo";
 import {
   Navbar,
   Container,

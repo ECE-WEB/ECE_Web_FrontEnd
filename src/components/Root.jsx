@@ -8,7 +8,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
 import {
   faLayerGroup,
@@ -16,11 +15,14 @@ import {
   faArrowUpFromBracket,
   faHand,
 } from "@fortawesome/free-solid-svg-icons";
-
+import SidePanel from "./SidePanel";
 import NavBar from "./NavBar";
 import ProfilePanel from "./ProfilePanel";
 import Drawer from "@mui/material/Drawer";
 import LandingPage from "../pages/LandingPage";
+import StudentAttendance from "../pages/StudentAttendance";
+import StudentSchedule from "../pages/StudentSchedule";
+import StudentMarks from "../pages/StudentMarks";
 import LoginPage from "../pages/LoginPage";
 import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
@@ -29,7 +31,7 @@ const drawerWidthCollapsed = 60;
 const mobileBreakpoint = 768;//900 to 930
 const panelVanishBreakpoint = 768;
 
-const RootContent = () => {
+const Root = () => {
   const location = useLocation();
   const [isToggled, setIsToggled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -142,6 +144,9 @@ return (
           <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/studentdashboard" element={<StudentDashboard  />} />
+            <Route path="/studentattendance" element={<StudentAttendance  />} />
+            <Route path="/studentschedule" element={<StudentSchedule  />} />
+            <Route path="/studentmarks" element={<StudentMarks  />} />
             <Route
               path="/facultydashboard"
               element={

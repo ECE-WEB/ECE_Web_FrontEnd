@@ -137,7 +137,9 @@ return (
             p: 1,
           }}
         >
-          {(userStatus == 1)?<NavBar brand={brand} isMobile={isMobile} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
+          {(userStatus == 1 && location.pathname !== "/") && (
+  <NavBar brand={brand} isMobile={isMobile} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/>
+)}
 
           {/* Routes */}
           <Routes>

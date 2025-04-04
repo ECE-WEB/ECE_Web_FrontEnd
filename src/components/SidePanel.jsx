@@ -71,7 +71,11 @@ const SidePanel = ({
   const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
-    console.log("profileclicked");
+<<<<<<<<< Temporary merge branch 1
+=========
+    //window.location.href = "/profile";
+    console.log("profileclicked")  
+>>>>>>>>> Temporary merge branch 2
     setProfileOffcanvasVisible(true);
     setOffcanvasVisible(true);
   };
@@ -126,6 +130,7 @@ const SidePanel = ({
           pb: 2,
         }}
       >
+        
         <Avatar
           alt={user.name}
           sx={{
@@ -176,8 +181,10 @@ const SidePanel = ({
             </ListItem>
           ))}
         </List>
+<<<<<<<<< Temporary merge branch 1
 
-        {/* Extra Image */}
+        {/* Logout Button */}
+=========
         <List>
           <ListItem disablePadding>
             {isSidebarExpanded && (
@@ -189,8 +196,8 @@ const SidePanel = ({
             )}
           </ListItem>
         </List>
-
-        {/* Logout Button */}
+        {/* Toggler Section */}
+>>>>>>>>> Temporary merge branch 2
         <List>
           <ListItem disablePadding>
             <ListItemButton

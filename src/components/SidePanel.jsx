@@ -8,21 +8,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Fade from "@mui/material/Fade";
-import TextField from "@mui/material/TextField";
-import { Button, Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faBullhorn, faArrowUpFromBracket, faHand, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from "react-router-dom";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const colorsProp = {
-  panelBackgroundColor: "#4D0000",
-  panelTextColor: "white",
-  profileBorder: "2px solid #FF7A7A",
-  profileBackgroundColor: "#FF7A7A",
-  hoverBackgroundColor: "#FF7A7A",
-  selectedBackgroundColor: "#800000",
+  selectedBackgroundColor: "#6e0f0f",
+  hoverBackgroundColor: "#801919",
   itemBorderRadius: "12px",
 };
 
@@ -34,9 +26,11 @@ const SidePanel = ({
   setIsHovered,
   textVisible,
   setProfileOffcanvasVisible,
-  setOffcanvasVisible,
+  setOffcanvasVisible
 }) => {
   const location = useLocation();
+
+  if (location.pathname === "/") return null;
 
   const user = {
     name: "Yekkaluru Divya Teja",
@@ -44,7 +38,6 @@ const SidePanel = ({
     email: "divyateja050@gmail.com",
     role: (sessionStorage.getItem("role") || "student").toLowerCase(),
   };
-  user.avatar = user.name[0];
 
   const menuItems = {
     admin: [
@@ -61,7 +54,7 @@ const SidePanel = ({
     ],
     student: [
       { name: "Dashboard", path: "/studentdashboard", icon: faLayerGroup },
-      { name: "Announcements", path: "/anouncements", icon: faBullhorn },
+      { name: "Announcements", path: "/announcements", icon: faBullhorn },
       { name: "View Marks", path: "/studentMarks", icon: faArrowUpFromBracket },
       { name: "Attendance", path: "/studentattendance", icon: faHand },
       { name: "Schedule", path: "/studentschedule", icon: faHand },
@@ -71,11 +64,8 @@ const SidePanel = ({
   const sidebarOptions = menuItems[user.role] || menuItems.student;
 
   const handleProfilePanel = () => {
-<<<<<<<<< Temporary merge branch 1
-=========
     //window.location.href = "/profile";
     console.log("profileclicked")  
->>>>>>>>> Temporary merge branch 2
     setProfileOffcanvasVisible(true);
     setOffcanvasVisible(true);
   };
@@ -84,7 +74,7 @@ const SidePanel = ({
     <Drawer
       variant="permanent"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {setIsHovered(false)}}
       sx={{
         width: isHovered ? drawerWidthExpanded : drawerWidthCollapsed,
         transition: "width 0.5s ease",
@@ -95,8 +85,8 @@ const SidePanel = ({
           transition: "width 0.4s ease",
           overflowX: "hidden",
           overflowY: "auto",
-          backgroundColor: colorsProp.panelBackgroundColor,
-          color: colorsProp.panelTextColor,
+          backgroundColor: "#4D0000",
+          color: "white",
           borderTopRightRadius: "20px",
           borderBottomRightRadius: "20px",
           height: "100%",
@@ -111,18 +101,18 @@ const SidePanel = ({
           padding: 2,
           flexDirection: {
             xs: "column",
-            sm: "row",
-            md: "row",
+            sm:"row", // Column orientation for mobile (small screens)
+            md: "row", // Row orientation for desktop (medium and larger screens)
           },
           alignItems: {
-            xs: "center",
-            sm: "flex-start",
-            md: "flex-start",
+            xs: "center", // Center alignment for mobile
+            sm: "flex-start", // Left alignment for desktop
+            md: "flex-start", // Left alignment for desktop
           },
           justifyContent: {
-            xs: "center",
-            sm: "flex-start",
-            md: "flex-start",
+            xs: "center", // Center on mobile
+            sm: "flex-start", // Left alignment for desktop
+            md: "flex-start", // Align to start on desktop
           },
           cursor: "pointer",
           pt: 2,
@@ -136,8 +126,8 @@ const SidePanel = ({
           sx={{
             width: 50,
             height: 50,
-            border: colorsProp.profileBorder,
-            bgcolor: colorsProp.profileBackgroundColor,
+            border: "2px solid #FF7A7A",
+            bgcolor: "#FF7A7A",
           }}
         >
           {user.avatar}
@@ -146,8 +136,26 @@ const SidePanel = ({
           <Box sx={{ ml: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
             <Fade in={textVisible} timeout={400} unmountOnExit>
               <Box>
-                <Typography variant="subtitle1">{user.name}</Typography>
-                <Typography variant="caption">{user.email}</Typography>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    textAlign: "center",
+                    wordWrap: "break-word",
+                    whiteSpace: "normal",
+                  }}
+                >
+                  {user.email}
+                </Typography>
               </Box>
             </Fade>
           </Box>
@@ -181,23 +189,18 @@ const SidePanel = ({
             </ListItem>
           ))}
         </List>
-<<<<<<<<< Temporary merge branch 1
-
-        {/* Logout Button */}
-=========
         <List>
-          <ListItem disablePadding>
-            {isSidebarExpanded && (
-              <Fade in={textVisible} timeout={400} unmountOnExit>
-                <Box>
-                  <img src="/src/assets/Teacher.png" style={{ width: '100%', height: '100%' }} alt="Teacher" />
-                </Box>
-              </Fade>
-            )}
+        <ListItem disablePadding>
+        {isSidebarExpanded && (
+                <Fade in={textVisible} timeout={400} unmountOnExit>
+                  <Box>
+                  <img src="/src/assets/Teacher.png" style={{width: '100%', height: '100%'}} />
+                  </Box>
+                </Fade>
+              )}
           </ListItem>
         </List>
         {/* Toggler Section */}
->>>>>>>>> Temporary merge branch 2
         <List>
           <ListItem disablePadding>
             <ListItemButton
@@ -206,7 +209,7 @@ const SidePanel = ({
               sx={{
                 alignItems: "center",
                 borderRadius: colorsProp.itemBorderRadius,
-                ":hover": { backgroundColor: colorsProp.hoverBackgroundColor },
+                ":hover": { backgroundColor: "#FF7A7A" },
               }}
             >
               <ListItemIcon sx={{ color: "inherit" }}>

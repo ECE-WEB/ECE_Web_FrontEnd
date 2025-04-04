@@ -25,13 +25,6 @@ import {
 import SidePanel from "./SidePanel";
 import ProfilePanel from "./ProfilePanel";
 import PopUp from "./PopUp";
-<<<<<<<<< Temporary merge branch 1
-import ChatBox from "./ChatBox"; // ✅ Import ChatBox
-
-function MainContent({ brand, offcanvasVisible, setOffcanvasVisible, onChatToggle, showChatBox }) {
-  const searchBreakpoint = 700;
-  const mobileBreakpoint = 768;
-=========
 function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommunityVisible,isComunityVisible,isLogoAnim ,setLogoAnim,isMobile}) {
   const searchBreakpoint = 1150;
   const drawerWidthExpanded = 240;

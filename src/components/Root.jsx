@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
 import {
   faLayerGroup,
@@ -17,74 +15,37 @@ import {
   faArrowUpFromBracket,
   faHand,
 } from "@fortawesome/free-solid-svg-icons";
-
+import SidePanel from "./SidePanel";
 import NavBar from "./NavBar";
 import ProfilePanel from "./ProfilePanel";
-<<<<<<<<< Temporary merge branch 1
-import SidePanel from "./SidePanel";
-=========
 import Drawer from "@mui/material/Drawer";
->>>>>>>>> Temporary merge branch 2
 import LandingPage from "../pages/LandingPage";
-import LoginPage from "../pages/LoginPage";
-import StudentDashboard from "../pages/StudentDashboard";
-<<<<<<<<< Temporary merge branch 1
 import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
 import StudentMarks from "../pages/StudentMarks";
-import ChatBody from "./ChatBody";
-import ChatBox from "./ChatBox";
-import { Offcanvas } from "react-bootstrap";
-
-const drawerWidthExpanded = 240;
-const drawerWidthCollapsed = 60;
-const panelVanishBreakpoint = 650;
-=========
+import LoginPage from "../pages/LoginPage";
+import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
-
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
+const mobileBreakpoint = 768;//900 to 930
 const panelVanishBreakpoint = 768;
->>>>>>>>> Temporary merge branch 2
 
-const RootContent = () => {
+const Root = () => {
   const location = useLocation();
   const [isToggled, setIsToggled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   
   const [textVisible, setTextVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+      window.innerWidth <= mobileBreakpoint
+    );
   const [isPanelVisible, setIsPanelVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= mobileBreakpoint);
   const [brand, setBrand] = useState({ name: "Dashboard", icon: faLayerGroup });
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
-<<<<<<<<< Temporary merge branch 1
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showChatBox, setShowChatBox] = useState(false); // ✅ Chat toggle
-  const isSidebarExpanded = isToggled || isHovered;
-
-  const toggleSidebar = () => setIsToggled((prev) => !prev);
-  const toggleChatBox = () => setShowChatBox((prev) => !prev); // ✅ Toggle handler
-
-  useEffect(() => {
-    const protectedPaths = [
-      "/studentdashboard",
-      "/studentattendance",
-      "/studentschedule",
-      "/studentmarks",
-      "/profilepanel",
-      "/facultydashboard",
-      "/uploadMarks",
-      "/uploadAttandance",
-      "/anouncements",
-    ];
-    setIsLoggedIn(protectedPaths.includes(location.pathname));
-  }, [location.pathname]);
-
-=========
   const [isComunityVisible,setIsCommunityVisible] = useState(false);
   const [isLogoAnim , setLogoAnim] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   const isSidebarExpanded = isToggled || isHovered;
   const userStatus = 1;
   const colorsProp = {
@@ -99,12 +60,11 @@ const RootContent = () => {
   const toggleSidebar = () => {
     setIsToggled(prev => !prev);
   };
-  const location = useLocation();
+
 
   // If the route is "/overlay", we slide the main content offscreen (translateX: -100%)
   const translate = location.pathname === '/overlay' ? -100 : 0;
   // Manage the visibility of text within the sidebar.
->>>>>>>>> Temporary merge branch 2
   useEffect(() => {
     if (isSidebarExpanded) {
       const timer = setTimeout(() => setTextVisible(true), 280);
@@ -114,25 +74,12 @@ const RootContent = () => {
     }
   }, [isSidebarExpanded]);
 
-<<<<<<<<< Temporary merge branch 1
-  useEffect(() => {
-    const handlePanelVisibility = () => {
-      setIsPanelVisible(window.innerWidth >= panelVanishBreakpoint);
-    };
-    handlePanelVisibility();
-    window.addEventListener("resize", handlePanelVisibility);
-    return () => window.removeEventListener("resize", handlePanelVisibility);
-  }, []);
-
-  return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
-      <CssBaseline />
-=========
   // Automatically hide the panel if screen width falls below the breakpoint.
   // Inside Root component:
 useEffect(() => {
   const handlePanelVisibility = () => {
     const newWidth = window.innerWidth;
+    console.log(newWidth);
     // Update panel visibility based on the breakpoint
     if (newWidth < panelVanishBreakpoint) {
       setIsPanelVisible(false);
@@ -151,60 +98,23 @@ useEffect(() => {
   return () => window.removeEventListener("resize", handlePanelVisibility);
 }, []);
 return (
-      <Box sx={{ display: "flex" ,height:'100vh'}}>
+      <Box  sx={{ display: "flex" ,height:'100vh'}}>
         <CssBaseline />
->>>>>>>>> Temporary merge branch 2
 
-      {/* Side Panel */}
-      {isLoggedIn && isPanelVisible && (
-        <SidePanel
-          isHovered={isHovered}
-          isSidebarExpanded={isSidebarExpanded}
-          drawerWidthExpanded={drawerWidthExpanded}
-          drawerWidthCollapsed={drawerWidthCollapsed}
-          setIsHovered={setIsHovered}
-          textVisible={textVisible}
-          toggleSidebar={toggleSidebar}
-          setIsPanelVisible={setIsPanelVisible}
-          setOffcanvasVisible={null}
-          setProfileOffcanvasVisible={null}
-        />
-      )}
-
-      {/* Main Content */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          transition: "width 0.5s ease",
-          width: isPanelVisible
-            ? `calc(100% - ${
-                isHovered ? drawerWidthExpanded : drawerWidthCollapsed
-              }px)`
-            : "100%",
-          margin: {
-            xs: "0 0.5rem",
-            sm: "0 1rem",
-            md: "0 1.5rem",
-            lg: "0 2rem",
-            xl: "0 3rem",
-          },
-          minHeight: "100vh",
-          p: 1,
-        }}
-      >
-        {/* NavBar only if logged in */}
-        {isLoggedIn && (
-          <NavBar
-            brand={brand}
-            offcanvasVisible={offcanvasVisible}
-            setOffcanvasVisible={setOffcanvasVisible}
-            onChatToggle={toggleChatBox} // ✅ pass toggle
-            showChatBox={showChatBox} // ✅ pass visibility
+        {/* Side Panel */}
+        {(userStatus == 1)?(isPanelVisible && (
+          <SidePanel
+            isHovered={isHovered}
+            isSidebarExpanded={isSidebarExpanded}
+            drawerWidthExpanded={drawerWidthExpanded}
+            drawerWidthCollapsed={drawerWidthCollapsed}
+            setIsHovered={setIsHovered}
+            textVisible={textVisible}
+            toggleSidebar={toggleSidebar}
+            setIsPanelVisible={setIsPanelVisible}
+            setOffcanvasVisible={null}
+            setProfileOffcanvasVisible={null}
           />
-<<<<<<<<< Temporary merge branch 1
-        )}
-=========
         )):<></>}
         {/* Main Content */}
         <Box
@@ -220,77 +130,25 @@ return (
               lg: '0 1rem',
               xl: '0 2rem'
             },
-            width: '100vw',
+            width:"100%",
             transition: 'transform 300ms ease',
             transform: `translateX(${translate}%)`,
-            minHeight: "100vh",
+            minHeight: "100%",
             p: 1,
           }}
         >
-          {(userStatus == 1)?<NavBar brand={brand} isMobile={isMobile} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/> : <></>}
->>>>>>>>> Temporary merge branch 2
+          {(userStatus == 1 && location.pathname !== "/") && (
+  <NavBar brand={brand} isMobile={isMobile} setLogoAnim={setLogoAnim} isLogoAnim={isLogoAnim} offcanvasVisible={offcanvasVisible} isComunityVisible={isComunityVisible} setIsCommunityVisible={setIsCommunityVisible} setOffcanvasVisible = {setOffcanvasVisible}/>
+)}
 
           {/* Routes */}
           <Routes>
           <Route path="/" element={<LandingPage />} />
-<<<<<<<<< Temporary merge branch 1
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/sidepanel" element={<SidePanel />} />
-          <Route path="/studentdashboard" element={<StudentDashboard />} />
-          <Route path="/studentattendance" element={<StudentAttendance />} />
-          <Route path="/studentschedule" element={<StudentSchedule />} />
-          <Route path="/studentmarks" element={<StudentMarks />} />
-          <Route path="/profilepanel" element={<ProfilePanel />} />
-          <Route path="/chatbody" element={<ChatBody />} />
-          <Route path="/chatbox" element={<ChatBox />} />
-          <Route
-            path="/facultydashboard"
-            element={
-              <Home
-                setBrand={() => {
-                  setBrand({ name: "Dashboard", icon: faLayerGroup });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/anouncements"
-            element={
-              <About
-                setBrand={() => {
-                  setBrand({ name: "Announcements", icon: faBullhorn });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/uploadMarks"
-            element={
-              <Contact
-                setBrand={() => {
-                  setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-          <Route
-            path="/uploadAttandance"
-            element={
-              <UploadAttendance
-                setBrand={() => {
-                  setBrand({ name: "Upload Attendance", icon: faHand });
-                  setOffcanvasVisible(false);
-                }}
-              />
-            }
-          />
-        </Routes>
-=========
             <Route path="/login" element={<LoginPage />} />
             <Route path="/studentdashboard" element={<StudentDashboard  />} />
+            <Route path="/studentattendance" element={<StudentAttendance  />} />
+            <Route path="/studentschedule" element={<StudentSchedule  />} />
+            <Route path="/studentmarks" element={<StudentMarks  />} />
             <Route
               path="/facultydashboard"
               element={
@@ -366,43 +224,11 @@ return (
     
   );
 }
->>>>>>>>> Temporary merge branch 2
 
-        {/* ✅ ChatBox Offcanvas */}
-        {isLoggedIn && (
-          <Offcanvas
-            show={showChatBox}
-            onHide={toggleChatBox}
-            placement="end"
-            style={{
-              zIndex: 1065,
-              height: "100vh",
-              width: "360px",
-              borderTopLeftRadius: "20px",
-              borderBottomLeftRadius: "20px",
-              padding: "0px",
-            }}
-          >
-            <Offcanvas.Body style={{ padding: 0 }}>
-              <ChatBox />
-            </Offcanvas.Body>
-          </Offcanvas>
-        )}
-      </Box>
-    </Box>
-  );
-};
-
-// Wrapping RootContent with Router
-const Root = () => (
-  <Router>
-    <RootContent />
-  </Router>
-);
-
-// Dummy route content components
 const Home = ({ setBrand }) => {
-  useEffect(() => { setBrand(); }, []);
+  useEffect(() => {
+    setBrand();
+  }, []);
   return (
     <>
       <Typography variant="h4">Home Content</Typography>
@@ -412,7 +238,9 @@ const Home = ({ setBrand }) => {
 };
 
 const About = ({ setBrand }) => {
-  useEffect(() => { setBrand(); }, []);
+  useEffect(() => {
+    setBrand();
+  }, []);
   return (
     <>
       <Typography variant="h4">About Content</Typography>
@@ -422,7 +250,9 @@ const About = ({ setBrand }) => {
 };
 
 const Contact = ({ setBrand }) => {
-  useEffect(() => { setBrand(); }, []);
+  useEffect(() => {
+    setBrand();
+  }, []);
   return (
     <>
       <Typography variant="h4">Contact Content</Typography>
@@ -432,7 +262,9 @@ const Contact = ({ setBrand }) => {
 };
 
 const UploadAttendance = ({ setBrand }) => {
-  useEffect(() => { setBrand(); }, []);
+  useEffect(() => {
+    setBrand();
+  }, []);
   return (
     <>
       <Typography variant="h4">Upload Attendance</Typography>
@@ -441,4 +273,4 @@ const UploadAttendance = ({ setBrand }) => {
   );
 };
 
-export default RootWrapper;
+export default Root;

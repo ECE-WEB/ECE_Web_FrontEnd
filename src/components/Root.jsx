@@ -26,6 +26,8 @@ import StudentMarks from "../pages/StudentMarks";
 import LoginPage from "../pages/LoginPage";
 import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
+import UploadAttendance from "../pages/Upload_attendence";
+import FacultyDashboard from "../pages/FacultyDashboard";
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
 const mobileBreakpoint = 768;//900 to 930
@@ -149,10 +151,12 @@ return (
             <Route path="/studentattendance" element={<StudentAttendance  />} />
             <Route path="/studentschedule" element={<StudentSchedule  />} />
             <Route path="/studentmarks" element={<StudentMarks  />} />
+            <Route path="/uploadattendance" element={<UploadAttendance  />} />
+            
             <Route
               path="/facultydashboard"
               element={
-                <Home style={{ padding: "0rem 2rem" }} setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
+                <FacultyDashboard style={{ padding: "0rem 2rem" }} setBrand={() => {setBrand({ name: "Dashboard", icon: faLayerGroup });setOffcanvasVisible(false)}} />
               }
             />
             <Route
@@ -167,12 +171,7 @@ return (
                 <Contact setBrand={() => {setBrand({ name: "Upload Marks", icon: faArrowUpFromBracket });setOffcanvasVisible(false)}} />
               }
             />
-            <Route
-              path="/uploadAttandance"
-              element={
-                <UploadAttendance setBrand={() => {setBrand({ name: "Upload Attendance", icon: faHand });setOffcanvasVisible(false)}} />
-              }
-            />
+            
             <Route path="/overlay" element={<></>} />
           </Routes>
         </Box>
@@ -261,16 +260,5 @@ const Contact = ({ setBrand }) => {
   );
 };
 
-const UploadAttendance = ({ setBrand }) => {
-  useEffect(() => {
-    setBrand();
-  }, []);
-  return (
-    <>
-      <Typography variant="h4">Upload Attendance</Typography>
-      <Typography paragraph>This is the upload attendance page.</Typography>
-    </>
-  );
-};
 
 export default Root;

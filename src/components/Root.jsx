@@ -23,6 +23,7 @@ import LandingPage from "../pages/LandingPage";
 import StudentAttendance from "../pages/StudentAttendance";
 import StudentSchedule from "../pages/StudentSchedule";
 import StudentMarks from "../pages/StudentMarks";
+
 import LoginPage from "../pages/LoginPage";
 import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
@@ -64,6 +65,26 @@ const Root = () => {
   };
 
 
+
+  const toggleSidebar = () => setIsToggled((prev) => !prev);
+  const toggleChatBox = () => setShowChatBox((prev) => !prev); // ✅ Toggle handler
+
+  useEffect(() => {
+    const protectedPaths = [
+      "/studentdashboard",
+      "/studentattendance",
+      "/studentschedule",
+      "/studentmarks",
+      "/profilepanel",
+      "/facultydashboard",
+      "/uploadMarks",
+      "/uploadAttandance",
+      "/anouncements",
+    ];
+    setIsLoggedIn(protectedPaths.includes(location.pathname));
+  }, [location.pathname]);
+
+
   // If the route is "/overlay", we slide the main content offscreen (translateX: -100%)
   const translate = location.pathname === '/overlay' ? -100 : 0;
   // Manage the visibility of text within the sidebar.
@@ -76,32 +97,36 @@ const Root = () => {
     }
   }, [isSidebarExpanded]);
 
-  // Automatically hide the panel if screen width falls below the breakpoint.
-  // Inside Root component:
-useEffect(() => {
-  const handlePanelVisibility = () => {
-    const newWidth = window.innerWidth;
-    console.log(newWidth);
-    // Update panel visibility based on the breakpoint
-    if (newWidth < panelVanishBreakpoint) {
-      setIsPanelVisible(false);
-    } else {
-      setIsPanelVisible(true);
-    }
-    // Update the state with the new window width
-    setWindowWidth(newWidth);
-    // If you need to log the updated value, use newWidth directly:
-    setIsMobile(window.innerWidth <= mobileBreakpoint);
-  };
-  
-  // Set initial state on mount
-  handlePanelVisibility();
-  window.addEventListener("resize", handlePanelVisibility);
-  return () => window.removeEventListener("resize", handlePanelVisibility);
-}, []);
-return (
-      <Box  sx={{ display: "flex" ,height:'100vh'}}>
-        <CssBaseline />
+
+  useEffect(() => {
+    const handlePanelVisibility = () => {
+      setIsPanelVisible(window.innerWidth >= panelVanishBreakpoint);
+    };
+    handlePanelVisibility();
+    window.addEventListener("resize", handlePanelVisibility);
+    return () => window.removeEventListener("resize", handlePanelVisibility);
+  }, []);
+
+  return (
+
+    <Box sx={{ display: "flex", height: "100vh" }}>
+      <CssBaseline />
+
+      {/* Side Panel */}
+      {isLoggedIn && isPanelVisible && (
+        <SidePanel
+          isHovered={isHovered}
+          isSidebarExpanded={isSidebarExpanded}
+          drawerWidthExpanded={drawerWidthExpanded}
+          drawerWidthCollapsed={drawerWidthCollapsed}
+          setIsHovered={setIsHovered}
+          textVisible={textVisible}
+          toggleSidebar={toggleSidebar}
+          setIsPanelVisible={setIsPanelVisible}
+          setOffcanvasVisible={null}
+          setProfileOffcanvasVisible={null}
+        />
+      )}
 
         {/* Side Panel */}
         {(userStatus == 1)?(isPanelVisible && (
@@ -146,6 +171,7 @@ return (
           {/* Routes */}
           <Routes>
           <Route path="/" element={<LandingPage />} />
+
             <Route path="/login" element={<LoginPage />} />
             <Route path="/studentdashboard" element={<StudentDashboard  />} />
             <Route path="/studentattendance" element={<StudentAttendance  />} />
@@ -219,6 +245,7 @@ return (
        </Drawer>
         
         ):<></>}
+
       </Box>
     
   );

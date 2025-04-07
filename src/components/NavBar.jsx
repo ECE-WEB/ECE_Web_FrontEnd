@@ -1,4 +1,8 @@
+
+
+import { useLocation } from "react-router-dom";
 /* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState, useRef } from "react";
 import { Box } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -182,20 +186,35 @@ function MainContent({ brand, offcanvasVisible, setOffcanvasVisible,setIsCommuni
               </Button>
             </div >
             {/* Brand Section */}
-            {!isMobile && (<div className={`d-flex align-items-center ms-3`}>
+
+
+            {!isMobile && (
+              <div className="d-flex align-items-center ms-3">
+                <Navbar.Brand style={navLinkStyle} href="#">
+                  <FontAwesomeIcon icon={brand.icon} style={{ marginRight: "8px" }} />
+                  &nbsp;
+                  {brand.name}
+                </Navbar.Brand>
+              </div>
+            )}
+
+            <div className={`d-flex align-items-center ms-${showSearch ? 0 : 3}`}>
               <Navbar.Brand style={navLinkStyle} href="#">
-
-                <FontAwesomeIcon
-                  icon={brand.icon}
-                  style={{ marginRight: "8px" }}
-                />
-
+                {showSearch && (
+                  <FontAwesomeIcon
+                    icon={brand.icon}
+                    style={{ marginRight: "8px" }}
+                  />
+                )}
                 &nbsp;
-                {brand.name}
+                {showSearch && brand.name}
               </Navbar.Brand>
-            </div>)}
-            {/* Search Bar Section */}
-            <div className="d-flex flex-grow-1 justify-content-center align-items-center" style={{ height: "100%", }} >
+            </div>
+
+
+            {/* Search Bar */}
+            <div className="d-flex flex-grow-1 justify-content-center align-items-center">
+
               {showSearch && (
                 <Form
                   className="d-flex"

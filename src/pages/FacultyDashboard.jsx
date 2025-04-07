@@ -16,7 +16,13 @@ const FacultyDashboard = () => {
     totalClasses: 120,
     conducted: 85,
     pending: 35,
-    percentage: 71 // (85/120)*100
+    percentage: Math.round((85 / 120) * 100),
+    subjects: [
+      { name: "CL", conducted: 22, total: 30, color: "#4E79A7" },
+      { name: "EDC", conducted: 18, total: 30, color: "#F28E2B" },
+      { name: "SS", conducted: 25, total: 30, color: "#E15759" },
+      { name: "NT", conducted: 20, total: 30, color: "#76B7B2" }
+    ]
   };
 
   // State management
@@ -44,29 +50,29 @@ const FacultyDashboard = () => {
     
     return (
       <div className="fd-progress-container">
-        <svg className="fd-progress-circle" width="100" height="100">
-          <circle
-            className="fd-progress-bg"
-            cx="50"
-            cy="50"
-            r={radius}
-            strokeWidth="8"
-          />
-          <circle
-            className="fd-progress-fill"
-            cx="50"
-            cy="50"
-            r={radius}
-            strokeWidth="8"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-          />
-        </svg>
-        <div className="fd-progress-text">
-          <span className="fd-progress-percent">{percentage}%</span>
-          <span className="fd-progress-details">
-            {conducted}/{total} classes
-          </span>
+        <div className="fd-progress-circle-wrapper">
+          <svg className="fd-progress-circle" width="100" height="100">
+            <circle
+              className="fd-progress-bg"
+              cx="50"
+              cy="50"
+              r={radius}
+              strokeWidth="8"
+            />
+            <circle
+              className="fd-progress-fill"
+              cx="50"
+              cy="50"
+              r={radius}
+              strokeWidth="8"
+              strokeDasharray={circumference}
+              strokeDashoffset={offset}
+            />
+          </svg>
+          <div className="fd-progress-text">
+            <span className="fd-progress-percent">{percentage}%</span>
+            <span className="fd-progress-details">{conducted}/{total}</span>
+          </div>
         </div>
         <div className="fd-progress-stats">
           <div className="fd-progress-stat">
@@ -77,6 +83,27 @@ const FacultyDashboard = () => {
             <span className="fd-stat-dot fd-pending"></span>
             <span>Pending: {pending}</span>
           </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Horizontal Progress Bar Component
+  const HorizontalProgressBar = ({ label, value, max, color }) => {
+    const percentage = Math.round((value / max) * 100);
+    
+    return (
+      <div className="fd-horizontal-progress">
+        <div className="fd-progress-label">{label}</div>
+        <div className="fd-progress-bar-container">
+          <div 
+            className="fd-progress-bar-fill" 
+            style={{
+              width: `${percentage}%`,
+              backgroundColor: color
+            }}
+          ></div>
+          <div className="fd-progress-text">{value}/{max}</div>
         </div>
       </div>
     );
@@ -253,13 +280,26 @@ const FacultyDashboard = () => {
             {/* Class Progress Section */}
             <div className="fd-class-progress">
               <h3 className="fd-progress-title">Semester Class Progress</h3>
-              <div className="fd-progress-wrapper">
-                <CircularProgress 
-                  percentage={classProgress.percentage}
-                  conducted={classProgress.conducted}
-                  pending={classProgress.pending}
-                  total={classProgress.totalClasses}
-                />
+              <div className="fd-progress-content">
+                <div className="fd-progress-left">
+                  <CircularProgress 
+                    percentage={classProgress.percentage}
+                    conducted={classProgress.conducted}
+                    pending={classProgress.pending}
+                    total={classProgress.totalClasses}
+                  />
+                </div>
+                <div className="fd-progress-right">
+                  {classProgress.subjects.map((subject, index) => (
+                    <HorizontalProgressBar
+                      key={index}
+                      label={subject.name}
+                      value={subject.conducted}
+                      max={subject.total}
+                      color={subject.color}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>

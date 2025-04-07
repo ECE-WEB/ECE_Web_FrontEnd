@@ -459,6 +459,8 @@
   
   .fd-progress-circle {
     transform: rotate(-90deg);
+    
+    
   }
   
   .fd-progress-bg {
@@ -475,7 +477,7 @@
   
   .fd-progress-text {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -537,3 +539,99 @@
       font-size: 1.2rem;
     }
   }
+
+  /* Add these styles to your existing FacultyDashboard.css */
+
+/* Progress Bars Layout */
+.fd-progress-content {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.fd-progress-left {
+  flex: 0 0 180px;
+}
+
+.fd-progress-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Horizontal Progress Bars */
+.fd-horizontal-progress {
+  width: 100%;
+}
+
+.fd-progress-label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4D0000;
+  font-family: 'Inter', sans-serif;
+}
+
+.fd-progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.fd-progress-bar-fill {
+  height: 10px;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+  background-color: #4E79A7; /* Default color, will be overridden by inline style */
+  flex-grow: 1;
+}
+
+.fd-progress-text {
+  font-size: 0.8rem;
+  color: #666;
+  min-width: 50px;
+  text-align: right;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Adjust the circular progress to match your theme */
+.fd-progress-fill {
+  stroke: #4D0000; /* Match your maroon theme */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fd-progress-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .fd-progress-left {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fd-progress-right {
+    width: 100%;
+  }
+  
+  .fd-progress-bar-container {
+    gap: 0.5rem;
+  }
+  
+  .fd-progress-text {
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fd-progress-label {
+    font-size: 0.8rem;
+  }
+  
+  .fd-progress-text {
+    font-size: 0.7rem;
+  }
+}

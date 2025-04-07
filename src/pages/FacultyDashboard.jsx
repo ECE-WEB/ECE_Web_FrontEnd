@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/FacultyDashboard.css";
+import alumni from "../assets/alumni-icon.svg";
 
 const FacultyDashboard = () => {
   // Schedule data
@@ -9,6 +10,9 @@ const FacultyDashboard = () => {
     { time: "10:00-11:00", subject: "EDC", section: "B", room: "Lab-3" },
     { time: "11:30-12:30", subject: "SS", section: "C", room: "A-101" },
     { time: "2:00-3:00", subject: "NT", section: "D", room: "C-305" },
+    { time: "2:00-3:00", subject: "NT", section: "D", room: "C-305" },
+    { time: "2:00-3:00", subject: "NT", section: "D", room: "C-305" },
+    
   ];
 
   // Class progress data
@@ -103,7 +107,7 @@ const FacultyDashboard = () => {
               backgroundColor: color
             }}
           ></div>
-          <div className="fd-progress-text">{value}/{max}</div>
+          
         </div>
       </div>
     );
@@ -267,7 +271,7 @@ const FacultyDashboard = () => {
 
               <div className="fd-stat-card" style={{ backgroundColor: '#FFD89C' }}>
                 <div className="fd-stat-icon">
-                  <img src="/assets/alumni-icon.png" alt="Alumni" />
+                  <img src={alumni} alt="Alumni" />
                 </div>
                 <div className="fd-stat-content">
                   <div className="fd-stat-value">2,850</div>

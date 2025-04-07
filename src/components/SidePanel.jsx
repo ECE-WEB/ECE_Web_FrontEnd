@@ -47,8 +47,8 @@ const SidePanel = ({
       { name: "Upload Reports", path: "/uploadReports", icon: faArrowUpFromBracket },
     ],
     faculty: [
-      { name: "Dashboard", path: "/dashboard", icon: faLayerGroup },
-      { name: "Announcements", path: "/announcements", icon: faBullhorn },
+      { name: "Dashboard", path: "/facultydashboard", icon: faLayerGroup },
+      { name: "Announcements", path: "/facultyannouncements", icon: faBullhorn },
       { name: "Upload Marks", path: "/uploadMarks", icon: faArrowUpFromBracket },
       { name: "Upload Attendance", path: "/uploadAttendance", icon: faHand },
     ],

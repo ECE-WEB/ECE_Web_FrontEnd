@@ -1,0 +1,205 @@
+.announcements-container {
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Filter Row */
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.tags {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.tag-btn {
+  background: #eee;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tag-btn.active {
+  background: #333;
+  color: white;
+}
+
+.announcement-btn {
+  background: transparent;
+  color: #8B0000;
+  border: 2px solid #8B0000;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.plus {
+  margin-right: 5px;
+  font-size: 1.2rem;
+}
+
+/* Announcement Card */
+.announcement-card {
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid #000;
+  border-left-width: 6px;
+}
+
+.announcement-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.faculty-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.faculty-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.role {
+  font-size: 0.85rem;
+  color: #777;
+  margin-left: 0.25rem;
+}
+
+.read-more {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.announcement-card h5 {
+  margin: 0.4rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.announcement-card p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.announcement-title {
+  display: block;
+}
+
+/* ============================= */
+/* ===== Announcement Modal ==== */
+/* ============================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fffaf0;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #FF8C00;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header img {
+  width: 30px;
+  margin-right: 0.5rem;
+}
+
+.modal-header h2 {
+  color: #FF8C00;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.modal-label {
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #f0f0f0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.send-btn {
+  margin-top: 1rem;
+  background: #ff8c00;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  transition: background 0.2s;
+}
+
+.send-btn:hover {
+  background: #e67600;
+}

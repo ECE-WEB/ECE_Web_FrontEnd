@@ -28,6 +28,8 @@ import StudentDashboard from "../pages/StudentDashboard";
 import ChatBox from "./community/ChatBox";
 import UploadAttendance from "../pages/Upload_attendence";
 import FacultyDashboard from "../pages/FacultyDashboard";
+import FacultyAnnouncements from "../pages/FacultyAnnouncements";
+
 const drawerWidthExpanded = 240;
 const drawerWidthCollapsed = 60;
 const mobileBreakpoint = 768;//900 to 930
@@ -152,6 +154,7 @@ return (
             <Route path="/studentschedule" element={<StudentSchedule  />} />
             <Route path="/studentmarks" element={<StudentMarks  />} />
             <Route path="/uploadattendance" element={<UploadAttendance  />} />
+            <Route path="/facultyannouncements" element={<FacultyAnnouncements/>} />
             
             <Route
               path="/facultydashboard"

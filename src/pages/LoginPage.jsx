@@ -45,7 +45,7 @@ const LoginPage = ({ role, closePopup }) => {
 
       // Redirect based on role
       if (role === "Student") navigate("/studentdashboard");
-      else if (role === "Faculty") navigate("/faculty-dashboard");
+      else if (role === "Faculty") navigate("/facultydashboard");
       else if (role === "Alumni") navigate("/alumni-dashboard");
       else setError("Invalid role detected.");
     } catch (err) {

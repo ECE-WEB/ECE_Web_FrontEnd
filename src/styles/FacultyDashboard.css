@@ -1,0 +1,637 @@
+/* Layout Styles */
+.fd-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    height: 100vh;
+  }
+  
+  .fd-layout-container {
+    display: flex;
+    gap: 2rem;
+    height: 100%;
+  }
+  
+  .fd-left-division {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .fd-right-division {
+    flex: 1;
+    min-width: 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Statistics Container */
+  .fd-statistics-container {
+    display: flex;
+    column-gap: 5%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .fd-stat-card {
+    width: 50%;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .fd-stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .fd-stat-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .fd-stat-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .fd-stat-label {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #5a2a2a;
+    margin-bottom: 10px;
+  }
+  
+  .fd-stat-value {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #3d1919;
+  }
+  
+  /* Schedule Styles */
+  .fd-schedule-container {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex-grow: 1;
+  }
+  
+  .fd-section-title {
+    color: #4D0000;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .fd-schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .fd-schedule-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  .fd-schedule-item:hover {
+    transform: translateX(5px);
+  }
+  
+  .fd-schedule-time {
+    font-weight: bold;
+    min-width: 100px;
+    color: #4D0000;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .fd-schedule-details {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .fd-schedule-subject {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .fd-schedule-section {
+    color: #666;
+  }
+  
+  .fd-schedule-room {
+    color: #4D0000;
+    font-style: italic;
+  }
+  
+  .fd-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .fd-conducted-btn {
+    background: #4D0000;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  
+  .fd-conducted-btn:hover {
+    background: #3a0000;
+    transform: translateY(-2px);
+  }
+  
+  .fd-not-conducted-btn {
+    background: #e0e0e0;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  
+  .fd-not-conducted-btn:hover {
+    background: #d0d0d0;
+    transform: translateY(-2px);
+  }
+  
+  /* Attendance Modal Styles */
+  .fd-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .fd-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  
+  .fd-mode-selector {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    justify-content: center;
+  }
+  
+  .fd-mode-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .fd-mode-btn.active {
+    border-color: #4D0000;
+    background: #4D0000;
+    color: white;
+  }
+  
+  .fd-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .fd-modal-submit {
+    background: #4D0000;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  
+  .fd-modal-submit:hover {
+    background: #3a0000;
+  }
+  
+  .fd-modal-cancel {
+    background: #e0e0e0;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  
+  .fd-modal-cancel:hover {
+    background: #d0d0d0;
+  }
+  
+  /* Roll Numbers Grid */
+  .fd-roll-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+  }
+  
+  .fd-roll-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .fd-grid-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+  }
+  
+  .fd-grid-item:hover {
+    transform: scale(1.1);
+  }
+  
+  .fd-grid-empty {
+    background: none;
+    border: none;
+    cursor: default;
+  }
+  
+  .fd-absent {
+    background-color: darkred;
+    color: white;
+  }
+  
+  .fd-present {
+    background-color: green;
+    color: white;
+  }
+  
+  .fd-absentees-container {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff8dc;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .fd-absentees-container h3 {
+    margin: 0 0 5px;
+    color: black;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+  }
+  
+  .fd-absentees-container p {
+    font-size: 18px;
+    color: darkblue;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    margin: 0;
+  }
+  /* Right Division - Stats Dashboard */
+/* Updated Statistics Cards */
+.fd-stats-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .fd-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+  
+  .fd-stat-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 0.8rem auto;
+  }
+  
+  .fd-stat-content {
+    text-align: center;
+  }
+  
+  .fd-stat-value {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .fd-stat-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .fd-stat-trend {
+    font-size: 0.75rem;
+  }
+  
+  /* Remove horizontal scroll on larger screens */
+  @media (min-width: 768px) {
+    .fd-stats-grid {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      justify-content: center;
+    }
+    
+    .fd-stat-card {
+      min-width: 160px;
+      flex: 1;
+    }
+  }
+  
+  /* Make cards even more compact on mobile */
+  @media (max-width: 480px) {
+    .fd-stat-card {
+      min-width: 140px;
+      padding: 1rem;
+    }
+    
+    .fd-stat-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .fd-stat-value {
+      font-size: 1.3rem;
+    }
+  }
+  /* Class Progress Styles */
+.fd-class-progress {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .fd-progress-title {
+    color: #4D0000;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+  }
+  
+  .fd-progress-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .fd-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .fd-progress-circle {
+    transform: rotate(-90deg);
+    
+    
+  }
+  
+  .fd-progress-bg {
+    fill: none;
+    stroke: #f0f0f0;
+  }
+  
+  .fd-progress-fill {
+    fill: none;
+    stroke: #4D0000;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+  
+  .fd-progress-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .fd-progress-percent {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4D0000;
+  }
+  
+  .fd-progress-details {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  .fd-progress-stats {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .fd-progress-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .fd-stat-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .fd-stat-dot.fd-conducted {
+    background-color: #4D0000;
+  }
+  
+  .fd-stat-dot.fd-pending {
+    background-color: #FFD89C;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .fd-progress-stats {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .fd-progress-title {
+      font-size: 1rem;
+    }
+    
+    .fd-progress-percent {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* Add these styles to your existing FacultyDashboard.css */
+
+/* Progress Bars Layout */
+.fd-progress-content {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.fd-progress-left {
+  flex: 0 0 180px;
+}
+
+.fd-progress-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Horizontal Progress Bars */
+.fd-horizontal-progress {
+  width: 100%;
+}
+
+.fd-progress-label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4D0000;
+  font-family: 'Inter', sans-serif;
+}
+
+.fd-progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.fd-progress-bar-fill {
+  height: 10px;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+  background-color: #4E79A7; /* Default color, will be overridden by inline style */
+  flex-grow: 1;
+}
+
+.fd-progress-text {
+  font-size: 0.8rem;
+  color: #666;
+  min-width: 50px;
+  text-align: right;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Adjust the circular progress to match your theme */
+.fd-progress-fill {
+  stroke: #4D0000; /* Match your maroon theme */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fd-progress-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .fd-progress-left {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fd-progress-right {
+    width: 100%;
+  }
+  
+  .fd-progress-bar-container {
+    gap: 0.5rem;
+  }
+  
+  .fd-progress-text {
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fd-progress-label {
+    font-size: 0.8rem;
+  }
+  
+  .fd-progress-text {
+    font-size: 0.7rem;
+  }
+}

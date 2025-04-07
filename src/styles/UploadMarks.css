@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    width: 100%;
+  }
+  .container{
+    text-align: left; 
+  }
+  .text{
+    font-family: Arial, sans-serif;
+    font-weight: bolder;
+}
+.form-box {
+  background-color: #f8d7da;
+  padding: 5px;
+  border-radius: 10px;
+  width: 140%; /* Increased width */
+  margin: 0 auto; /* Center align */
+}
+  .form-group {
+    margin-bottom: 10px;
+    margin-top: 10px; 
+  }
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  select {
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background-color: #e2e3e5;
+  }
+  .buttons {
+    gap: 10px; /* Adjust the gap between buttons */
+}
+
+  .file-btn,
+  .upload-btn {
+    padding: 8px 12px;
+    font-weight: bold;
+    margin-right: 10px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+  }
+  .file-btn {
+    background-color: #ccc;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+width: 50%;
+margin-top: 10px;
+
+  }
+  
+  /* Gradient changes on hover */
+  .file-btn:hover {
+  background: linear-gradient(45deg, #f5edf0, #5f5e5d);
+}
+
+/* Color changes on click */
+.file-btn:active {
+  background: linear-gradient(45deg, #5f5e5d, #f5edf0);
+ 
+}
+  .upload-btn {
+    background-color: white;
+    color: #dc3545;
+    border: 2px solid #b02a37;
+    border-radius: 10px;
+    width: 70%;
+    margin-top: 10px;
+
+  }
+  .upload-btn:hover {
+    background-color: #b02a37;
+    border: 2px solid #dc3545;
+    color: white;
+  }
+  .file-btn:active {
+    transform: scale(0.95); /* Slightly shrink the button */
+  }
+  .upload-btn:active {
+    transform: scale(0.95); /* Slightly shrink the button */
+  }
+  #upload-btn:hover {
+    color: rgb(255, 255, 255);
+  }
+  /* .col-5{
+    font-weight: bold;
+    font-size: 20;
+    font-family: 'Inter', sans-serif;
+    color: #787878;
+  } */
+  .box{
+    font-weight: bold;
+    font-size: 20;
+    font-family: 'Inter', sans-serif;
+    color: #787878;
+  }

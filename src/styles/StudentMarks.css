@@ -1,66 +1,212 @@
-/* ViewMarks.css */
+/* StudentMarks.css - Scoped styles with sm- prefix */
 
-.container {
-    max-width: 960px;
+.sm-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Filter Section */
+.sm-card-body {
+  padding: 1.5rem;
+}
+
+.sm-form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.sm-form-select {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.sm-form-select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+.sm-view-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sm-view-toggle .btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-exam-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Content Cards */
+.sm-content-card {
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.sm-card-header {
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: 600;
+}
+
+.sm-card-body {
+  padding: 1.5rem;
+}
+
+/* Table Styles */
+.sm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sm-table thead th {
+  background-color: #343a40;
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.sm-table tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.sm-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.sm-badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+/* Chart Container */
+.sm-chart-container {
+  height: 400px;
+  position: relative;
+}
+
+/* Carousel Styles */
+.sm-carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sm-carousel-nav button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.sm-exam-carousel {
+  position: relative;
+  min-height: 300px;
+}
+
+.sm-exam-slide {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+.sm-exam-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.sm-exam-header h4 {
+  margin-bottom: 0.25rem;
+}
+
+.sm-exam-header small {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Grading Info */
+.sm-grading-card {
+  margin-top: 1.5rem;
+}
+
+.sm-grading-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.sm-grading-grid ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.sm-grading-grid li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.sm-icon {
+  margin-right: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .sm-grading-grid {
+    grid-template-columns: 1fr;
   }
   
-  h2 {
-    font-weight: 700;
-    color: #2c3e50;
+  .sm-form-select {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
   }
   
-  select.form-select {
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.1);
+  .sm-table thead th,
+  .sm-table tbody td {
+    padding: 0.5rem;
+    font-size: 0.875rem;
   }
   
-  .btn-group .btn {
-    min-width: 100px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+  .sm-card-header,
+  .sm-card-body {
+    padding: 1rem;
   }
-  
-  .btn-group .btn:hover {
-    transform: translateY(-2px);
-  }
-  
-  .table {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .table thead th {
-    background-color: #343a40;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  
-  .table td,
-  .table th {
-    vertical-align: middle;
-  }
-  
-  .accordion-button {
-    font-weight: 600;
-    background-color: #f8f9fa;
-    transition: background-color 0.3s ease;
-  }
-  
-  .accordion-button:not(.collapsed) {
-    background-color: #dee2e6;
-    color: #000;
-  }
-  
-  .accordion-body {
-    background-color: #fff;
-    border-left: 3px solid #0d6efd;
-  }
-  
-  ul {
-    padding-left: 20px;
-  }
-  
-  ul li {
-    margin-bottom: 5px;
-  }
-  
+}
+
+/* Color Classes for Grades */
+.bg-primary { background-color: #6366f1 !important; }
+.bg-info { background-color: #17a2b8 !important; }
+.bg-success { background-color: #28a745 !important; }
+.bg-warning { background-color: #ffc107 !important; }
+.bg-danger { background-color: #dc3545 !important; }
+.bg-secondary { background-color: #6c757d !important; }
+
+.text-warning { color: #ffc107 !important; }
+.text-muted { color: #6c757d !important; }
